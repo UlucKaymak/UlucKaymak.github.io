@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProjectCard</title>
+  <link rel="stylesheet" href="styles/style-reset.css">
+  <link rel="stylesheet" href="styles/style-headerfooter.css">
+  <link rel="stylesheet" href="styles/style-text.css">
+  <link rel="stylesheet" href="styles/style-projectcard.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+  <div id="header-container">
+    <script>
+      fetch('assets/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main class="project-section">
+    <div class="project-images" id="image-slider"></div>
+
+    <div class="project-info">
+      <h1 id="project-title"></h1>
+      <p><span id="project-date"></span></p>
+      <p><span id="project-type"></span></p>
+      <br>
+      <br>
+      <div id="project-description"></div>
+      <br>
+      <br>
+      <p><span id="project-role"></span></p>
+      <p><span id="project-tags"></span></p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch('projects.json')
+        .then(response => response.json())
+        .then(data => {
+          const params = new URLSearchParams(window.location.search);
+          const projectId = params.get('id');
+          const project = data.find(p => p.id === projectId);
+
+          if (project) {
+            document.getElementById('project-title').textContent = project.title;
+            document.title = project.title + " | Uluç Kaymak";
+            document.getElementById('project-type').textContent = project.type;
+            document.getElementById('project-date').textContent = project.date;
+
+            // Markdown'ı HTML'e çevir
+            document.getElementById('project-description').innerHTML = marked.parse(project.description.replace(/\n/g, "<br><br>"));
+
+
+            document.getElementById('project-role').textContent = project.role;
+            document.getElementById('project-tags').textContent = project.tags;
+
+            const imageSlider = document.getElementById("image-slider");
+            imageSlider.innerHTML = ''; // Önce temizle
+            project.media.forEach((src) => {
+              const fileExtension = src.split('.').pop().toLowerCase();
+
+              if (fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg') {
+                const video = document.createElement("video");
+                video.src = src;
+                video.alt = project.title;
+                video.controls = true;
+                imageSlider.appendChild(video);
+              } else {
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = project.title;
+                imageSlider.appendChild(img);
+              }
+            });
+          } else {
+            console.warn("Project not found.");
+          }
+        })
+        .catch(error => console.error('Error loading project:', error));
+    });
+
+  </script>
+
+  <div id="footer-container">
+    <script>
+      fetch('assets/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-container').innerHTML = html;
+        });
+    </script>
+  </div>
+</body>
+
+</html>

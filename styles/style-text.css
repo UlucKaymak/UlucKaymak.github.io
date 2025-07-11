@@ -1,0 +1,41 @@
+/* texts */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0px;
+    color: darkmagenta;
+}
+
+p {
+    margin-bottom: 0px;
+    line-height: 1.5;
+    color: #333;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.p {
+    margin-bottom: 0px;
+    line-height: 1.5;
+    color: #333;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.highlight {
+    color: whitesmoke;
+    background-color: darkmagenta;
+    padding: 0 3px;
+    border-radius: 0px;
+}
+
+.textlink {
+    margin-bottom: 0px;
+    line-height: 1;
+    color: darkmagenta;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+

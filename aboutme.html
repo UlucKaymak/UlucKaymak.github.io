@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me | Uluç Kaymak</title>
+  <link rel="stylesheet" href="styles/style-reset.css">
+  <link rel="stylesheet" href="styles/style-headerfooter.css">
+  <link rel="stylesheet" href="styles/style-text.css">
+  <link rel="stylesheet" href="styles/style-imagewithtext.css">
+</head>
+
+<body>
+  <div id="header-container">
+    <script>
+      fetch('assets/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main class="infopage">
+    <div class="infopage-content">
+
+      <div class="image-block">
+        <img src="assets/image-design-uluc1.jpeg" alt="UluçKaymak" />
+      </div>
+
+      <div class="text-block">
+        <p>Hi! I'm</p>
+        <h1>Uluç Kaymak</h1>
+        <p>A person who loves learning and creating new things.</p>
+        <br>
+        <p> <span class="highlight">As a digital artist,</span> I'm creating conceptual audio/visual
+          pieces.​<br>
+          <span class="highlight">As a musician,</span> I'm making soundscapes that define people's
+          feelings.​<br>
+          <span class="highlight">As a sound designer,</span> I'm creating some pieces people define as mental
+          illness.​<br>
+          <span class="highlight">As a person,</span> I love ducks.​<br>
+          ​<br>
+          I'm also a partner and co-founder of the interactive motion graphics and sound design firm,
+          BizYapım.
+          <br>
+          <br>
+          <a href="assets/UlucKaymak-CV.pdf" target="_blank" class="textlink">My Resume (CV)</a>
+          <br>
+          <a href="https://buymeacoffee.com/uluckaymak" target="_blank" class="textlink">Buy Me a Coffee, also my
+            digital shop.</a>
+          <br>
+          <!-- <img src="assets/bmc_qr.jpeg" alt="buymeacoffee" style="width: 100px;" /> -->
+          ​<br>
+          <span class="highlight">Exibitions:</span><br>
+          Kültür Yolu: Eskizden Piksele - 2024_September_14-21 - Antep_TR<br>
+          CAMP!ŞahikaIST - 2024_September_06-13 - Istanbul_TR<br>
+          <br>
+      </div>
+
+    </div>
+  </main>
+
+
+  <div id="footer-container">
+    <script>
+      fetch('assets/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-container').innerHTML = html;
+        });
+    </script>
+  </div>
+</body>
+
+</html>

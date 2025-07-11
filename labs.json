@@ -1,0 +1,17 @@
+[
+  {
+    "src": "labs/Image2.jpeg",
+    "alt": "Image 1",
+    "description": "Description for image 1"
+  },
+  {
+    "src": "labs/3687345-uhd_3840_2160_24fps.mp4",
+    "alt": "Video 1",
+    "description": "Description for video 1"
+  },
+  {
+    "src": "labs/Image3.jpeg",
+    "alt": "Image 2",
+    "description": "Description for image 2"
+  }
+]

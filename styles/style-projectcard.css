@@ -1,0 +1,41 @@
+/* === Project Section Layout === */
+.project-section {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
+    gap: 25px;
+}
+
+/* === Vertical Image Slider (Left) === */
+.project-images {
+    grid-column: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 80vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    padding-left: 20px;
+    /* Görsellerin soldan boşlukla başlaması için */
+}
+
+.project-images img,
+.project-images video {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* === Project Text Info (Middle - Centered Block) === */
+.project-info {
+    grid-column: 2 / 3;
+    width: 100%;
+    text-align: left;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Dikey ortalama */
+}

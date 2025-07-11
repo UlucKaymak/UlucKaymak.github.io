@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labs | Uluç Kaymak</title>
+  <link rel="stylesheet" href="styles/style-reset.css">
+  <link rel="stylesheet" href="styles/style-headerfooter.css">
+  <link rel="stylesheet" href="styles/style-text.css">
+  <link rel="stylesheet" href="styles/style-labs.css">
+</head>
+<body>
+  <div id="header-container">
+    <script>
+      fetch('/assets/header')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <div class="labs-container" id="labsContainer"></div>
+
+  <script>
+    fetch('labs.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('labsContainer');
+        data.forEach(item => {
+          const element = document.createElement('div');
+          element.classList.add('labs-item');
+
+          const fileExtension = item.src.split('.').pop().toLowerCase();
+          if (fileExtension === 'mp4') {
+            element.innerHTML = `
+              <video controls class="labs-item-video">
+                <source src="${item.src}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="labs-item-description">${item.description}</div>
+            `;
+          } else if (['jpg', 'jpeg', 'png'].includes(fileExtension)) {
+            element.innerHTML = `
+              <img src="${item.src}" alt="${item.alt}" class="labs-item-image" />
+              <div class="labs-item-description">${item.description}</div>
+            `;
+          }
+
+          container.appendChild(element);
+        });
+      });
+  </script>
+
+  <div id="footer-container">
+    <script>
+      fetch('../../assets/footer')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-container').innerHTML = html;
+        });
+    </script>
+  </div>
+</body>
+</html>

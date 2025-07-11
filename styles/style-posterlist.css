@@ -1,0 +1,107 @@
+/* Body ve html etiketlerine tam yükseklik */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Poster Slider Wrapper */
+.poster-slider-wrapper {
+  position: relative;
+  height: (100vh-50px); /* Header yüksekliği çıkarıldı */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%; /* Tam genişlik */
+}
+
+/* Slider */
+.poster-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 0;
+  scroll-snap-type: x mandatory;
+  height: 80vh; /* Yüksekliği ekranın %80'i */
+  box-sizing: border-box;
+  width: 100%; /* Tam genişlik */
+  align-items: flex-start; /* Üst hizalama */
+}
+
+/* Poster item'ların stilleri */
+.poster-item {
+  position: relative;
+  scroll-snap-align: start;
+  height: 100%; /* Yüksekliği %100 */
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.poster-item img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  transition: filter 0.3s;
+  display: block;
+}
+
+/* Overlay stili */
+.poster-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(67, 0, 100, 0.75);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 30px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.poster-item:hover .overlay {
+  opacity: 1;
+}
+
+.poster-item:hover img {
+  filter: brightness(0.6);
+}
+
+/* Slider butonları */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.slider-btn:hover {
+  background-color: rgba(67, 0, 100, 0.8);
+  color: white;
+}
+
+.left-btn {
+  left: 30px;
+}
+
+.right-btn {
+  right: 30px;
+}

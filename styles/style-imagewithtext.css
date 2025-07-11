@@ -1,0 +1,39 @@
+/* Landing Section */
+.infopage {
+    min-height: calc(100vh - 230px); /* total header + footer height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+/* Main content area (image + text) */
+.infopage-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 35px;
+    max-width: 90%;
+}
+
+/* Image Section */
+.image-block {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image-block img {
+    width: 100%;
+    max-width: 450px; /* Daha uyumlu bir boyut */
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Text Block */
+.text-block {
+    flex: 2;
+    max-width: 75%;
+    justify-content: flex-start;
+}

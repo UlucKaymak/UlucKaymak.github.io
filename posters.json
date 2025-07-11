@@ -1,0 +1,32 @@
+[
+  {
+    "id": "poster1",
+    "title": "Uninspirational #1",
+    "description": "The illusion of effort is enough.",
+    "image": "posters/image0.jpeg"
+  },
+  {
+    "id": "poster2",
+    "title": "Uninspirational #2",
+    "description": "Even your potential gave up.",
+    "image": "posters/image1.jpeg"
+  },
+  {
+    "id": "poster3",
+    "title": "Uninspirational #3",
+    "description": "Even your potential gave up.",
+    "image": "posters/image2.jpeg"
+  },
+  {
+    "id": "poster3",
+    "title": "Uninspirational #3",
+    "description": "Even your potential gave up.",
+    "image": "posters/image2.jpeg"
+  },
+  {
+    "id": "poster3",
+    "title": "Uninspirational #3",
+    "description": "Even your potential gave up.",
+    "image": "posters/image2.jpeg"
+  }
+]

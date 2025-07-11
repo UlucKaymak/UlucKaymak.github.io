@@ -1,0 +1,42 @@
+.labs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 10px;
+  padding: 20px;
+}
+
+.labs-item {
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.labs-item img,
+.labs-item video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: filter 0.3s;
+}
+
+.labs-item-description {
+  padding: 10px;
+  background-color: rgba(67, 0, 100, 0.75);
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.labs-item:hover .labs-item-description {
+  opacity: 1;
+}
+
+.labs-item:hover img,
+.labs-item:hover video {
+  filter: brightness(0.6);
+}
