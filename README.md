@@ -1,2 +1,2 @@
 # UlucKaymak.github.io
-my blog page
+my alternative portfolio and blog

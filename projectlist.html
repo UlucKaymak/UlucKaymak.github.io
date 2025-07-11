@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project List | Uluç Kaymak</title>
+  <link rel="stylesheet" href="/styles/style-reset.css">
+  <link rel="stylesheet" href="/styles/style-headerfooter.css">
+  <link rel="stylesheet" href="/styles/style-text.css">
+  <link rel="stylesheet" href="/styles/style-projectlist.css">
+</head>
+
+<body>
+  <div id="header-container">
+    <script>
+      fetch('assets/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+        });
+    </script>
+  </div>
+
+  <main class="project-list" id="project-list">
+    <!-- JSON'dan gelen projeler buraya eklenecek -->
+
+    <!-- JS JSON'dan projeleri yükleyecek -->
+    <script>
+      // URL'deki tag parametresini al
+      const urlParams = new URLSearchParams(window.location.search);
+      const tagFilter = urlParams.get('tag');
+
+      fetch('projects.json')
+        .then(response => response.json())
+        .then(data => {
+          const listContainer = document.getElementById('project-list');
+
+          data.forEach(project => {
+            // Eğer URL'deki tag filtre parametresi varsa, sadece bu tag ile eşleşen projeleri göster
+            if (tagFilter && project.tags && project.tags.includes(tagFilter)) {
+              const card = document.createElement('div');
+              card.classList.add('project-card');
+
+              // Enable durumunu kontrol et
+              if (project.enabled) {
+                card.classList.add('enabled');
+              } else {
+                card.classList.add('disabled');
+              }
+
+              // Dinamik içerik oluşturma
+              card.innerHTML = `
+                <a href="projectcard.html?id=${project.id}">
+                  <img src="${project.thumbnail}" alt="${project.title} Thumbnail">
+                  <div class="overlay">
+                    <h3>${project.title}</h3>
+                    <p>${project.type}</p>
+                  </div>
+                </a>
+              `;
+
+              listContainer.appendChild(card);
+            }
+            // Eğer tag yoksa tüm projeleri göster
+            else if (!tagFilter) {
+              const card = document.createElement('div');
+              card.classList.add('project-card');
+
+              // Enable durumunu kontrol et
+              if (project.enabled) {
+                card.classList.add('enabled');
+              } else {
+                card.classList.add('disabled');
+              }
+
+              // Dinamik içerik oluşturma
+              card.innerHTML = `
+                <a href="projectcard.html?id=${project.id}">
+                  <img src="${project.thumbnail}" alt="${project.title} Thumbnail">
+                  <div class="overlay">
+                    <h3>${project.title}</h3>
+                    <p>${project.type}</p>
+                  </div>
+                </a>
+              `;
+
+              listContainer.appendChild(card);
+            }
+          });
+        })
+        .catch(error => console.error('Error loading projects:', error));
+    </script>
+  </main>
+
+  <div id="footer-container">
+    <script>
+      fetch('assets/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-container').innerHTML = html;
+        });
+    </script>
+  </div>
+</body>
+
+</html>
