@@ -120,6 +120,7 @@
                 <tbody id="portfolio-projects-body"></tbody>
             </table>
         </div>
+        <button id="open-project-btn" style="margin-top: 5px; margin-bottom: 5px;" disabled>Open Project</button>
     </div>
 
 
@@ -161,6 +162,8 @@
         }
 
         // Load Projects from JSON
+        let selectedProject = null;
+
         async function loadProjects() {
             try {
                 const res = await fetch('projects.json');
@@ -168,7 +171,6 @@
 
                 const projects = await res.json();
 
-                // projects bir array olmalı, yoksa uyarı ver
                 if (!Array.isArray(projects)) {
                     console.error('projects.json should be an array of project objects.');
                     return;
@@ -186,12 +188,31 @@
 
                 enabledProjects.forEach(proj => {
                     const tr = document.createElement('tr');
+                    tr.style.cursor = 'pointer';
+
                     const tdTitle = document.createElement('td');
                     tdTitle.textContent = proj.title;
+
                     const tdType = document.createElement('td');
                     tdType.textContent = proj.type;
+
                     tr.appendChild(tdTitle);
                     tr.appendChild(tdType);
+
+                    // Satıra tıklayınca seçimi yap
+                    tr.addEventListener('click', () => {
+                        // Önceki seçili satırı kaldır
+                        const prevSelected = tbody.querySelector('tr.highlighted');
+                        if (prevSelected) prevSelected.classList.remove('highlighted');
+
+                        // Yeni seçili satırı ekle
+                        tr.classList.add('highlighted');
+                        selectedProject = proj;
+
+                        // Butonu aktif yap
+                        document.getElementById('open-project-btn').disabled = false;
+                    });
+
                     tbody.appendChild(tr);
                 });
             } catch (error) {
@@ -202,26 +223,20 @@
                 }
             }
         }
+
+        // Buton tıklama olayı
+        document.getElementById('open-project-btn').addEventListener('click', () => {
+            if (!selectedProject) return;
+
+            // Projenin kendi sayfası varsa onu aç
+            // Örneğin, projelerin URL'si varsa: selectedProject.url
+            // Yoksa, id ile yönlendirme yapabilirsiniz, örnek:
+            const projectPageUrl = `/projects/${selectedProject.id}.html`;
+
+            window.open(projectPageUrl, '_blank');
+        });
+
         loadProjects();
-
-        // // Tablo satır seçme işlevi aynı:
-        // document.querySelectorAll('table.interactive').forEach(table => {
-        //     table.addEventListener('click', (event) => {
-        //         const highlightedClass = 'highlighted';
-        //         const isRow = element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY';
-        //         const newlySelectedRow = event.composedPath().find(isRow);
-        //         if (!newlySelectedRow) return;
-
-        //         const previouslySelectedRow = Array.from(newlySelectedRow.parentElement.children)
-        //             .filter(isRow)
-        //             .find(row => row.classList.contains(highlightedClass));
-        //         if (previouslySelectedRow && previouslySelectedRow !== newlySelectedRow) {
-        //             previouslySelectedRow.classList.remove(highlightedClass);
-        //         }
-        //         newlySelectedRow.classList.toggle(highlightedClass);
-        //     });
-        // });
-
     </script>
 
 </body>
