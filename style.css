@@ -955,8 +955,8 @@ table>tbody>tr>* {
 
 .desktop {
   display: grid;
-  grid-template-columns: 1fr; /* tek sütun */
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 20px;
   padding: 16px;
   width: 100px;
 }
@@ -965,7 +965,6 @@ table>tbody>tr>* {
     position: absolute;
     top: 50px;
     left: 50px;
-    /* Bu değeri artırarak daha ortaya alabilirsin */
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -979,6 +978,7 @@ table>tbody>tr>* {
     width: 80px;
     cursor: pointer;
     color: black;
+    gap: 5px;
     font-family: "Pixelated MS Sans Serif", Arial;
     font-size: 12px;
     text-align: center;
