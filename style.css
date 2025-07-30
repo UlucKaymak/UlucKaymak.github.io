@@ -23,7 +23,7 @@ body {
     background: teal;
     color: #222;
     font-family: Arial;
-    font-size: 12px
+    font-size: 14px
 }
 
 .title-bar,
@@ -40,7 +40,7 @@ textarea,
 ul.tree-view {
     -webkit-font-smoothing: none;
     font-family: "Pixelated MS Sans Serif", Arial;
-    font-size: 11px
+    font-size: 14px
 }
 
 h1 {
