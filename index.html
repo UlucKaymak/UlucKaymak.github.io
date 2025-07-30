@@ -27,7 +27,7 @@
             <img src="design/icons_png/w2k_unknown_17.png" />
             <span>Links</span>
         </div>
-        <div class="desktop-icon" ondblclick="openWindow('portfolio')">
+        <div class="desktop-icon" ondblclick="openWindow('projects-table')">
             <img src="design/icons_png/w2k_unknown_14.png" />
             <span>Portfolio</span>
         </div>
@@ -101,18 +101,27 @@
         </div>
     </div>
 
-    <div class="window" id="portfolio"
-        style="top: 350px; left: 200px; width: 320px; max-height: 500px; overflow-y: auto; display: none;">
+    <div class="window" id="projects-table"
+        style="top: 350px; left: 700px; width: 450px; max-height: 1000px; overflow-y: auto; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">Portfolio Projects</div>
+            <div class="title-bar-text">Projects Table</div>
             <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('portfolio')"></button>
+                <button aria-label="Close" onclick="closeWindow('projects-table')"></button>
             </div>
         </div>
-        <div class="window-body" id="portfolio-project-list">
-            <!-- Proje başlıkları buraya gelecek -->
+        <div class="sunken-panel" style="height: 300px; width: 450px; overflow-y: auto;">
+            <table class="interactive" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Project Title</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="portfolio-projects-body"></tbody>
+            </table>
         </div>
     </div>
+
 
     <script>
         function openWindow(id) {
@@ -151,46 +160,67 @@
             document.getElementById(id).style.display = 'none';
         }
 
-
-        // Proje başlıklarını yükle
-        async function loadPortfolioTitles() {
+        // Load Projects from JSON
+        async function loadProjects() {
             try {
                 const res = await fetch('projects.json');
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
                 const projects = await res.json();
 
-                const listContainer = document.getElementById('portfolio-project-list');
-                listContainer.innerHTML = '';
-
-                // enabled olan projeleri filtrele
-                const enabledProjects = projects.filter(p => p.enabled);
-
-                if (enabledProjects.length === 0) {
-                    listContainer.innerHTML = '<p>No projects available.</p>';
+                // projects bir array olmalı, yoksa uyarı ver
+                if (!Array.isArray(projects)) {
+                    console.error('projects.json should be an array of project objects.');
                     return;
                 }
 
-                // liste oluştur
-                const ul = document.createElement('ul');
-                ul.style.paddingLeft = '20px';
+                const enabledProjects = projects.filter(p => p.enabled);
+
+                const tbody = document.getElementById('portfolio-projects-body');
+                tbody.innerHTML = '';
+
+                if (enabledProjects.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="2">No projects available.</td></tr>';
+                    return;
+                }
 
                 enabledProjects.forEach(proj => {
-                    const li = document.createElement('li');
-                    li.textContent = proj.title;
-                    li.style.cursor = 'default';
-                    li.style.marginBottom = '6px';
-                    ul.appendChild(li);
+                    const tr = document.createElement('tr');
+                    const tdTitle = document.createElement('td');
+                    tdTitle.textContent = proj.title;
+                    const tdType = document.createElement('td');
+                    tdType.textContent = proj.type;
+                    tr.appendChild(tdTitle);
+                    tr.appendChild(tdType);
+                    tbody.appendChild(tr);
                 });
-
-                listContainer.appendChild(ul);
-
             } catch (error) {
                 console.error('Error loading projects:', error);
-                document.getElementById('portfolio-project-list').innerHTML = '<p>Error loading projects.</p>';
+                const tbody = document.getElementById('portfolio-projects-body');
+                if (tbody) {
+                    tbody.innerHTML = '<tr><td colspan="2">Error loading projects.</td></tr>';
+                }
             }
         }
+        loadProjects();
 
-        // Sayfa yüklenince projeleri yükle
-        loadPortfolioTitles();
+        // // Tablo satır seçme işlevi aynı:
+        // document.querySelectorAll('table.interactive').forEach(table => {
+        //     table.addEventListener('click', (event) => {
+        //         const highlightedClass = 'highlighted';
+        //         const isRow = element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY';
+        //         const newlySelectedRow = event.composedPath().find(isRow);
+        //         if (!newlySelectedRow) return;
+
+        //         const previouslySelectedRow = Array.from(newlySelectedRow.parentElement.children)
+        //             .filter(isRow)
+        //             .find(row => row.classList.contains(highlightedClass));
+        //         if (previouslySelectedRow && previouslySelectedRow !== newlySelectedRow) {
+        //             previouslySelectedRow.classList.remove(highlightedClass);
+        //         }
+        //         newlySelectedRow.classList.toggle(highlightedClass);
+        //     });
+        // });
 
     </script>
 

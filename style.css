@@ -15,20 +15,22 @@
 }
 
 html {
-  /* filter: contrast(1.2) brightness(1.1); */
-  position: relative;
+    /* filter: contrast(1.2) brightness(1.1); */
+    position: relative;
 }
 
+/* gradient */
 html::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999;
-  pointer-events: none;
-  background: linear-gradient(0deg, rgb(0, 0, 0, 0.2), rgba(255, 255, 255, 1), transparent 100%);
-  mix-blend-mode: multiply;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+    background: linear-gradient(0deg, rgb(0, 0, 0, 0.2), rgba(255, 255, 255, 1), transparent 100%);
+    mix-blend-mode: multiply;
 }
 
 .glow {
@@ -48,7 +50,8 @@ body {
     font-size: 14px
 }
 
-body::after {
+/* scanlines */
+/* body::after {
   content: "";
   position: fixed;
   top: 0;
@@ -63,7 +66,7 @@ body::after {
     rgba(0, 0, 0, 0.1) 3px
   );
   z-index: 9999;
-}
+} */
 
 
 
@@ -297,6 +300,19 @@ input[type=submit]:disabled {
 .window-body img {
     max-width: 100%;
     height: auto;
+}
+
+.resize-handle {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+  background: transparent; /* istersen biraz görünür yap */
+  /* Eğer görünür yapmak istersen örnek: */
+  /* background: rgba(0,0,0,0.2); */
+  z-index: 10;
 }
 
 fieldset {
