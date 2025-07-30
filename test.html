@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Resize Test</title>
+<style>
+  .window {
+    position: absolute;
+    top: 100px; left: 100px;
+    width: 300px; height: 200px;
+    background: #eee;
+    border: 2px solid #333;
+    box-sizing: border-box;
+    user-select: none;
+  }
+  .resize-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #333;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+  }
+</style>
+</head>
+<body>
+
+<div class="window" id="win">
+  <div class="resize-handle" id="resizer"></div>
+</div>
+
+<script>
+  const win = document.getElementById('win');
+  const resizer = document.getElementById('resizer');
+
+  let isResizing = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  resizer.addEventListener('mousedown', e => {
+    isResizing = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
+
+    let dx = e.clientX - lastX;
+    let dy = e.clientY - lastY;
+
+    let newWidth = win.offsetWidth + dx;
+    let newHeight = win.offsetHeight + dy;
+
+    const minWidth = 150;
+    const minHeight = 100;
+    const maxWidth = window.innerWidth - win.offsetLeft;
+    const maxHeight = window.innerHeight - win.offsetTop;
+
+    if (newWidth < minWidth) newWidth = minWidth;
+    if (newWidth > maxWidth) newWidth = maxWidth;
+
+    if (newHeight < minHeight) newHeight = minHeight;
+    if (newHeight > maxHeight) newHeight = maxHeight;
+
+    win.style.width = newWidth + 'px';
+    win.style.height = newHeight + 'px';
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+  });
+
+  document.addEventListener('mouseup', () => {
+    isResizing = false;
+  });
+</script>
+
+</body>
+</html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <meta name="description"
         content="Portfolio of Uluç Kaymak, a multidisciplinary artist exploring human perception and psychology through digital art." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 
 
     <!-- Windows -->
-    <div class="window" id="welcome" style="top: 70px; left: 120px;">
+    <div class="window" id="welcome" style="top: 50px; left: 175px;">
         <div class="title-bar">
             <div class="title-bar-text">welcome.txt</div>
             <div class="title-bar-controls">
@@ -58,6 +59,7 @@
         </div>
     </div>
 
+
     <div class="window" id="about" style="top: 125px; left: 425px;">
         <div class="title-bar">
             <div class="title-bar-text">about_me.txt</div>
@@ -70,36 +72,19 @@
         </div>
     </div>
 
-
-
-    <div class="window" id="about" style="top: 100px; left: 850px;">
+    <div class="window" id="img1" style="top: 100px; left: 850px;">
         <div class="title-bar">
             <div class="title-bar-text">neko1.jpg</div>
             <div class="title-bar-controls">
-                <button aria-label="Close"></button>
+                <button aria-label="Close" onclick="closeWindow('img1')"></button>
             </div>
         </div>
         <div class="window-body">
             <img src="design/images/neko1.jpg" alt="neko1 :3" style="max-width: 100%; height: auto;" />
         </div>
     </div>
-    
-    <div class="window" id="about" style="top: 300px; left: 1000px;">
-        <div class="title-bar">
-            <div class="title-bar-text">neko2.jpg</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="design/images/neko2.jpg" alt="neko2 :3" style="max-width: 100%; height: auto;" />
-        </div>
-    </div>
-    
 
-
-
-    <div class="window" id="img-uluc" style="top: 240px; left: 475px; width: 280px;">
+    <div class="window" id="img-uluc" style="top: 240px; left: 475px; min-width: 280px;">
         <div class="title-bar">
             <div class="title-bar-text">uluc.jpeg</div>
             <div class="title-bar-controls">
@@ -116,6 +101,19 @@
         </div>
     </div>
 
+    <div class="window" id="img2" style="top: 300px; left: 1000px;">
+        <div class="title-bar">
+            <div class="title-bar-text">neko2.jpg</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('img2')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="design/images/neko2.jpg" alt="neko2 :3" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+
+    <!-- Default closed windows -->
     <div class="window" id="links" style="top: 450px; left: 120px; width: 300px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Links</div>
@@ -133,7 +131,7 @@
     </div>
 
     <div class="window" id="projects-table"
-        style="top: 350px; left: 700px; width: 550px; max-height: 1000px; overflow-y: auto; display: none;">
+        style="top: 350px; left: 700px; width: 550px; max-width: 550px; max-height: 1000px; overflow-y: auto; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">projects.exe</div>
             <div class="title-bar-controls">
@@ -155,6 +153,7 @@
         <button id="open-project-btn" style="margin-top: 5px; margin-bottom: 5px;" disabled>Open Project</button>
         <div class="status-bar">
             <p class="status-bar-field">Projects: <span id="project-count"></span></p>
+            <p class="status-bar-field">Click a project to select it.</p>
         </div>
 
 
@@ -163,9 +162,33 @@
         <script>
             function openWindow(id) {
                 const win = document.getElementById(id);
+                win.style.display = 'block';
                 if (win) {
+                    // Ekran ortası pozisyonu
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+
+                    // Window genişlik ve yüksekliği
+                    const width = win.offsetWidth || 320; // varsayılan genişlik
+                    const height = win.offsetHeight || 200; // varsayılan yükseklik
+
+                    // Ortalanmış pozisyonlar
+                    const left = Math.max(10, (vw - width) / 2);
+                    const top = Math.max(10, (vh - height) / 2);
+
+                    win.style.left = left + 'px';
+                    win.style.top = top + 'px';
+
                     win.style.display = 'block';
-                    win.style.zIndex = 1000;
+                    win.style.zIndex = 3;
+                }
+                // Mobil ekran için otomatik konumlandır
+                const isMobile = window.innerWidth < 768;
+                if (isMobile) {
+                    win.style.top = '5vh';
+                    win.style.left = '2.5vw';
+                    win.style.width = '95vw';
+                    win.style.height = 'auto';
                 }
             }
             // Drag & Drop
@@ -174,23 +197,47 @@
                 let isDragging = false;
                 let offsetX, offsetY;
 
+                var windowZindex = 3;
                 titleBar.addEventListener('mousedown', e => {
                     isDragging = true;
                     offsetX = e.clientX - win.offsetLeft;
                     offsetY = e.clientY - win.offsetTop;
-                    win.style.zIndex = 1000; // ön plana getir
+                    windowZindex = win.style.zIndex + 1;
+                    win.style.zIndex = windowZindex;
                 });
 
                 document.addEventListener('mousemove', e => {
                     if (!isDragging) return;
-                    win.style.left = (e.clientX - offsetX) + 'px';
-                    win.style.top = (e.clientY - offsetY) + 'px';
+
+                    // Yeni pozisyon hesapla
+                    let newLeft = e.clientX - offsetX;
+                    let newTop = e.clientY - offsetY;
+
+                    // Ekran boyutları
+                    const screenWidth = window.innerWidth;
+                    const screenHeight = window.innerHeight;
+
+                    // Pencere boyutları
+                    const winWidth = win.offsetWidth;
+                    const winHeight = win.offsetHeight;
+
+                    // Limitleri uygula: ekran dışına çıkmasın
+                    if (newLeft < 0) newLeft = 0;
+                    if (newTop < 0) newTop = 0;
+                    if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
+                    if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
+
+                    // Pozisyonu ata
+                    win.style.left = newLeft + 'px';
+                    win.style.top = newTop + 'px';
                 });
 
                 document.addEventListener('mouseup', () => {
                     isDragging = false;
+                    // Pencereyi en üstte tut
                 });
             });
+
 
             // Close Window
             function closeWindow(id) {
@@ -267,15 +314,32 @@
                 }
             }
 
+            function keepWindowInViewport(win) {
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+                const winWidth = win.offsetWidth;
+                const winHeight = win.offsetHeight;
 
+                let left = win.offsetLeft;
+                let top = win.offsetTop;
+
+                if (left < 0) left = 0;
+                if (top < 0) top = 0;
+                if (left + winWidth > screenWidth) left = screenWidth - winWidth;
+                if (top + winHeight > screenHeight) top = screenHeight - winHeight;
+
+                win.style.left = left + 'px';
+                win.style.top = top + 'px';
+            }
+
+            // Örnek: pencereler açıldığında
+            document.querySelectorAll('.window').forEach(win => {
+                keepWindowInViewport(win);
+            });
 
             // Buton tıklama olayı
             document.getElementById('open-project-btn').addEventListener('click', () => {
                 if (!selectedProject) return;
-
-                // Projenin kendi sayfası varsa onu aç
-                // Örneğin, projelerin URL'si varsa: selectedProject.url
-                // Yoksa, id ile yönlendirme yapabilirsiniz, örnek:
                 const projectPageUrl = `https://uluckaymak.com/project/${selectedProject.id}`;
 
                 window.open(projectPageUrl, '_blank');
