@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+    <!-- Desktop icons -->
     <div class="desktop">
         <div class="desktop-icon" ondblclick="openWindow('welcome')">
             <img src="design/icons_png/w2k_unknown_11.png" />
@@ -21,22 +23,22 @@
         </div>
         <div class="desktop-icon" ondblclick="openWindow('img-uluc')">
             <img src="design/icons_png/w2k_uninstall.png" />
-            <span>Uluc.jpeg</span>
+            <span>uluc.jpeg</span>
         </div>
         <div class="desktop-icon" ondblclick="openWindow('links')">
             <img src="design/icons_png/w2k_unknown_17.png" />
-            <span>Links</span>
+            <span>links.txt</span>
         </div>
         <div class="desktop-icon" ondblclick="openWindow('projects-table')">
             <img src="design/icons_png/w2k_unknown_14.png" />
-            <span>Portfolio</span>
+            <span>portfolio.exe</span>
         </div>
     </div>
 
 
 
 
-
+    <!-- Windows -->
     <div class="window" id="welcome" style="top: 70px; left: 120px;">
         <div class="title-bar">
             <div class="title-bar-text">welcome.txt</div>
@@ -58,7 +60,7 @@
 
     <div class="window" id="about" style="top: 125px; left: 425px;">
         <div class="title-bar">
-            <div class="title-bar-text">About Me</div>
+            <div class="title-bar-text">about_me.txt</div>
             <div class="title-bar-controls">
                 <button aria-label="Close" onclick="closeWindow('about')"></button>
             </div>
@@ -70,7 +72,7 @@
 
     <div class="window" id="img-uluc" style="top: 240px; left: 475px; width: 280px;">
         <div class="title-bar">
-            <div class="title-bar-text">Uluc.jpeg</div>
+            <div class="title-bar-text">uluc.jpeg</div>
             <div class="title-bar-controls">
                 <button aria-label="Close" onclick="closeWindow('img-uluc')"></button>
             </div>
@@ -102,142 +104,156 @@
     </div>
 
     <div class="window" id="projects-table"
-        style="top: 350px; left: 700px; width: 450px; max-height: 1000px; overflow-y: auto; display: none;">
+        style="top: 350px; left: 700px; width: 550px; max-height: 1000px; overflow-y: auto; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">Projects Table</div>
+            <div class="title-bar-text">projects.exe</div>
             <div class="title-bar-controls">
                 <button aria-label="Close" onclick="closeWindow('projects-table')"></button>
             </div>
         </div>
-        <div class="sunken-panel" style="height: 300px; width: 450px; overflow-y: auto;">
+        <div class="sunken-panel" style="height: 300px; width: 550px; overflow-y: auto;">
             <table class="interactive" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th>Project Title</th>
                         <th>Type</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody id="portfolio-projects-body"></tbody>
             </table>
         </div>
         <button id="open-project-btn" style="margin-top: 5px; margin-bottom: 5px;" disabled>Open Project</button>
-    </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Projects: <span id="project-count"></span></p>
+        </div>
 
 
-    <script>
-        function openWindow(id) {
-            const win = document.getElementById(id);
-            if (win) {
-                win.style.display = 'block';
-                win.style.zIndex = 1000;
+
+
+        <script>
+            function openWindow(id) {
+                const win = document.getElementById(id);
+                if (win) {
+                    win.style.display = 'block';
+                    win.style.zIndex = 1000;
+                }
             }
-        }
-        // Drag & Drop
-        document.querySelectorAll('.window').forEach(win => {
-            const titleBar = win.querySelector('.title-bar');
-            let isDragging = false;
-            let offsetX, offsetY;
+            // Drag & Drop
+            document.querySelectorAll('.window').forEach(win => {
+                const titleBar = win.querySelector('.title-bar');
+                let isDragging = false;
+                let offsetX, offsetY;
 
-            titleBar.addEventListener('mousedown', e => {
-                isDragging = true;
-                offsetX = e.clientX - win.offsetLeft;
-                offsetY = e.clientY - win.offsetTop;
-                win.style.zIndex = 1000; // ön plana getir
-            });
-
-            document.addEventListener('mousemove', e => {
-                if (!isDragging) return;
-                win.style.left = (e.clientX - offsetX) + 'px';
-                win.style.top = (e.clientY - offsetY) + 'px';
-            });
-
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
-        });
-
-        // Close Window
-        function closeWindow(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        // Load Projects from JSON
-        let selectedProject = null;
-
-        async function loadProjects() {
-            try {
-                const res = await fetch('projects.json');
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
-                const projects = await res.json();
-
-                if (!Array.isArray(projects)) {
-                    console.error('projects.json should be an array of project objects.');
-                    return;
-                }
-
-                const enabledProjects = projects.filter(p => p.enabled);
-
-                const tbody = document.getElementById('portfolio-projects-body');
-                tbody.innerHTML = '';
-
-                if (enabledProjects.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="2">No projects available.</td></tr>';
-                    return;
-                }
-
-                enabledProjects.forEach(proj => {
-                    const tr = document.createElement('tr');
-                    tr.style.cursor = 'pointer';
-
-                    const tdTitle = document.createElement('td');
-                    tdTitle.textContent = proj.title;
-
-                    const tdType = document.createElement('td');
-                    tdType.textContent = proj.type;
-
-                    tr.appendChild(tdTitle);
-                    tr.appendChild(tdType);
-
-                    // Satıra tıklayınca seçimi yap
-                    tr.addEventListener('click', () => {
-                        // Önceki seçili satırı kaldır
-                        const prevSelected = tbody.querySelector('tr.highlighted');
-                        if (prevSelected) prevSelected.classList.remove('highlighted');
-
-                        // Yeni seçili satırı ekle
-                        tr.classList.add('highlighted');
-                        selectedProject = proj;
-
-                        // Butonu aktif yap
-                        document.getElementById('open-project-btn').disabled = false;
-                    });
-
-                    tbody.appendChild(tr);
+                titleBar.addEventListener('mousedown', e => {
+                    isDragging = true;
+                    offsetX = e.clientX - win.offsetLeft;
+                    offsetY = e.clientY - win.offsetTop;
+                    win.style.zIndex = 1000; // ön plana getir
                 });
-            } catch (error) {
-                console.error('Error loading projects:', error);
-                const tbody = document.getElementById('portfolio-projects-body');
-                if (tbody) {
-                    tbody.innerHTML = '<tr><td colspan="2">Error loading projects.</td></tr>';
+
+                document.addEventListener('mousemove', e => {
+                    if (!isDragging) return;
+                    win.style.left = (e.clientX - offsetX) + 'px';
+                    win.style.top = (e.clientY - offsetY) + 'px';
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+            });
+
+            // Close Window
+            function closeWindow(id) {
+                document.getElementById(id).style.display = 'none';
+            }
+
+            // Load Projects from JSON
+            let selectedProject = null;
+
+            async function loadProjects() {
+                try {
+                    const res = await fetch('projects.json');
+                    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+                    const projects = await res.json();
+
+                    if (!Array.isArray(projects)) {
+                        console.error('projects.json should be an array of project objects.');
+                        return;
+                    }
+
+                    const enabledProjects = projects.filter(p => p.enabled);
+
+                    const tbody = document.getElementById('portfolio-projects-body');
+                    tbody.innerHTML = '';
+
+                    if (enabledProjects.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="2">No projects available.</td></tr>';
+                        return;
+                    }
+
+                    const projectCountElement = document.getElementById('project-count');
+                    projectCountElement.textContent = `${projects.length}`;
+
+                    enabledProjects.forEach(proj => {
+                        const tr = document.createElement('tr');
+                        tr.style.cursor = 'pointer';
+
+                        const tdTitle = document.createElement('td');
+                        tdTitle.textContent = proj.title;
+
+                        const tdType = document.createElement('td');
+                        tdType.textContent = proj.type;
+
+                        const tdDate = document.createElement('td');
+                        tdDate.textContent = proj.date;
+
+                        tr.appendChild(tdTitle);
+                        tr.appendChild(tdType);
+                        tr.appendChild(tdDate);
+
+                        // Satıra tıklayınca seçimi yap
+                        tr.addEventListener('click', () => {
+                            // Önceki seçili satırı kaldır
+                            const prevSelected = tbody.querySelector('tr.highlighted');
+                            if (prevSelected) prevSelected.classList.remove('highlighted');
+
+                            // Yeni seçili satırı ekle
+                            tr.classList.add('highlighted');
+                            selectedProject = proj;
+
+                            // Butonu aktif yap
+                            document.getElementById('open-project-btn').disabled = false;
+                        });
+
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error('Error loading projects:', error);
+                    const tbody = document.getElementById('portfolio-projects-body');
+                    if (tbody) {
+                        tbody.innerHTML = '<tr><td colspan="2">Error loading projects.</td></tr>';
+                    }
                 }
             }
-        }
 
-        // Buton tıklama olayı
-        document.getElementById('open-project-btn').addEventListener('click', () => {
-            if (!selectedProject) return;
 
-            // Projenin kendi sayfası varsa onu aç
-            // Örneğin, projelerin URL'si varsa: selectedProject.url
-            // Yoksa, id ile yönlendirme yapabilirsiniz, örnek:
-            const projectPageUrl = `/projects/${selectedProject.id}.html`;
 
-            window.open(projectPageUrl, '_blank');
-        });
+            // Buton tıklama olayı
+            document.getElementById('open-project-btn').addEventListener('click', () => {
+                if (!selectedProject) return;
 
-        loadProjects();
-    </script>
+                // Projenin kendi sayfası varsa onu aç
+                // Örneğin, projelerin URL'si varsa: selectedProject.url
+                // Yoksa, id ile yönlendirme yapabilirsiniz, örnek:
+                const projectPageUrl = `https://uluckaymak.com/project/${selectedProject.id}`;
+
+                window.open(projectPageUrl, '_blank');
+            });
+
+            loadProjects();
+        </script>
 
 </body>
 
