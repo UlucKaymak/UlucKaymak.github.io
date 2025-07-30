@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <title>HomePage.exe | uluckaymak</title>
     <link rel="stylesheet" href="style.css" />
-    <meta name="description" content="Portfolio of Uluç Kaymak, a multidisciplinary artist exploring human perception and psychology through digital art." />
+    <meta name="description"
+        content="Portfolio of Uluç Kaymak, a multidisciplinary artist exploring human perception and psychology through digital art." />
 </head>
 
 <body>
@@ -100,15 +101,16 @@
         </div>
     </div>
 
-    <div class="window" id="portfolio" style="top: 350px; left: 200px; width: 300px; display: none;">
+    <div class="window" id="portfolio"
+        style="top: 350px; left: 200px; width: 320px; max-height: 500px; overflow-y: auto; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">Click to Go Portfolio</div>
+            <div class="title-bar-text">Portfolio Projects</div>
             <div class="title-bar-controls">
                 <button aria-label="Close" onclick="closeWindow('portfolio')"></button>
             </div>
         </div>
-        <div class="window-body">
-            <button onclick="window.open('uluckaymak.com', '_blank')">Go to Portfolio</button>
+        <div class="window-body" id="portfolio-project-list">
+            <!-- Proje başlıkları buraya gelecek -->
         </div>
     </div>
 
@@ -148,6 +150,48 @@
         function closeWindow(id) {
             document.getElementById(id).style.display = 'none';
         }
+
+
+        // Proje başlıklarını yükle
+        async function loadPortfolioTitles() {
+            try {
+                const res = await fetch('projects.json');
+                const projects = await res.json();
+
+                const listContainer = document.getElementById('portfolio-project-list');
+                listContainer.innerHTML = '';
+
+                // enabled olan projeleri filtrele
+                const enabledProjects = projects.filter(p => p.enabled);
+
+                if (enabledProjects.length === 0) {
+                    listContainer.innerHTML = '<p>No projects available.</p>';
+                    return;
+                }
+
+                // liste oluştur
+                const ul = document.createElement('ul');
+                ul.style.paddingLeft = '20px';
+
+                enabledProjects.forEach(proj => {
+                    const li = document.createElement('li');
+                    li.textContent = proj.title;
+                    li.style.cursor = 'default';
+                    li.style.marginBottom = '6px';
+                    ul.appendChild(li);
+                });
+
+                listContainer.appendChild(ul);
+
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('portfolio-project-list').innerHTML = '<p>Error loading projects.</p>';
+            }
+        }
+
+        // Sayfa yüklenince projeleri yükle
+        loadPortfolioTitles();
+
     </script>
 
 </body>
