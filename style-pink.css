@@ -25,7 +25,7 @@
 }
 
 body {
-    background: teal;
+    background: Thistle;
     /* background: rgb(94, 154, 168); */
     font-family: Arial;
     font-size: 14px
@@ -184,8 +184,8 @@ input[type=submit]:disabled {
 
 .title-bar {
     align-items: center;
-    background: linear-gradient(90deg, navy, #1084d0);
-    /* background: linear-gradient(90deg, MediumVioletRed, pink); */
+    background: linear-gradient(90deg, DarkSlateBlue, SlateBlue);
+    /* background: linear-gradient(90deg, MediumVioletRed, Thistle); */
     display: flex;
     justify-content: space-between;
     padding: 3px 2px 3px 3px
@@ -673,7 +673,7 @@ input[type=range]::-moz-range-track {
 }
 
 select:focus {
-    background-color: navy;
+    background-color: DarkSlateBlue;
     color: #fff
 }
 
@@ -712,7 +712,7 @@ ul.tree-view a {
 }
 
 ul.tree-view a:focus {
-    background-color: navy;
+    background-color: DarkSlateBlue;
     color: #fff
 }
 
@@ -942,7 +942,7 @@ table.interactive>tbody>tr {
 }
 
 table>tbody>tr.highlighted {
-    background-color: navy;
+    background-color: DarkSlateBlue;
     color: #fff
 }
 
@@ -965,14 +965,14 @@ table>tbody>tr>* {
 }
 
 .progress-indicator>.progress-indicator-bar {
-    background-color: navy;
+    background-color: DarkSlateBlue;
     display: block;
     height: 100%
 }
 
 .progress-indicator.segmented>.progress-indicator-bar {
     background-color: transparent;
-    background-image: linear-gradient(90deg, navy 16px, transparent 0 2px);
+    background-image: linear-gradient(90deg, DarkSlateBlue 16px, transparent 0 2px);
     background-repeat: repeat;
     background-size: 18px 100%;
     width: 100%
