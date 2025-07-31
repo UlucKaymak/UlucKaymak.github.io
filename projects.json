@@ -1,5 +1,77 @@
 [
   {
+    "id": "art-Persona",
+    "title": "PersonA",
+    "type": "Art Installation",
+    "date": "2025_06_11",
+    "description": "'The history of humanity is, in a way, the history of mankind’s efforts to define itself. In every age, in every society, in every individual, human beings have sought an image, a face, an identity. Art is one of the oldest and most powerful tools in this endeavor. Person A is a reflection of this search today: a portrait that dissolves the image of the individual into the collective — but never fixes it — changing with every glance, constantly reborn.'\n-Muzaffer Malkoç (Artist)\n\nExibithed: 11-15 June, IFAD @AKM İstanbul",
+    "role": "Creative Coder",
+    "thumbnail": "projects/2025_06_11-Art-Persona/Cover.jpeg",
+    "media": [
+      "projects/2025_06_11-Art-Persona/60x33cm_sergi_2025_siyah.jpeg",
+      "projects/2025_06_11-Art-Persona/Cover.jpeg",
+      "projects/2025_06_11-Art-Persona/img-00001.jpeg",
+      "projects/2025_06_11-Art-Persona/img-00002.jpeg",
+      "projects/2025_06_11-Art-Persona/img-00003.jpeg",
+      "projects/2025_06_11-Art-Persona/img-00004.jpeg",
+      "projects/2025_06_11-Art-Persona/img-00005.jpeg",
+      "projects/2025_06_11-Art-Persona/img-captured.0.jpg",
+      "projects/2025_06_11-Art-Persona/PersonA-Plan.jpeg"
+    ],
+    "tags": [
+      "#ArtPieces",
+      "#CreativeCoding",
+      "#Visual"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "inevgames-livber",
+    "title": "Livber: Smoke and Mirrors",
+    "type": "Video Game",
+    "date": "2025_05_02",
+    "description": "Lilith, whom you believed dead for years, calls to you with nothing but a letter, summoning you back to the old house, silent witness to your past. Inside the letter, there is only an address and a few haunting lines:\n'I will birth our creation in our home. Come, and crown us in the dark. You and I must always be one.'\n\nLivber: Smoke and Mirrors is a text-based interactive fiction game in the choose-your-own-adventure tradition. Your choices don’t just influence your next move; they reshape the entire narrative.\nI started to project for audible parts, but I spread to other departments like a virus.\nSteam\nitch.io (Prologue)",
+    "role": "Soundtrack Composer, Audio Engineer, Audio FXs, and some other things",
+    "thumbnail": "projects/2025_06-InEvGames-Livber/Livber-Kare.jpeg",
+    "media": [
+      "projects/2025_06-InEvGames-Livber/Livber-Kare.jpeg",
+      "projects/2025_06-InEvGames-Livber/02 - livber_-_smoke_and_mirrors-unexpected_letter-preview.mp4",
+      "projects/2025_06-InEvGames-Livber/03 - livber_-_smoke_and_mirrors-runing_from-preview.mp4",
+      "projects/2025_06-InEvGames-Livber/04 - livber_-_smoke_and_mirrors-grand_unification-preview.mp4",
+      "projects/2025_06-InEvGames-Livber/Livber_Screenshot_(1).jpg",
+      "projects/2025_06-InEvGames-Livber/Livber_Screenshot_(3).jpg",
+      "projects/2025_06-InEvGames-Livber/Livber_Screenshot_(5).jpg",
+      "projects/2025_06-InEvGames-Livber/Livber_Screenshot_(8).jpg",
+      "projects/2025_06-InEvGames-Livber/Livber-Kare.jpeg"
+    ],
+    "tags": [
+      "#VideoGame",
+      "#Audio",
+      "#Soundtrack"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "uluc_script-dithering",
+    "title": "Touchdesigner Scripts",
+    "type": "Script",
+    "date": "2025_04",
+    "description": "I started to make my own Interactive Poster style by creating my own viusal scripts. These are for TouchDesigner (.tox)\nSome of them:\nDrop shadow script\nBayer Dithering Algorithm Script\nLasso-Masking Script\nYou can purchase it from my Buy Me a Coffee shop.",
+    "role": "Creative Coder, Artist",
+    "thumbnail": "projects/2025_04-uluc_script-dithering/Image0.jpg",
+    "media": [
+      "projects/2025_04-uluc_script-dithering/Image0.jpg",
+      "projects/2025_04-uluc_script-dithering/Image1.jpg",
+      "projects/2025_04-uluc_script-ditheringImage2.mp4",
+      "projects/2025_04-uluc_script-ditheringImage3.mp4"
+    ],
+    "tags": [
+      "#Visual",
+      "#CreativeCoding"
+    ],
+    "enabled": true
+  },
+  {
     "id": "ulucart-istanbulsegmented",
     "title": "Istanbul, segmented",
     "type": "PosterArt",
@@ -17,7 +89,7 @@
       "#Visual",
       "#ArtPiece"
     ],
-    "enabled": true  
+    "enabled": true
   },
   {
     "id": "ulucart-unseenimages",

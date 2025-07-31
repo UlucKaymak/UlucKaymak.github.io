@@ -16,7 +16,7 @@
 
 <body>
     <script src="design/oneko/oneko.js"></script>
-    
+
     <!-- Desktop icons -->
     <div class="desktop">
         <div class="desktop-icon" ondblclick="openWindow('welcome')">
@@ -31,9 +31,13 @@
             <img src="design/icons_png/w2k_uninstall.png" />
             <span>uluc.jpeg</span>
         </div>
-        <div class="desktop-icon" ondblclick="openWindow('links')">
+        <div class="desktop-icon" ondblclick="window.open('https://linktr.ee/uluckaymak', '_blank')">
             <img src="design/icons_png/w98_world_network_directories.png" />
-            <span>links.txt</span>
+            <span>linktr.ee</span>
+        </div>
+        <div class="desktop-icon" ondblclick="spawnCatWindow()">
+            <img src="design/icons_png/w2k_cd_player.png" />
+            <span>cat_spawner.exe</span>
         </div>
         <div class="desktop-icon" ondblclick="openWindow('projects-table')">
             <img src="design/icons_png/w2k_unknown_14.png" />
@@ -41,7 +45,7 @@
         </div>
         <div class="desktop-icon" ondblclick="openWindow('contact')">
             <img src="design/icons_png/w98_phone_desk.png" />
-            <span>contect.exe</span>
+            <span>contact.exe</span>
         </div>
         <!-- <div class="desktop-icon" ondblclick="openWindow('settings')">
             <img src="design/icons_png/w2k_unknown_19.png" />
@@ -85,11 +89,14 @@
             </div>
         </div>
         <div class="window-body">
-            <p>As a digital artist, I create conceptual audio/visual pieces shaped by human perception, experience, and
-                psychology.</p>
+            <p>As a digital artist, I create conceptual audio/visual pieces shaped by <span class="highlight">human
+                    perception, experience, and
+                    psychology.</span></p>
 
-            <p>As a composer, I design soundscapes that resonate with how people feel.</p>
-            <p>As a sound designer, I craft personal works that people categorize as simulations of mental disorder.</p>
+            <p>As a composer, I design soundscapes that resonate with <span class="highlight">how people feel.</span>
+            </p>
+            <p>As a sound designer, I craft personal works that people categorize as simulations of <span
+                    class="highlight">mental disorder.</span></p>
             <p>As a person, <span class="highlight">I love ducks.</span></p>
             ​
             <p>I'm also a partner and co-founder of the interactive motion graphics and sound design firm, BizYapım.</p>
@@ -149,40 +156,7 @@
         </div>
     </div>
 
-    <!-- <div class="window" id="settings" style="top: 200px; left: 900px; z-index: 2; display: none;">
-        <div class="title-bar">
-            <div class="title-bar-text">theme.config</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('settings')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <select id="theme-select" onchange="changeTheme()">
-                <option value="default">Default Theme</option>
-                <option value="dark">Pink Theme</option>
-            </select>
-            <button id="save-theme-btn" onclick="saveTheme()">Apply Theme</button>
-        </div>
-    </div> -->
-
-    <!-- Default closed windows -->
-    <div class="window" id="links" style="top: 450px; left: 120px; width: 300px; display: none;">
-        <div class="title-bar">
-            <div class="title-bar-text">Links</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('links')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <ul>
-                <li><a href="https://twitter.com/uluckaymak" target="_blank">Twitter</a></li>
-                <li><a href="https://instagram.com/uluckaymak" target="_blank">Instagram</a></li>
-                <li><a href="https://github.com/uluckaymak" target="_blank">GitHub</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- <div class="window" id="contact" style="top: 450px; left: 120px; width: 250px; display: none;">
+    <div class="window" id="contact" style="top: 450px; left: 120px; width: 250px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">contact.exe</div>
             <div class="title-bar-controls">
@@ -191,22 +165,57 @@
         </div>
         <div class="window-body">
             <p>For inquiries, collaborations, or just to say hi, you can reach me at:</p>
+
             <div class="field-row-stacked" style="width: 230px">
-                <label for="contact_name">Name:</label> <input id="contact_name" type="text" />
-                <label for="contact_name">Pronoun:</label> <input id="contact_pronoun" type="text" />
-                <label for="contact_name">Subject:</label> <input id="contact_subject" type="text" />
+                <label for="contact_name">Name:</label>
+                <input id="contact_name" type="text" />
+
+                <label for="contact_pronoun">Pronoun:</label>
+                <input id="contact_pronoun" type="text" />
+
+                <label for="contact_reason">Reason:</label>
+                <select id="contact_reason">
+                    <option>Just to say Hi!</option>
+                    <option>I'm gonna ask something</option>
+                    <option>I want to collaborate</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="contact_subject">Subject:</label>
+                <input id="contact_subject" type="text" />
             </div>
+
             <div class="field-row-stacked" style="width: 200px">
-                <label for="text20">Additional notes</label>
-                <textarea id="text20" rows="8"></textarea>
+                <label for="mail_content">Additional notes:</label>
+                <textarea id="mail_content" rows="8"></textarea>
             </div>
+
+            <p></p>
+            <button onclick="sendMail()">Send</button>
         </div>
-        <button id="contact" style="margin-top: 5px; margin-bottom: 5px; margin-left: 10px;">Send</button>
+
         <div class="status-bar">
             <p class="status-bar-field">mail</p>
             <p class="status-bar-field">cat</p>
         </div>
-    </div> -->
+
+        <script>
+            function sendMail() {
+                const name = document.getElementById("contact_name").value;
+                const pronoun = document.getElementById("contact_pronoun").value;
+                const subject = document.getElementById("contact_subject").value;
+                const reason = document.getElementById("contact_reason").value;
+                const notes = document.getElementById("mail_content").value;
+
+                const mailto = `mailto:uluckaymak@gmail.com?subject=${encodeURIComponent(reason + " — " + subject)}&body=${encodeURIComponent(
+                    `Hi! I'm ${name}! (${pronoun})\n\n${notes}\n\nBest regards,\n${name}`
+                )}`;
+
+                window.location.href = mailto;
+            }
+        </script>
+    </div>
+
 
     <div class="window" id="projects-table"
         style="top: 350px; left: 700px; width: 550px; max-width: 550px; max-height: 1000px; overflow-y: auto; display: none;">
@@ -234,6 +243,48 @@
             <p class="status-bar-field">Click a project to select it.</p>
         </div>
 
+
+        <div class="window" id="catWindow" style="top: 300px; left: 1000px; display: none; z-index: 3;">
+            <div class="title-bar">
+                <div class="title-bar-text">cat.gif</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('catWindow')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <img id="catImage" src="" alt="cute cat" style="max-width: 100%; height: auto;" />
+            </div>
+            <script>
+                let catWindowCount = 0;
+
+                function spawnCatWindow() {
+                    const desktop = document.body;
+                    const windowId = `catWindow${catWindowCount++}`;
+                    const windowDiv = document.createElement("div");
+                    const randomX = Math.floor(Math.random() * (window.innerWidth - 300));
+                    const randomY = Math.floor(Math.random() * (window.innerHeight - 300));
+
+                    windowDiv.className = "window";
+                    windowDiv.id = windowId;
+                    windowDiv.style = `position: absolute; top: ${randomY}px; left: ${randomX}px; z-index: 1000;`;
+
+                    windowDiv.innerHTML = `
+        <div class="title-bar">
+            <div class="title-bar-text">cat_${catWindowCount}.gif</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('${windowId}')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="https://cataas.com/cat/gif?${Date.now()}" alt="neko gif" style="max-width: 100%; height: auto;" />
+        </div>
+    `;
+
+                    desktop.appendChild(windowDiv);
+                    makeDraggable(windowDiv); // ✨ bunu ekle
+                }
+            </script>
+        </div>
 
 
 
@@ -269,13 +320,52 @@
                     win.style.height = 'auto';
                 }
             }
+
+
+            function makeDraggable(win) {
+                const titleBar = win.querySelector('.title-bar');
+                let isDragging = false;
+                let offsetX, offsetY;
+
+                titleBar.addEventListener('mousedown', e => {
+                    isDragging = true;
+                    offsetX = e.clientX - win.offsetLeft;
+                    offsetY = e.clientY - win.offsetTop;
+                    win.style.zIndex = parseInt(win.style.zIndex || 1000) + 1;
+                });
+
+                document.addEventListener('mousemove', e => {
+                    if (!isDragging) return;
+                    let newLeft = e.clientX - offsetX;
+                    let newTop = e.clientY - offsetY;
+
+                    // Ekran dışına taşmasını engelle
+                    const screenWidth = window.innerWidth;
+                    const screenHeight = window.innerHeight;
+                    const winWidth = win.offsetWidth;
+                    const winHeight = win.offsetHeight;
+
+                    if (newLeft < 0) newLeft = 0;
+                    if (newTop < 0) newTop = 0;
+                    if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
+                    if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
+
+                    win.style.left = newLeft + 'px';
+                    win.style.top = newTop + 'px';
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+            }
+
             // Drag & Drop
             document.querySelectorAll('.window').forEach(win => {
                 const titleBar = win.querySelector('.title-bar');
                 let isDragging = false;
                 let offsetX, offsetY;
 
-                var windowZindex = 3;
+                var windowZindex = 1;
                 titleBar.addEventListener('mousedown', e => {
                     isDragging = true;
                     offsetX = e.clientX - win.offsetLeft;
@@ -424,6 +514,8 @@
             });
 
             loadProjects();
+
+
         </script>
 
 </body>
