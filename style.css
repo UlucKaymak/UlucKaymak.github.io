@@ -14,7 +14,6 @@
     src: url(ms_sans_serif_bold.woff2) format("woff2")
 }
 
-
 .glow {
     color: #fff;
     text-shadow:
@@ -24,11 +23,11 @@
         0 0 40px rgb(200, 0, 255);
 }
 
-body {
-    background: teal;
-    /* background: rgb(94, 154, 168); */
-    font-family: Arial;
-    font-size: 14px
+html {
+    /* background: teal; */
+    height: 100%;
+    background: linear-gradient(teal, rgb(0, 80, 80));
+    font-size: 14px;
 }
 
 /* scanlines */
@@ -43,18 +42,18 @@ body::after {
     background: repeating-linear-gradient(to bottom,
             rgba(0, 0, 0, 0) 0px,
             rgba(0, 0, 0, 0) 2px,
-            rgba(0, 0, 0, 0.1) 3px);
+            rgba(0, 0, 0, 0.2) 3px);
     z-index: 9999;
 }
 
 ::selection {
-  background-color: rgba(255, 255, 150, 0.4);
-  color: inherit;
+    background-color: rgba(255, 255, 150, 0.4);
+    color: inherit;
 }
 
 .highlight {
-  background: rgba(255, 239, 150, 0.4);
-  padding: 0.1em 0.1em;
+    background: rgba(255, 239, 150, 0.4);
+    padding: 0.1em 0.1em;
 }
 
 
@@ -185,10 +184,10 @@ input[type=submit]:disabled {
 .title-bar {
     align-items: center;
     background: linear-gradient(90deg, navy, #1084d0);
-    /* background: linear-gradient(90deg, MediumVioletRed, pink); */
     display: flex;
     justify-content: space-between;
-    padding: 3px 2px 3px 3px
+    padding: 3px 2px 3px 3px;
+
 }
 
 .title-bar.inactive {
