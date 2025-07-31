@@ -43,6 +43,10 @@
             <img src="design/icons_png/w2k_unknown_14.png" />
             <span>portfolio.exe</span>
         </div>
+        <div class="desktop-icon" ondblclick="openWindow('leave-note')">
+            <img src="design/icons_png/w2k_move.png" />
+            <span>leave_note.exe</span>
+        </div>
         <div class="desktop-icon" ondblclick="openWindow('contact')">
             <img src="design/icons_png/w98_phone_desk.png" />
             <span>contact.exe</span>
@@ -80,7 +84,6 @@
         </div>
     </div>
 
-
     <div class="window" id="about" style="top: 125px; left: 425px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">about_me.txt</div>
@@ -100,59 +103,6 @@
             <p>As a person, <span class="highlight">I love ducks.</span></p>
             ​
             <p>I'm also a partner and co-founder of the interactive motion graphics and sound design firm, BizYapım.</p>
-        </div>
-    </div>
-
-    <div class="window" id="img1" style="top: 100px; left: 850px;">
-        <div class="title-bar">
-            <div class="title-bar-text">neko1.jpg</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('img1')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="design/images/neko1.jpg" alt="neko1 :3" style="max-width: 100%; height: auto;" />
-        </div>
-    </div>
-
-    <div class="window" id="img-uluc" style="top: 240px; left: 475px; min-width: 280px;">
-        <div class="title-bar">
-            <div class="title-bar-text">uluc.jpeg</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('img-uluc')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="design/uluc.jpeg" alt="Uluç Kaymak" style="max-width: 100%; height: auto;" />
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">Size: 280x512</p>
-            <p class="status-bar-field">Format: Human</p>
-            <p class="status-bar-field">Created: 2001</p>
-        </div>
-    </div>
-
-    <div class="window" id="img2" style="top: 300px; left: 1000px; z-index: 3">
-        <div class="title-bar">
-            <div class="title-bar-text">neko2.jpg</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('img2')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="design/images/neko2.jpg" alt="neko2 :3" style="max-width: 100%; height: auto;" />
-        </div>
-    </div>
-
-    <div class="window" id="img3" style="top: 200px; left: 900px; z-index: 2;">
-        <div class="title-bar">
-            <div class="title-bar-text">ciniveben.gif</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('img2')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="design/images/ART-ciniveben.gif" alt="neko2 :3" style="max-width: 100%; height: auto;" />
         </div>
     </div>
 
@@ -217,6 +167,137 @@
     </div>
 
 
+
+    <div class="window" id="img1" style="top: 100px; left: 850px;">
+        <div class="title-bar">
+            <div class="title-bar-text">neko1.jpg</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('img1')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="design/images/neko1.jpg" alt="neko1 :3" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+
+    <div class="window" id="img-uluc" style="top: 240px; left: 475px; min-width: 280px;">
+        <div class="title-bar">
+            <div class="title-bar-text">uluc.jpeg</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('img-uluc')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="design/uluc.jpeg" alt="Uluç Kaymak" style="max-width: 100%; height: auto;" />
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Size: 280x512</p>
+            <p class="status-bar-field">Format: Human</p>
+            <p class="status-bar-field">Created: 2001</p>
+        </div>
+    </div>
+
+    <div class="window" id="img2" style="top: 300px; left: 1000px; z-index: 3">
+        <div class="title-bar">
+            <div class="title-bar-text">neko2.jpg</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('img2')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="design/images/neko2.jpg" alt="neko2 :3" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+
+    <div class="window" id="img3" style="top: 200px; left: 900px; z-index: 2;">
+        <div class="title-bar">
+            <div class="title-bar-text">ciniveben.gif</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('img2')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="design/images/ART-ciniveben.gif" alt="neko2 :3" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+
+    <div class="window" id="catWindow" style="top: 300px; left: 1000px; display: none; z-index: 3;">
+        <div class="title-bar">
+            <div class="title-bar-text">cat.gif</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('catWindow')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img id="catImage" src="" alt="cute cat" style="max-width: 100%; height: auto;" />
+        </div>
+        <script>
+            let catWindowCount = 0;
+
+            function spawnCatWindow() {
+                const desktop = document.body;
+                const windowId = `catWindow${catWindowCount++}`;
+                const windowDiv = document.createElement("div");
+                const randomX = Math.floor(Math.random() * (window.innerWidth - 300));
+                const randomY = Math.floor(Math.random() * (window.innerHeight - 300));
+
+                windowDiv.className = "window";
+                windowDiv.id = windowId;
+                windowDiv.style = `position: absolute; top: ${randomY}px; left: ${randomX}px; z-index: 1000;`;
+
+                windowDiv.innerHTML = `
+        <div class="title-bar">
+            <div class="title-bar-text">cat_${catWindowCount}.gif</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('${windowId}')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="https://cataas.com/cat/gif?${Date.now()}" alt="neko gif" style="max-width: 100%; height: auto;" />
+        </div>
+    `;
+
+                desktop.appendChild(windowDiv);
+                makeDraggable(windowDiv); // ✨ bunu ekle
+            }
+        </script>
+    </div>
+
+    <div class="window" id="leave-note" style="top: 300px; left: 200px; width: 300px;">
+        <div class="title-bar">
+            <div class="title-bar-text">leave_note.exe</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('leave-note')"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <p><strong>Last note:</strong></p>
+            <div id="last-note" style="margin-bottom: 10px; color: gray;">No note yet.</div>
+            <textarea id="note-input" rows="4" style="width: 100%;"></textarea>
+            <button onclick="saveNote()" style="margin-top: 10px;">Leave Note</button>
+        </div>
+        <script>
+            function saveNote() {
+                const note = document.getElementById("note-input").value;
+                if (note.trim() !== "") {
+                    localStorage.setItem("visitor_note", note);
+                    document.getElementById("last-note").innerText = note;
+                    document.getElementById("note-input").value = "";
+                }
+            }
+
+            function loadNote() {
+                const note = localStorage.getItem("visitor_note");
+                if (note) {
+                    document.getElementById("last-note").innerText = note;
+                }
+            }
+
+            window.addEventListener("DOMContentLoaded", loadNote);
+        </script>
+    </div>
+
+
     <div class="window" id="projects-table"
         style="top: 350px; left: 700px; width: 550px; max-width: 550px; max-height: 1000px; overflow-y: auto; display: none;">
         <div class="title-bar">
@@ -243,48 +324,6 @@
             <p class="status-bar-field">Click a project to select it.</p>
         </div>
 
-
-        <div class="window" id="catWindow" style="top: 300px; left: 1000px; display: none; z-index: 3;">
-            <div class="title-bar">
-                <div class="title-bar-text">cat.gif</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Close" onclick="closeWindow('catWindow')"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <img id="catImage" src="" alt="cute cat" style="max-width: 100%; height: auto;" />
-            </div>
-            <script>
-                let catWindowCount = 0;
-
-                function spawnCatWindow() {
-                    const desktop = document.body;
-                    const windowId = `catWindow${catWindowCount++}`;
-                    const windowDiv = document.createElement("div");
-                    const randomX = Math.floor(Math.random() * (window.innerWidth - 300));
-                    const randomY = Math.floor(Math.random() * (window.innerHeight - 300));
-
-                    windowDiv.className = "window";
-                    windowDiv.id = windowId;
-                    windowDiv.style = `position: absolute; top: ${randomY}px; left: ${randomX}px; z-index: 1000;`;
-
-                    windowDiv.innerHTML = `
-        <div class="title-bar">
-            <div class="title-bar-text">cat_${catWindowCount}.gif</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('${windowId}')"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <img src="https://cataas.com/cat/gif?${Date.now()}" alt="neko gif" style="max-width: 100%; height: auto;" />
-        </div>
-    `;
-
-                    desktop.appendChild(windowDiv);
-                    makeDraggable(windowDiv); // ✨ bunu ekle
-                }
-            </script>
-        </div>
 
 
 
