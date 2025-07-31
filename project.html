@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio Projects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .window {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #666;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      padding: 0;
+      width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+      display: none;
+      z-index: 10;
+    }
+
+    .title-bar {
+      background: #0066cc;
+      color: white;
+      padding: 5px 10px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title-bar-text {
+      font-weight: bold;
+    }
+
+    .title-bar-controls button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .window-body {
+      padding: 10px;
+    }
+
+    #project-list .project-entry {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    #project-list .project-entry:hover {
+      background: #f0f8ff;
+    }
+
+    .project-images img {
+      max-width: 100%;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #open-project-btn {
+      margin: 10px 10px 10px 0;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button onclick="openWindow('projects')">Open Projects Window</button>
+
+  <!-- Projects List Window -->
+  <div class="window" id="projects" style="top: 50px; left: 50px;">
+    <div class="title-bar">
+      <div class="title-bar-text">projects.exe</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" onclick="closeWindow('projects')">×</button>
+      </div>
+    </div>
+    <div class="window-body" id="project-list">
+      <!-- Project entries burada olacak -->
+    </div>
+  </div>
+
+  <!-- Project Detail Window -->
+  <div class="window" id="project-detail" style="top: 100px; left: 600px; width: 550px;">
+    <div class="title-bar">
+      <div class="title-bar-text" id="project-title">Project Detail</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" onclick="closeWindow('project-detail')">×</button>
+      </div>
+    </div>
+    <div class="window-body" id="project-content">
+      <!-- Proje detayları burada gösterilecek -->
+    </div>
+  </div>
+
+  <script>
+    // Pencere açma-kapama fonksiyonları
+    function openWindow(id) {
+      const win = document.getElementById(id);
+      if (!win) return;
+      win.style.display = 'block';
+
+      // Ortala
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const w = win.offsetWidth || 500;
+      const h = win.offsetHeight || 400;
+      win.style.left = Math.max(10, (vw - w) / 2) + 'px';
+      win.style.top = Math.max(10, (vh - h) / 2) + 'px';
+      win.style.zIndex = 1000;
+    }
+
+    function closeWindow(id) {
+      const win = document.getElementById(id);
+      if (win) win.style.display = 'none';
+    }
+
+    // Draggable yapma
+    function makeDraggable(win) {
+      const titleBar = win.querySelector('.title-bar');
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      titleBar.addEventListener('mousedown', e => {
+        isDragging = true;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+        win.style.zIndex = 1001;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        let left = e.clientX - offsetX;
+        let top = e.clientY - offsetY;
+
+        // viewport sınırları
+        left = Math.min(Math.max(0, left), window.innerWidth - win.offsetWidth);
+        top = Math.min(Math.max(0, top), window.innerHeight - win.offsetHeight);
+
+        win.style.left = left + 'px';
+        win.style.top = top + 'px';
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+    }
+
+    // Tüm window'ları draggable yap
+    document.querySelectorAll('.window').forEach(win => makeDraggable(win));
+
+    // Projeleri yükle ve listele
+    async function loadProjects() {
+      try {
+        const res = await fetch('projects.json');
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+        const projects = await res.json();
+        const list = document.getElementById('project-list');
+        list.innerHTML = '';
+
+        const enabledProjects = projects.filter(p => p.enabled);
+
+        if (enabledProjects.length === 0) {
+          list.innerHTML = '<p>No enabled projects found.</p>';
+          return;
+        }
+
+        enabledProjects.forEach(project => {
+          const div = document.createElement('div');
+          div.className = 'project-entry';
+          div.innerHTML = `<strong>${project.title}</strong><br><small>${project.type} — ${project.date}</small>`;
+          div.onclick = () => openProjectDetail(project);
+          list.appendChild(div);
+        });
+      } catch (error) {
+        console.error(error);
+        document.getElementById('project-list').innerHTML = '<p>Error loading projects.</p>';
+      }
+    }
+
+    // Proje detayını göster
+    function openProjectDetail(project) {
+      document.getElementById('project-title').textContent = project.title;
+      const container = document.getElementById('project-content');
+
+      // Satır sonu için <br> yapalım:
+      const descriptionHtml = project.description ? project.description.replace(/\n/g, '<br>') : '';
+
+      container.innerHTML = `
+        <p><strong>Type:</strong> ${project.type}</p>
+        <p><strong>Date:</strong> ${project.date}</p>
+        <p><strong>Role:</strong> ${project.role}</p>
+        <p>${descriptionHtml}</p>
+        <div class="project-images">
+          ${project.media.map(url => `<img src="${url}" alt="media image">`).join('')}
+        </div>
+        <p><strong>Tags:</strong> ${project.tags.join(' ')}</p>
+      `;
+
+      openWindow('project-detail');
+    }
+
+    // Sayfa açılınca projeleri yükle
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProjects();
+    });
+  </script>
+</body>
+
+</html> 

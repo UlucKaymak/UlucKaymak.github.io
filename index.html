@@ -43,10 +43,10 @@
             <img src="design/icons_png/w2k_unknown_14.png" />
             <span>portfolio.exe</span>
         </div>
-        <div class="desktop-icon" ondblclick="openWindow('leave-note')">
+        <!-- <div class="desktop-icon" ondblclick="openWindow('leave-note')">
             <img src="design/icons_png/w2k_move.png" />
             <span>leave_note.exe</span>
-        </div>
+        </div> -->
         <div class="desktop-icon" ondblclick="openWindow('contact')">
             <img src="design/icons_png/w98_phone_desk.png" />
             <span>contact.exe</span>
@@ -145,8 +145,7 @@
         </div>
 
         <div class="status-bar">
-            <p class="status-bar-field">mail</p>
-            <p class="status-bar-field">cat</p>
+            <p class="status-bar-field">Pet the cat.</p>
         </div>
 
         <script>
@@ -213,7 +212,7 @@
         <div class="title-bar">
             <div class="title-bar-text">ciniveben.gif</div>
             <div class="title-bar-controls">
-                <button aria-label="Close" onclick="closeWindow('img2')"></button>
+                <button aria-label="Close" onclick="closeWindow('img3')"></button>
             </div>
         </div>
         <div class="window-body">
@@ -263,7 +262,7 @@
         </script>
     </div>
 
-    <div class="window" id="leave-note" style="top: 300px; left: 200px; width: 300px;">
+    <!-- <div class="window" id="leave-note" style="top: 300px; left: 200px; width: 300px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">leave_note.exe</div>
             <div class="title-bar-controls">
@@ -295,7 +294,7 @@
 
             window.addEventListener("DOMContentLoaded", loadNote);
         </script>
-    </div>
+    </div> -->
 
 
     <div class="window" id="projects-table"
@@ -320,242 +319,345 @@
         </div>
         <button id="open-project-btn" style="margin-top: 5px; margin-bottom: 5px;" disabled>Open Project</button>
         <div class="status-bar">
+            <p class="status-bar-field">Select a project to open it.</p>
             <p class="status-bar-field">Projects: <span id="project-count"></span></p>
-            <p class="status-bar-field">Click a project to select it.</p>
         </div>
+    </div>
 
+    <div class="window" id="project-detail" style="top: 100px; left: 600px; width: 550px; display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text" id="project-title">Project Detail</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('project-detail')"></button>
+            </div>
+        </div>
+        <div class="window-body" id="project-content">
+            <!-- Proje detayları burada gösterilecek -->
+        </div>
+    </div>
 
+    <div class="window" id="image-viewer" style="top: 150px; left: 150px; width: 600px; display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text" id="image-viewer-title">Image Viewer</div>
+            <div class="title-bar-controls">
+                <button aria-label="Close" onclick="closeWindow('image-viewer')"></button>
+            </div>
+        </div>
+        <div class="window-body" style="text-align: center;">
+            <!-- Image -->
+            <img id="image-viewer-img" src="" alt="Viewing Image"
+                style="max-width: 100%; max-height: 120vh; display: none;" />
+            <!-- Video -->
+            <video id="image-viewer-video" controls style="max-width: 100%; max-height: 80vh; display: none;">
+                <source id="image-viewer-video-source" src="" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setupProjectMediaClick();
+        });
 
-        <script>
-            function openWindow(id) {
-                const win = document.getElementById(id);
-                win.style.display = 'block';
-                if (win) {
-                    // Ekran ortası pozisyonu
-                    const vw = window.innerWidth;
-                    const vh = window.innerHeight;
+        function setupProjectMediaClick() {
+            const projectContent = document.getElementById('project-content');
+            if (!projectContent) return;
 
-                    // Window genişlik ve yüksekliği
-                    const width = win.offsetWidth || 320; // varsayılan genişlik
-                    const height = win.offsetHeight || 200; // varsayılan yükseklik
-
-                    // Ortalanmış pozisyonlar
-                    const left = Math.max(10, (vw - width) / 2);
-                    const top = Math.max(10, (vh - height) / 2);
-
-                    win.style.left = left + 'px';
-                    win.style.top = top + 'px';
-
-                    win.style.display = 'block';
-                    win.style.zIndex = 3;
-                }
-                // Mobil ekran için otomatik konumlandır
-                const isMobile = window.innerWidth < 768;
-                if (isMobile) {
-                    win.style.top = '5vh';
-                    win.style.left = '2.5vw';
-                    win.style.width = '95vw';
-                    win.style.height = 'auto';
-                }
-            }
-
-
-            function makeDraggable(win) {
-                const titleBar = win.querySelector('.title-bar');
-                let isDragging = false;
-                let offsetX, offsetY;
-
-                titleBar.addEventListener('mousedown', e => {
-                    isDragging = true;
-                    offsetX = e.clientX - win.offsetLeft;
-                    offsetY = e.clientY - win.offsetTop;
-                    win.style.zIndex = parseInt(win.style.zIndex || 1000) + 1;
-                });
-
-                document.addEventListener('mousemove', e => {
-                    if (!isDragging) return;
-                    let newLeft = e.clientX - offsetX;
-                    let newTop = e.clientY - offsetY;
-
-                    // Ekran dışına taşmasını engelle
-                    const screenWidth = window.innerWidth;
-                    const screenHeight = window.innerHeight;
-                    const winWidth = win.offsetWidth;
-                    const winHeight = win.offsetHeight;
-
-                    if (newLeft < 0) newLeft = 0;
-                    if (newTop < 0) newTop = 0;
-                    if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
-                    if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
-
-                    win.style.left = newLeft + 'px';
-                    win.style.top = newTop + 'px';
-                });
-
-                document.addEventListener('mouseup', () => {
-                    isDragging = false;
-                });
-            }
-
-            // Drag & Drop
-            document.querySelectorAll('.window').forEach(win => {
-                const titleBar = win.querySelector('.title-bar');
-                let isDragging = false;
-                let offsetX, offsetY;
-
-                var windowZindex = 1;
-                titleBar.addEventListener('mousedown', e => {
-                    isDragging = true;
-                    offsetX = e.clientX - win.offsetLeft;
-                    offsetY = e.clientY - win.offsetTop;
-                    windowZindex = win.style.zIndex + 1;
-                    win.style.zIndex = windowZindex;
-                });
-
-                document.addEventListener('mousemove', e => {
-                    if (!isDragging) return;
-
-                    // Yeni pozisyon hesapla
-                    let newLeft = e.clientX - offsetX;
-                    let newTop = e.clientY - offsetY;
-
-                    // Ekran boyutları
-                    const screenWidth = window.innerWidth;
-                    const screenHeight = window.innerHeight;
-
-                    // Pencere boyutları
-                    const winWidth = win.offsetWidth;
-                    const winHeight = win.offsetHeight;
-
-                    // Limitleri uygula: ekran dışına çıkmasın
-                    if (newLeft < 0) newLeft = 0;
-                    if (newTop < 0) newTop = 0;
-                    if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
-                    if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
-
-                    // Pozisyonu ata
-                    win.style.left = newLeft + 'px';
-                    win.style.top = newTop + 'px';
-                });
-
-                document.addEventListener('mouseup', () => {
-                    isDragging = false;
-                    // Pencereyi en üstte tut
-                });
+            projectContent.querySelectorAll('img, video').forEach(media => {
+                media.style.cursor = 'pointer';
+                media.addEventListener('click', () => openMediaViewer(media));
             });
+        }
 
+        function openMediaViewer(media) {
+            const viewer = document.getElementById('image-viewer');
+            const imgElem = document.getElementById('image-viewer-img');
+            const videoElem = document.getElementById('image-viewer-video');
+            const videoSource = document.getElementById('image-viewer-video-source');
+            const viewerTitle = document.getElementById('image-viewer-title');
 
-            // Close Window
-            function closeWindow(id) {
-                document.getElementById(id).style.display = 'none';
+            if (media.tagName.toLowerCase() === 'img') {
+                imgElem.src = media.src;
+                imgElem.style.display = 'block';
+                videoElem.pause();
+                videoElem.style.display = 'none';
+                viewerTitle.textContent = media.alt || 'Image';
+            } else if (media.tagName.toLowerCase() === 'video') {
+                videoSource.src = media.querySelector('source')?.src || media.src;
+                videoElem.load();
+                imgElem.style.display = 'none';
+                videoElem.style.display = 'block';
+                viewerTitle.textContent = media.alt || 'Video';
             }
 
-            // Load Projects from JSON
-            let selectedProject = null;
+            openWindow('image-viewer');
+            makeDraggable(viewer);
+        }
+    </script>
+    </div>
 
-            async function loadProjects() {
-                try {
-                    const res = await fetch('projects.json');
+    <script>
+        let selectedProject = null;
+
+        function closeWindow(id) {
+            const win = document.getElementById(id);
+            if (win) win.style.display = 'none';
+        }
+
+        function openWindow(id) {
+            const win = document.getElementById(id);
+            if (!win) return;
+            win.style.display = 'block';
+
+            // Ekran ortası pozisyonu
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const width = win.offsetWidth || 320;
+            const height = win.offsetHeight || 200;
+
+            const left = Math.max(10, (vw - width) / 2);
+            const top = Math.max(10, (vh - height) / 2);
+
+            win.style.left = left + 'px';
+            win.style.top = top + 'px';
+            win.style.zIndex = 1000;
+
+            // Mobil ekran için ayar
+            if (window.innerWidth < 768) {
+                win.style.top = '5vh';
+                win.style.left = '2.5vw';
+                win.style.width = '95vw';
+                win.style.height = 'auto';
+            }
+        }
+
+        function loadProjects() {
+            fetch('projects.json')
+                .then(res => {
                     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
-                    const projects = await res.json();
-
+                    return res.json();
+                })
+                .then(projects => {
                     if (!Array.isArray(projects)) {
-                        console.error('projects.json should be an array of project objects.');
+                        console.error('projects.json should be an array');
                         return;
                     }
-
                     const enabledProjects = projects.filter(p => p.enabled);
-
                     const tbody = document.getElementById('portfolio-projects-body');
                     tbody.innerHTML = '';
 
                     if (enabledProjects.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="2">No projects available.</td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="3">No projects available.</td></tr>';
                         return;
                     }
 
-                    const projectCountElement = document.getElementById('project-count');
-                    projectCountElement.textContent = `${projects.length}`;
+                    document.getElementById('project-count').textContent = enabledProjects.length;
 
                     enabledProjects.forEach(proj => {
                         const tr = document.createElement('tr');
                         tr.style.cursor = 'pointer';
 
-                        const tdTitle = document.createElement('td');
-                        tdTitle.textContent = proj.title;
+                        tr.innerHTML = `
+                        <td>${proj.title}</td>
+                        <td>${proj.type}</td>
+                        <td>${proj.date}</td>
+                    `;
 
-                        const tdType = document.createElement('td');
-                        tdType.textContent = proj.type;
-
-                        const tdDate = document.createElement('td');
-                        tdDate.textContent = proj.date;
-
-                        tr.appendChild(tdTitle);
-                        tr.appendChild(tdType);
-                        tr.appendChild(tdDate);
-
-                        // Satıra tıklayınca seçimi yap
                         tr.addEventListener('click', () => {
-                            // Önceki seçili satırı kaldır
-                            const prevSelected = tbody.querySelector('tr.highlighted');
-                            if (prevSelected) prevSelected.classList.remove('highlighted');
+                            // Önceki seçimi kaldır
+                            const prev = tbody.querySelector('tr.highlighted');
+                            if (prev) prev.classList.remove('highlighted');
 
-                            // Yeni seçili satırı ekle
+                            // Yeni seçimi ekle
                             tr.classList.add('highlighted');
                             selectedProject = proj;
 
-                            // Butonu aktif yap
+                            // Butonu aktif et
                             document.getElementById('open-project-btn').disabled = false;
+
+                            // Detay penceresini aç
+                            // showProjectDetail(proj);
                         });
 
                         tbody.appendChild(tr);
                     });
-                } catch (error) {
-                    console.error('Error loading projects:', error);
+                })
+                .catch(err => {
+                    console.error('Error loading projects:', err);
                     const tbody = document.getElementById('portfolio-projects-body');
-                    if (tbody) {
-                        tbody.innerHTML = '<tr><td colspan="2">Error loading projects.</td></tr>';
-                    }
-                }
-            }
+                    tbody.innerHTML = '<tr><td colspan="3">Error loading projects.</td></tr>';
+                });
+        }
 
-            function keepWindowInViewport(win) {
+        function showProjectDetail(project) {
+            const detailWin = document.getElementById('project-detail');
+            const titleElem = document.getElementById('project-title');
+            const contentElem = document.getElementById('project-content');
+
+            titleElem.textContent = project.title;
+
+            contentElem.innerHTML = `
+                <div style="display: flex; gap: 15px; align-items: flex-start;">
+                    <div style="flex: 1; min-width: 0;">
+                        <h3>${project.title}</h3>
+                        <p><strong>Type:</strong> ${project.type}</p>
+                        <p><strong>Date:</strong> ${project.date}</p>
+                        <p><strong>Role:</strong> ${project.role || '-'}</p>
+                        <p><strong>Description:</strong> ${project.description || '-'}</p>
+                        <p><strong>Tags:</strong> ${(project.tags || []).join(', ')}</p>
+                        <p><strong>Media:</strong></p>
+                        <ul style="display: flex; flex-wrap: wrap; padding-left: 0; list-style: none;">
+                            ${(project.media || []).map(src => `
+                            <li style="margin: 3px;">
+                                <img src="${src}" alt="media" style="max-width: 100px; height: auto; display: block; cursor: pointer;">
+                            </li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="flex-shrink: 0; max-width: 200px;">
+                        <p><strong>Thumbnail:</strong></p>
+                        <img src="${project.thumbnail}" alt="thumbnail" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">
+                    </div>
+                </div>
+            `;
+
+            setupProjectMediaClick();  // <-- Burada çağırıyoruz
+
+            openWindow('project-detail');
+        }
+
+        document.getElementById('open-project-btn').addEventListener('click', () => {
+            if (!selectedProject) return;
+            showProjectDetail(selectedProject);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+        });
+
+        function openWindow(id) {
+            const win = document.getElementById(id);
+            win.style.display = 'block';
+            if (win) {
+                // Ekran ortası pozisyonu
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+
+                // Window genişlik ve yüksekliği
+                const width = win.offsetWidth || 320; // varsayılan genişlik
+                const height = win.offsetHeight || 200; // varsayılan yükseklik
+
+                // Ortalanmış pozisyonlar
+                const left = Math.max(10, (vw - width) / 2);
+                const top = Math.max(10, (vh - height) / 2);
+
+                win.style.left = left + 'px';
+                win.style.top = top + 'px';
+
+                win.style.display = 'block';
+                win.style.zIndex = 3;
+            }
+            // Mobil ekran için otomatik konumlandır
+            const isMobile = window.innerWidth < 768;
+            if (isMobile) {
+                win.style.top = '5vh';
+                win.style.left = '2.5vw';
+                win.style.width = '95vw';
+                win.style.height = 'auto';
+            }
+        }
+
+
+        function makeDraggable(win) {
+            const titleBar = win.querySelector('.title-bar');
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            titleBar.addEventListener('mousedown', e => {
+                isDragging = true;
+                offsetX = e.clientX - win.offsetLeft;
+                offsetY = e.clientY - win.offsetTop;
+                win.style.zIndex = parseInt(win.style.zIndex || 1000) + 1;
+            });
+
+            document.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                let newLeft = e.clientX - offsetX;
+                let newTop = e.clientY - offsetY;
+
+                // Ekran dışına taşmasını engelle
                 const screenWidth = window.innerWidth;
                 const screenHeight = window.innerHeight;
                 const winWidth = win.offsetWidth;
                 const winHeight = win.offsetHeight;
 
-                let left = win.offsetLeft;
-                let top = win.offsetTop;
+                if (newLeft < 0) newLeft = 0;
+                if (newTop < 0) newTop = 0;
+                if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
+                if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
 
-                if (left < 0) left = 0;
-                if (top < 0) top = 0;
-                if (left + winWidth > screenWidth) left = screenWidth - winWidth;
-                if (top + winHeight > screenHeight) top = screenHeight - winHeight;
-
-                win.style.left = left + 'px';
-                win.style.top = top + 'px';
-            }
-
-            // Örnek: pencereler açıldığında
-            document.querySelectorAll('.window').forEach(win => {
-                keepWindowInViewport(win);
+                win.style.left = newLeft + 'px';
+                win.style.top = newTop + 'px';
             });
 
-            // Buton tıklama olayı
-            document.getElementById('open-project-btn').addEventListener('click', () => {
-                if (!selectedProject) return;
-                const projectPageUrl = `https://uluckaymak.com/project/${selectedProject.id}`;
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        }
 
-                window.open(projectPageUrl, '_blank');
+        // Drag & Drop
+        document.querySelectorAll('.window').forEach(win => {
+            const titleBar = win.querySelector('.title-bar');
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            var windowZindex = 1;
+            titleBar.addEventListener('mousedown', e => {
+                isDragging = true;
+                offsetX = e.clientX - win.offsetLeft;
+                offsetY = e.clientY - win.offsetTop;
+                windowZindex = win.style.zIndex + 1;
+                win.style.zIndex = windowZindex;
             });
 
-            loadProjects();
+            document.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+
+                // Yeni pozisyon hesapla
+                let newLeft = e.clientX - offsetX;
+                let newTop = e.clientY - offsetY;
+
+                // Ekran boyutları
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+
+                // Pencere boyutları
+                const winWidth = win.offsetWidth;
+                const winHeight = win.offsetHeight;
+
+                // Limitleri uygula: ekran dışına çıkmasın
+                if (newLeft < 0) newLeft = 0;
+                if (newTop < 0) newTop = 0;
+                if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
+                if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
+
+                // Pozisyonu ata
+                win.style.left = newLeft + 'px';
+                win.style.top = newTop + 'px';
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                // Pencereyi en üstte tut
+            });
+        });
 
 
-        </script>
+        // Close Window
+        function closeWindow(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
 
 </body>
 
