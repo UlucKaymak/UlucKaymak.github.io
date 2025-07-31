@@ -1,5 +1,20 @@
 [
   {
+    "id": "videogame-rideup",
+    "title": "Ride Up",
+    "type": "Video Game",
+    "date": "2025_07",
+    "description": "'The steepest climb between mind and body: Ride UP. Grab your bike and ascend through a world woven with delusions. Physics-based riding, brutal tracks, and a past that refuses to be remembered await you.'",
+    "role": "Sound Designer",
+    "thumbnail": "projects/2025_07-SuberGames-RideUp/header.jpg",
+    "media": ["projects/2025_07-SuberGames-RideUp/header.jpg"],
+    "tags": [
+      "#VideoGame",
+      "#Audio"
+    ],
+    "enabled": true
+  },
+  {
     "id": "art-Persona",
     "title": "PersonA",
     "type": "Art Installation",
