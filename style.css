@@ -998,7 +998,9 @@ table>tbody>tr>* {
 }
 
 .desktop {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 16px;
