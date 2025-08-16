@@ -2,22 +2,22 @@
     font-family: "Pixelated MS Sans Serif";
     font-style: normal;
     font-weight: 400;
-    src: url(ms_sans_serif.woff) format("woff");
-    src: url(ms_sans_serif.woff2) format("woff2")
+    src: url(design/webfont/w95font.woff) format("woff");
+    src: url(design/webfont/w95font.woff2) format("woff2");   
 }
 
 @font-face {
     font-family: "Pixelated MS Sans Serif";
     font-style: normal;
     font-weight: 700;
-    src: url(ms_sans_serif_bold.woff) format("woff");
-    src: url(ms_sans_serif_bold.woff2) format("woff2")
+    src: url(design/webfont/w95font-bold.woff) format("woff");
+    src: url(design/webfont/w95font-bold2.woff) format("woff2");
 }
 
 html {
     height: 100%;
     background: linear-gradient(teal, rgb(0, 80, 80));
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.3;
 }
 
