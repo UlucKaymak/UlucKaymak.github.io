@@ -1029,63 +1029,65 @@ table>tbody>tr>* {
     image-rendering: pixelated;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 80px);
-    gap: 16px;
-    padding: 10px;
-    max-height: 250px;
-    overflow-y: auto;
-}
-
-.project-shortcut {
-  width: 128px;
-  height: 128px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 14px;
-  cursor: pointer;
-  /* margin: 10px; */
-  user-select: none;
-}
-
-.project-shortcut img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  /* margin-bottom: 5px; */
-}
-
 
 /* Aktif pencere başlık çubuğunu belirginleştirir */
 .window.active .title-bar {
     background: linear-gradient(90deg, #000080, #1084d0); /* Windows 98'in aktif başlık rengi */
 }
 
-/* Proje klasöründeki ikonlar için grid yapısı */
 .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px;
+    display: flex; /* Esnek kutu modelini etkinleştirir */
+    flex-wrap: wrap; /* Gerekirse alt satıra geçmesini sağlar */
+    gap: 10px; /* Öğeler arasında boşluk bırakır */
+    justify-content: flex-start; /* Öğeleri baştan itibaren hizalar */
+    align-content: flex-start; /* İçeriği pencere içinde yukarıya hizalar */
 }
+
+
+
+/* Proje klasörü içindeki ikonlar için stil */
 .project-shortcut {
+    /* İkonları ortalar */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;
     text-align: center;
+    
+    /* Boyut ve renk */
+    width: 210px;
     cursor: pointer;
-}
-.project-shortcut img {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 5px;
-}
-.project-shortcut div {
+    color: #222; /* İkon yazısı için daha okunabilir bir renk */
+    gap: 5px;
+    font-family: "Pixelated MS Sans Serif", Arial;
     font-size: 12px;
-    word-wrap: break-word;
+    
+    /* Seçim efekti için geçişler */
+    transition: background-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    padding: 5px;
+}
+
+/* Fareyle üzerine gelindiğinde (hover) efekti */
+.project-shortcut:hover {
+    background-color: rgba(0, 0, 128, 0.2); /* Hafif mavi arka plan */
+    color: #fff; /* Yazı rengini beyaza çevir */
+    box-shadow: inset 0 0 0 1px #000080, 
+                inset 0 0 0 2px #fff; /* Beyaz bir kenarlık ekler */
+    opacity: 0.8; /* Hafif şeffaflık */
+}
+
+/* Tıklama anındaki (active) efekti */
+.project-shortcut:active {
+    background-color: navy; /* Koyuluk ve belirginlik için */
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #fff,
+                inset 0 0 0 2px #000;
+}
+
+/* İkon görseli için */
+.project-shortcut img {
+    width: 200px;
+    height: 200px;
+    /* image-rendering: pixelated; */
+    border: 1px solid transparent;
 }
