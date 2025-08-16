@@ -4,11 +4,15 @@
     "title": "Ride Up",
     "type": "Video Game",
     "date": "2025_07",
-    "description": "'The steepest climb between mind and body: Ride UP. Grab your bike and ascend through a world woven with delusions. Physics-based riding, brutal tracks, and a past that refuses to be remembered await you.'",
+    "description": "'The steepest climb between mind and body: Ride UP. Grab your bike and ascend through a world woven with delusions. Physics-based riding, brutal tracks, and a past that refuses to be remembered await you.' [Steam](https://store.steampowered.com/app/3752520/Ride_Up/)",
     "role": "Sound Designer",
-    "thumbnail": "projects/2025_07-SuberGames-RideUp/header.jpg",
+    "thumbnail": "projects/2025_07-SuberGames-RideUp/suber-rideup2.jpg",
     "media": [
-      "projects/2025_07-SuberGames-RideUp/header.jpg"
+      "projects/2025_07-SuberGames-RideUp/suber-rideup2.jpg",
+      "projects/2025_07-SuberGames-RideUp/suber-rideup1.jpg",
+      "projects/2025_07-SuberGames-RideUp/suber-rideup3.jpg",
+      "projects/2025_07-SuberGames-RideUp/suber-rideup4.jpg",
+      "projects/2025_07-SuberGames-RideUp/suber-rideup5.jpg"
     ],
     "tags": [
       "#VideoGame",
@@ -21,7 +25,7 @@
     "title": "PersonA",
     "type": "Art Installation",
     "date": "2025_06_11",
-    "description": "'The history of humanity is, in a way, the history of mankind’s efforts to define itself. In every age, in every society, in every individual, human beings have sought an image, a face, an identity. Art is one of the oldest and most powerful tools in this endeavor. Person A is a reflection of this search today: a portrait that dissolves the image of the individual into the collective — but never fixes it — changing with every glance, constantly reborn.'\n-Muzaffer Malkoç (Artist)\n\nExibithed: 11-15 June, IFAD @AKM İstanbul",
+    "description": "'The history of humanity is, in a way, the history of mankind’s efforts to define itself. In every age, in every society, in every individual, human beings have sought an image, a face, an identity. Art is one of the oldest and most powerful tools in this endeavor. Person A is a reflection of this search today: a portrait that dissolves the image of the individual into the collective — but never fixes it — changing with every glance, constantly reborn.' -Muzaffer Malkoç (Artist)  Exibithed: 11-15 June, IFAD @AKM İstanbul",
     "role": "Creative Coder",
     "thumbnail": "projects/2025_06_11-Art-Persona/Cover.jpeg",
     "media": [
@@ -47,7 +51,7 @@
     "title": "Livber: Smoke and Mirrors",
     "type": "Video Game",
     "date": "2025_05_02",
-    "description": "Lilith, whom you believed dead for years, calls to you with nothing but a letter, summoning you back to the old house, silent witness to your past.\n\nInside the letter, there is only an address and a few haunting lines:\n\n> *I will birth our creation in our home. Come, and crown us in the dark. You and I must always be one.*\n\n**Livber: Smoke and Mirrors** is a text-based interactive fiction game in the *choose-your-own-adventure* tradition. Your choices don’t just influence your next move; they reshape the entire narrative.\n\nI started the project for audible parts, but I spread to other departments like a virus.\n\n[Steam](https://store.steampowered.com/app/3700580/Livber_Smoke_and_Mirrors/)",
+    "description": "Lilith, whom you believed dead for years, calls to you with nothing but a letter, summoning you back to the old house, silent witness to your past.  Inside the letter, there is only an address and a few haunting lines:  > *I will birth our creation in our home. Come, and crown us in the dark. You and I must always be one.*  **Livber: Smoke and Mirrors** is a text-based interactive fiction game in the *choose-your-own-adventure* tradition. Your choices don’t just influence your next move; they reshape the entire narrative.  I started the project for audible parts, but I spread to other departments like a virus.  [Steam](https://store.steampowered.com/app/3700580/Livber_Smoke_and_Mirrors/)",
     "role": "Soundtrack Composer, Audio Engineer, Audio FXs, and some other things",
     "thumbnail": "projects/2025_06-InEvGames-Livber/Livber-Kare.jpeg",
     "media": [
@@ -73,7 +77,7 @@
     "title": "Touchdesigner Scripts",
     "type": "Script",
     "date": "2025_04",
-    "description": "I started to make my own Interactive Poster style by creating my own viusal scripts. These are for TouchDesigner (.tox)\nSome of them:\nDrop shadow script\nBayer Dithering Algorithm Script\nLasso-Masking Script\nYou can purchase it from my Buy Me a Coffee shop.",
+    "description": "I started to make my own Interactive Poster style by creating my own viusal scripts. These are for TouchDesigner (.tox) Some of them: Drop shadow script Bayer Dithering Algorithm Script Lasso-Masking Script You can purchase it from my Buy Me a Coffee shop.",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2025_04-uluc_script-dithering/Image0.jpg",
     "media": [
@@ -113,7 +117,7 @@
     "title": "Unseen Images",
     "type": "Algorithmic Art Piece",
     "date": "2024_09-Present",
-    "description": "\"Being a digital artist comes with unnecessary responsibility.\"\nI have been studying \"art consumption on social media\" for a while. And I started to develop some projects and art pieces for social media platforms. Unseen Images, is my first project on this topic.\nUnseen Images is a deconstructive visual art project that produces visual sensory data without showing the main image behind the data.\n[https://x.com/UnseenbyUluc](https://x.com/UnseenbyUluc)",
+    "description": "\"Being a digital artist comes with unnecessary responsibility.\" I have been studying \"art consumption on social media\" for a while. And I started to develop some projects and art pieces for social media platforms. Unseen Images, is my first project on this topic. Unseen Images is a deconstructive visual art project that produces visual sensory data without showing the main image behind the data. [https://x.com/UnseenbyUluc](https://x.com/UnseenbyUluc)",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2024_09-uluc-UnseenImages/Unseen0.jpeg",
     "media": [
@@ -135,7 +139,7 @@
     "title": "MUKARNASv3_müsenna",
     "type": "Interactive Audio/Visual Art Piece",
     "date": "2024_09_14",
-    "description": "As an architectural element, the muqarnas represent the ability to carry the weight of its extensive load at a single point and to be fixed. From the symbolical perspective, each layer of the muqarnas corresponds to a level, a stage in human life. \nBut each person goes through different lives, experiences, and degradations, carries life within these social formations, and stabilizes themselves.\nThanks to [Ayyıldız.pro](https://www.ayyildiz.pro/) for having me.\nTürkiye Culture Route, From Sketch to Pixel Digital Art \"Anatolia Edition\", 2024",
+    "description": "As an architectural element, the muqarnas represent the ability to carry the weight of its extensive load at a single point and to be fixed. From the symbolical perspective, each layer of the muqarnas corresponds to a level, a stage in human life.  But each person goes through different lives, experiences, and degradations, carries life within these social formations, and stabilizes themselves. \n\n Thanks to [Ayyıldız.pro](https://www.ayyildiz.pro/) for having me. Türkiye Culture Route, From Sketch to Pixel Digital Art \"Anatolia Edition\", 2024",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2024_09-uluc-mukarnasv3_musenna/MUQ-Portfolio.jpeg",
     "media": [
@@ -157,7 +161,7 @@
     "title": "BilinçsizDavranışlar",
     "type": "Interactive Art Piece",
     "date": "2024_09_06",
-    "description": "BilinçsizDavranışlar (UnconsciousBehaviors) interactively explains the impact of unconscious behaviors on social processes through social media.\nInstallation is only visible through an Instagram filter.\nThanks to İremko, Emir, Lül and Gaflen.\nCAMP exhibition 2024 September @Şahika",
+    "description": "BilinçsizDavranışlar (UnconsciousBehaviors) interactively explains the impact of unconscious behaviors on social processes through social media. Installation is only visible through an Instagram filter. Thanks to İremko, Emir, Lül and Gaflen. CAMP exhibition 2024 September @Şahika",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2024_09-bilincsizdavranislar/Bilincsiz-PfCover.jpeg",
     "media": [
@@ -179,7 +183,7 @@
     "title": "Düşüncenin Tomografisi",
     "type": "Audio/Visual Art Piece",
     "date": "2024_07",
-    "description": "\"We are all thinking. Thinking is a different kind of miracle.\" \nFor each individual, a thought is unique. Two individuals share a common thought or a common knowledge.\nEven if they are thinking about it, they have come from different paths and have gained knowledge through different data. Different data means different processes.",
+    "description": "\"We are all thinking. Thinking is a different kind of miracle.\"  For each individual, a thought is unique. Two individuals share a common thought or a common knowledge. Even if they are thinking about it, they have come from different paths and have gained knowledge through different data. Different data means different processes.",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2024_07-uluc-dusuncenintomografisi/untitled.jpeg",
     "media": [
@@ -200,7 +204,7 @@
     "title": "Anla Ki - Olur Olmadık",
     "type": "Album Cover Art",
     "date": "2024_05",
-    "description": "Anla Ki is an alternative rock band from Istanbul formed with lovely people. I made three album covers for them before.\nI also wrote and played the keyboard parts of this track.\nYou can listen and follow them, and see my art from:\n[Instagram](https://www.instagram.com/anlakiofficial/)\n[Spotify](https://open.spotify.com/track/5rrfNszL3D27Lmvvs8FHAz?si=3726616758d94f18)\n[Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
+    "description": "Anla Ki is an alternative rock band from Istanbul formed with lovely people. I made three album covers for them before. I also wrote and played the keyboard parts of this track. You can listen and follow them, and see my art from: [Instagram](https://www.instagram.com/anlakiofficial/) [Spotify](https://open.spotify.com/track/5rrfNszL3D27Lmvvs8FHAz?si=3726616758d94f18) [Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
     "role": "Cover Artist",
     "thumbnail": "projects/2024_05-anlaki-olurolmadik/ANLAKI_04-Cover.jpeg",
     "media": [
@@ -218,7 +222,7 @@
     "title": "Avrupa'da Hayat",
     "type": "TV Program",
     "date": "2024_05",
-    "description": "Avrupa'da Hayat (Life in Europe) is a TV program about racism and discrimination in Germany. The program examines the groups exposed to racism, areas of systemic racism, the role of the media, the attitude of politics, the rise of right-wing mp4ements, and the origins of racist ideology in the West.\nAvrupa'da Hayat released on TRTTurkOpening Soundtrack Composer",
+    "description": "Avrupa'da Hayat (Life in Europe) is a TV program about racism and discrimination in Germany. The program examines the groups exposed to racism, areas of systemic racism, the role of the media, the attitude of politics, the rise of right-wing mp4ements, and the origins of racist ideology in the West. Avrupa'da Hayat released on TRTTurkOpening Soundtrack Composer",
     "role": "Opening Soundtrack Composer",
     "thumbnail": "projects/2024_05-AvrupadaHayat/works-avrupadahayat.jpeg",
     "media": [
@@ -236,7 +240,7 @@
     "title": "Motivasyon Konu​ş​ması",
     "type": "Personal Music Release",
     "date": "2023_12",
-    "description": "Warning: This speech is about motivation!\nA happy-sounding robotic voice tells you \"Your dreams are completely normal, everybody dreaming about dying. And I believe you can do this.\" \nI think it's funny.",
+    "description": "Warning: This speech is about motivation! A happy-sounding robotic voice tells you \"Your dreams are completely normal, everybody dreaming about dying. And I believe you can do this.\"  I think it's funny.",
     "role": "Producer, Composer",
     "thumbnail": "projects/2023_12-uluc-motivasyonkonusmasi/MotivasyonKonuşması2.jpeg",
     "media": [
@@ -257,7 +261,7 @@
     "title": "Anla Ki & Çiçek Dürbünü",
     "type": "Launch Event",
     "date": "2023_11_06",
-    "description": "\"People must feel friendly and special.\"\nThat was my first brief. And we achieve that with a beautiful team with a beautiful soul.\n[Anla Ki](https://www.instagram.com/anlakiofficial/) and [Çiçek Dürbünü](https://www.instagram.com/thecicekdurbunu/) are alternative rock bands from Istanbul.\nThanks to [Ozza Galata](https://www.instagram.com/ozzagalata/) for having us.\nThanks to [Reparikov](https://www.instagram.com/reparikov/) for letting me use his photos.",
+    "description": "\"People must feel friendly and special.\" That was my first brief. And we achieve that with a beautiful team with a beautiful soul. [Anla Ki](https://www.instagram.com/anlakiofficial/) and [Çiçek Dürbünü](https://www.instagram.com/thecicekdurbunu/) are alternative rock bands from Istanbul. Thanks to [Ozza Galata](https://www.instagram.com/ozzagalata/) for having us. Thanks to [Reparikov](https://www.instagram.com/reparikov/) for letting me use his photos.",
     "role": "Creative Director, VJ Artist, Videographer",
     "thumbnail": "projects/2023-10-AnlaKiCicekDurbunu-Lansman/Works-LansmanKonseri.jpeg",
     "media": [
@@ -281,7 +285,7 @@
     "title": "Anla Ki - Yaşadıkça",
     "type": "Album Cover Art",
     "date": "2023_08",
-    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made their Album Cover, Logo, and Spotify Canvas Animations. I'll continue to support them as a visual artist.\nYou can listen and follow them, and see my art from:\n[Instagram](https://www.instagram.com/anlakiofficial/)\n[Spotify](https://open.spotify.com/track/5rrfNszL3D27Lmvvs8FHAz?si=3726616758d94f18)\n[Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
+    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made their Album Cover, Logo, and Spotify Canvas Animations. I'll continue to support them as a visual artist. You can listen and follow them, and see my art from: [Instagram](https://www.instagram.com/anlakiofficial/) [Spotify](https://open.spotify.com/track/5rrfNszL3D27Lmvvs8FHAz?si=3726616758d94f18) [Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
     "role": "Cover Artist",
     "thumbnail": "projects/2023_08-anlaki-yasadikca/anlakiyasadikca.jpeg",
     "media": [
@@ -298,7 +302,7 @@
     "title": "MUKARNASv2 Series",
     "type": "Audio/Visual Art Piece",
     "date": "2023_07",
-    "description": "Muqarnas is an architectural design. It represents the balance of the universe and each layer represents the degrees of human nature.\n\"Every human being carries life in these social formations, going through different lives, different experiences, and different degradations.\"\nAli Emre did an installation on this subject before as part of the biennial in Istanbul. [YouTube](https://www.youtube.com/watch?v=btTYDANmmUU)\nThe necessary consent for the use of this interpreted work has been given by the author.",
+    "description": "Muqarnas is an architectural design. It represents the balance of the universe and each layer represents the degrees of human nature. \"Every human being carries life in these social formations, going through different lives, different experiences, and different degradations.\" Ali Emre did an installation on this subject before as part of the biennial in Istanbul. [YouTube](https://www.youtube.com/watch?v=btTYDANmmUU) The necessary consent for the use of this interpreted work has been given by the author.",
     "role": "Creative Coder, Artist",
     "thumbnail": "projects/2023_06-uluc-mukarnasv2/Muq2-cover.jpeg",
     "media": [
@@ -318,7 +322,7 @@
     "title": "Anla Ki - Gün Gelir",
     "type": "Album Cover Art",
     "date": "2023_03",
-    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made an album cover for them before.\nYou can listen and follow them, and see my art from:\n[Instagram](https://www.instagram.com/anlakiofficial/)\n[Spotify](https://open.spotify.com/track/58zWvENDzNspHYo7xqOGUj?si=75943929902040a7)\n[Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
+    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made an album cover for them before. You can listen and follow them, and see my art from: [Instagram](https://www.instagram.com/anlakiofficial/) [Spotify](https://open.spotify.com/track/58zWvENDzNspHYo7xqOGUj?si=75943929902040a7) [Apple Music](https://music.apple.com/tr/album/gün-gelir/1679492387?i=1679492396)",
     "role": "Cover Artist",
     "thumbnail": "projects/2023_03-anlaki-gungelir/AnlaKi-GGA-SingleCover.jpeg",
     "media": [
@@ -327,7 +331,8 @@
       "projects/2023_03-anlaki-gungelir/AnlaKi-BlenderExport1.jpeg"
     ],
     "tags": [
-      "#AlbumCoverArt"
+      "#AlbumCoverArt",
+      "#Visual"
     ],
     "enabled": true
   },
@@ -336,7 +341,7 @@
     "title": "KEDİ KIZLAR",
     "type": "Music EP",
     "date": "2023_03",
-    "description": "I don't know why I made these tracks. But the first is about tongue fetish, and the second is about cat-girls.\nYou can listen on [BandCamp](https://uluc.bandcamp.com/album/kedi-kizlar)",
+    "description": "I don't know why I made these tracks. But the first is about tongue fetish, and the second is about cat-girls. You can listen on [BandCamp](https://uluc.bandcamp.com/album/kedi-kizlar)",
     "role": "Producer, Artist",
     "thumbnail": "projects/2023_03-uluc-kedikizlar/kedikizlar.jpeg",
     "media": [
@@ -346,7 +351,8 @@
     ],
     "tags": [
       "#MusicRelease",
-      "#AlbumCoverArt"
+      "#AlbumCoverArt",
+      "#Audio"
     ],
     "enabled": true
   },
@@ -355,7 +361,7 @@
     "title": "memories",
     "type": "Algorithmic Music Pieces",
     "date": "2023_01",
-    "description": "memories is a music project for releasing my improvised algorithmic recordings in different genres.\nAlso, the artwork was made with an algorithm.\nListen on:\n[Spotify](https://open.spotify.com/playlist/7fcog6NddiFxlOECirY5Mp?si=ef32202aa3bc4835)\n[Apple Music](https://music.apple.com/tr/album/memory-01/1661630756?i=1661630758)\n[Youtube Music](https://music.youtube.com/playlist?list=PLOqHOxzbCQT-18JvYr2od5-t_C6oHpB-w&feature=share)\n[BandCamp (additional memories)](https://uluc.bandcamp.com/album/memories)",
+    "description": "memories is a music project for releasing my improvised algorithmic recordings in different genres. Also, the artwork was made with an algorithm. Listen on: [Spotify](https://open.spotify.com/playlist/7fcog6NddiFxlOECirY5Mp?si=ef32202aa3bc4835) [Apple Music](https://music.apple.com/tr/album/memory-01/1661630756?i=1661630758) [Youtube Music](https://music.youtube.com/playlist?list=PLOqHOxzbCQT-18JvYr2od5-t_C6oHpB-w&feature=share) [BandCamp (additional memories)](https://uluc.bandcamp.com/album/memories)",
     "role": "Producer, Creative Coder",
     "thumbnail": "projects/2023-uluc-memories/coverart-memory_01.jpeg",
     "media": [
@@ -382,7 +388,7 @@
     "title": " Bu Bir Strateji Oyunudur",
     "type": "Short Film",
     "date": "2022_11",
-    "description": "Sadık (40) is an officer who does errands in the municipality. He is not valued at all at work and at home, and cannot express himself. But apart from all this, there is a place where Sadık finds himself: football fields in the neighborhoods.\nFrom the Director: People often think that life is not fair. Economic distributions, merit, love, and many more are never balanced. I have always been intrigued by the public's reaction to injustice, in chorus and loudest at football matches, especially through the referee. Why do we react so much to injustice in football? Is life so fair?\n24th Izmir Short Film Festival, National Panorama Section, Screening Selection. 2023",
+    "description": "Sadık (40) is an officer who does errands in the municipality. He is not valued at all at work and at home, and cannot express himself. But apart from all this, there is a place where Sadık finds himself: football fields in the neighborhoods. From the Director: People often think that life is not fair. Economic distributions, merit, love, and many more are never balanced. I have always been intrigued by the public's reaction to injustice, in chorus and loudest at football matches, especially through the referee. Why do we react so much to injustice in football? Is life so fair? 24th Izmir Short Film Festival, National Panorama Section, Screening Selection. 2023",
     "role": "Audio Engineer",
     "thumbnail": "projects/2022_10-kisafilm-BuBirStratejiOyunudur/BSSO-cover.jpeg",
     "media": [
@@ -404,7 +410,7 @@
     "title": "Anla Ki - Artık Ben Yokum",
     "type": "Album Cover Art",
     "date": "2022_09",
-    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made their Album Cover, Logo, and Spotify Canvas Animations. I'll continue to support them as a visual artist.\nYou can listen and follow them, and see my art from:\n[Instagram](https://www.instagram.com/anlakiofficial/)\n[Spotify](https://open.spotify.com/album/7laEBsY5TTPnZ0kxqs5aBX?si=2FxqDjwdRauDMLE4W8Ivow)\n[Apple Music](https://music.apple.com/tr/album/artık-ben-yokum-ep/1641490295)",
+    "description": "Anla Ki is an alternative-rock band from Istanbul which is full of lovely people. I made their Album Cover, Logo, and Spotify Canvas Animations. I'll continue to support them as a visual artist. You can listen and follow them, and see my art from: [Instagram](https://www.instagram.com/anlakiofficial/) [Spotify](https://open.spotify.com/album/7laEBsY5TTPnZ0kxqs5aBX?si=2FxqDjwdRauDMLE4W8Ivow) [Apple Music](https://music.apple.com/tr/album/artık-ben-yokum-ep/1641490295)",
     "role": "Cover Artist, Spotify Canvas Animator",
     "thumbnail": "projects/2022_09-Anlaki-ArtikBenYokum/Anlaki_CoverArt(3000x3000px).jpeg",
     "media": [
@@ -425,7 +431,7 @@
     "title": "İletişim - TRT2",
     "type": "Conceptual Documentary",
     "date": "2022",
-    "description": "İletişim (Communication for Turkish) is a documentary about the different concepts of the communication term and its subterms.\nWith Prof. Dr. Mete Çamdereli, we discover new ways to explain communication as a social construct.\nİletişim was aired from September 2022 on TRT2 and trtizle.com\nStream on [TRTizle](https://www.trtizle.com/programlar/iletisim)",
+    "description": "İletişim (Communication for Turkish) is a documentary about the different concepts of the communication term and its subterms. With Prof. Dr. Mete Çamdereli, we discover new ways to explain communication as a social construct. İletişim was aired from September 2022 on TRT2 and trtizle.com Stream on [TRTizle](https://www.trtizle.com/programlar/iletisim)",
     "role": "Producer, Soundtrack Composer",
     "thumbnail": " projects/2022-belgesel-Iletisim/İletişim.jpeg",
     "media": [
@@ -470,7 +476,7 @@
     "title": "Edge of the Abyss",
     "type": "Video Game",
     "date": "2021",
-    "description": "\"Let us hope that the slumbering behemoth never wakes up.\"\nThis game is about a cult trying to keep the devil in a tome. We're gathering new people into the cult and trying to manage it.\nWe had about 10 days, but we worked 5 days or fewer, I think. So we can't finish it. However, that project has a significant place in my workflow and creative process.\n[Itch.io](https://red-salmon.itch.io/abyss)",
+    "description": "\"Let us hope that the slumbering behemoth never wakes up.\" This game is about a cult trying to keep the devil in a tome. We're gathering new people into the cult and trying to manage it. We had about 10 days, but we worked 5 days or fewer, I think. So we can't finish it. However, that project has a significant place in my workflow and creative process. [Itch.io](https://red-salmon.itch.io/abyss)",
     "role": "Soundtrack Composer, Audio FXs",
     "thumbnail": "projects/2021-videogame-edgeoftheabyys/Edge of the Abyys.jpeg",
     "media": [
@@ -492,7 +498,7 @@
     "title": "ERGENEKON Series",
     "type": "ComicBook Series",
     "date": "2019-Present",
-    "description": "Erdur Design Studio started making a graphic novel in 2019.\nThe first series of them Ergenekon is still in process.\nI'll gonna produce more tracks about Ergenekon until the series ends.\n[erdur.com](https://erdur.com) \n[BandCamp](https://uluc.bandcamp.com/album/ergenekon)",
+    "description": "Erdur Design Studio started making a graphic novel in 2019. The first series of them Ergenekon is still in process. I'll gonna produce more tracks about Ergenekon until the series ends. [erdur.com](https://erdur.com)  [BandCamp](https://uluc.bandcamp.com/album/ergenekon)",
     "role": "Motion Graphics for Social Media Ads, Soundtrack Composer",
     "thumbnail": "projects/2019-erdur-ergenekon/Works-Ergenekon1.jpeg",
     "media": [
@@ -514,7 +520,7 @@
     "title": " Untitled Project",
     "type": "Video Game",
     "date": "2019 October",
-    "description": "I was on Team 2 in 3Pixels. We were working on an action shooter game for mobile devices.\nI managed the audio team. I also made some stage theme songs for two whole levels. And recorded some creature sounds.\nUnfortunately, I had to leave the project before its first demos. But that project has a very significant place in my audio workflow.",
+    "description": "I was on Team 2 in 3Pixels. We were working on an action shooter game for mobile devices. I managed the audio team. I also made some stage theme songs for two whole levels. And recorded some creature sounds. Unfortunately, I had to leave the project before its first demos. But that project has a very significant place in my audio workflow.",
     "role": "Audio Team Leader, Composer",
     "thumbnail": "projects/2019_10-videogame-3pixels/Cover_3Pixels.jpeg",
     "media": [
@@ -550,7 +556,8 @@
       "projects/2019-belgesel-para/PARA_Bölüm 5-0012.jpeg"
     ],
     "tags": [
-      "#Marketing"
+      "#MediaProduction",
+      "#Soundtrack"
     ],
     "enabled": true
   },
@@ -559,7 +566,7 @@
     "title": "First Experiments (EP)",
     "type": "Soundtrack Album",
     "date": "2017",
-    "description": "These are my first tracks, the first musical experiments ever.\nI also remastered these tracks in 2022.\nYou can listen to the EP on; \n[BandCamp](https://uluc.bandcamp.com/album/first-experiments)",
+    "description": "These are my first tracks, the first musical experiments ever. I also remastered these tracks in 2022. You can listen to the EP on;  [BandCamp](https://uluc.bandcamp.com/album/first-experiments)",
     "role": "Producer, Composer",
     "thumbnail": "projects/2017-uluc-firstexperiments/FirstExperiments.jpeg",
     "media": [
@@ -572,7 +579,8 @@
     "tags": [
       "#MusicRelease",
       "#Soundtrack",
-      "#AlbumCoverArt"
+      "#AlbumCoverArt",
+      "#Audio"
     ],
     "enabled": true
   }
