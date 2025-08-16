@@ -3,19 +3,45 @@
     "id": "reha-analogsynthesizer",
     "title": "Synthesizer Prototype",
     "type": "Musical Instrument",
-    "date": "2025-07",
-    "description": "from the project's engineer, Reha:\n\"Developed within Turkey’s growing music technology scene, focuses on creating a cost-effective analog synthesizer that preserves the warm and dynamic qualities of analog sound. A Voltage-Controlled Oscillator (VCO) with sawtooth and pulse outputs (including Pulse-Width Modulation) has been successfully implemented, along with a Voltage-Controlled Amplifier (VCA) for dynamic outputü control. Control Voltage (CV) functionality is also supported, enabling precise pitch control and modular integration. Future work will expand on these foundations to enhance the synthesizer’s versatility and usability.\"\n\ntldr: made musical blip-blop machine blocks with a passionate team.",
+    "date": "2025_08",
+    "description": "from the project's engineer, Reha:\n\n\"Developed within Turkey’s growing music technology scene, focuses on creating a cost-effective analog synthesizer that preserves the warm and dynamic qualities of analog sound. A Voltage-Controlled Oscillator (VCO) with sawtooth and pulse outputs (including Pulse-Width Modulation) has been successfully implemented, along with a Voltage-Controlled Amplifier (VCA) for dynamic outputü control. Control Voltage (CV) functionality is also supported, enabling precise pitch control and modular integration. Future work will expand on these foundations to enhance the synthesizer’s versatility and usability.\"\n\ntldr: made musical blip-blop machine blocks with a very passionate team.",
     "role": "Consultant",
-    "thumbnail": "projects/2025_07-asynth/synthproto-cover.jpeg",
+    "thumbnail": "projects/2025_08-asynth/synthproto-cover.jpeg",
     "media": [
-      "projects/2025_07-asynth/WhatsApp Image 2024-12-20 at 12.07.52.jpeg",
-      "projects/2025_07-asynth/WhatsApp Image 2024-12-20 at 12.08.52.jpeg",
-      "projects/2025_07-asynth/WhatsApp Image 2025-01-15 at 15.51.44.jpeg",
-      "projects/2025_07-asynth/WhatsApp Image 2025-08-05 at 15.56.44.jpeg",
-      "projects/2025_07-asynth/WhatsApp Video 2025-08-05 at 16.05.27.mp4"
+      "projects/2025_08-asynth/WhatsApp Image 2024-12-20 at 12.07.52.jpeg",
+      "projects/2025_08-asynth/WhatsApp Image 2024-12-20 at 12.08.52.jpeg",
+      "projects/2025_08-asynth/WhatsApp Image 2025-01-15 at 15.51.44.jpeg",
+      "projects/2025_08-asynth/WhatsApp Image 2025-08-05 at 15.56.44.jpeg",
+      "projects/2025_08-asynth/WhatsApp Video 2025-08-05 at 16.05.27.mp4"
     ],
     "tags": [
       "#Audio"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "ulucart-gozkapali",
+    "title": "Göz, Kapalı",
+    "type": "Interactive Audio/Visual Art Piece",
+    "date": "2025_08_02",
+    "description": "\"Göz, kapalı\" is an art installation about the perception of time.\n\nTime is an abstract concept that allows us to understand the sequence of events, their duration, and the relationships between them. Plato defines time in terms of change, and Aristotle says that time exists as long as there is a before and after.\nBut what happens to time when we are alone with ourselves, independent of external perceptions?\n\n\"Göz, kapalı\" is a multi-layered narrative system based on the perception of time. While creating a visual that the experiencer can only experience with their eyes closed, it works through interactive ametric/granular music formation and the possibility of outcomes depending on one's experience.\n\nExhibited at: Eskizden Piksele | 2025_August_02-10 | Nevşehir_TR",
+    "role": "Artist",
+    "thumbnail": "projects/2025_08_02-ulucart-gozkapali/gozKapali-portfoliocover.png",
+    "media": [
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali1.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali2.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali3.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali4.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali5.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali6.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali7.jpeg",
+      "projects/2025_08_02-ulucart-gozkapali/gozkapali8.jpeg"
+    ],
+    "tags": [
+      "#Interactive",
+      "#AudioVisual",
+      "#ArtPiece",
+      "#Algorithmic"
     ],
     "enabled": true
   },
