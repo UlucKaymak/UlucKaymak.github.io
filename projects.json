@@ -1,5 +1,25 @@
 [
   {
+    "id": "reha-analogsynthesizer",
+    "title": "Synthesizer Prototype",
+    "type": "Musical Instrument",
+    "date": "2025-07",
+    "description": "from the project's engineer, Reha:\n\"Developed within Turkey’s growing music technology scene, focuses on creating a cost-effective analog synthesizer that preserves the warm and dynamic qualities of analog sound. A Voltage-Controlled Oscillator (VCO) with sawtooth and pulse outputs (including Pulse-Width Modulation) has been successfully implemented, along with a Voltage-Controlled Amplifier (VCA) for dynamic outputü control. Control Voltage (CV) functionality is also supported, enabling precise pitch control and modular integration. Future work will expand on these foundations to enhance the synthesizer’s versatility and usability.\"\n\ntldr: made musical blip-blop machine blocks with a passionate team.",
+    "role": "Consultant",
+    "thumbnail": "projects/2025_07-asynth/synthproto-cover.jpeg",
+    "media": [
+      "projects/2025_07-asynth/WhatsApp Image 2024-12-20 at 12.07.52.jpeg",
+      "projects/2025_07-asynth/WhatsApp Image 2024-12-20 at 12.08.52.jpeg",
+      "projects/2025_07-asynth/WhatsApp Image 2025-01-15 at 15.51.44.jpeg",
+      "projects/2025_07-asynth/WhatsApp Image 2025-08-05 at 15.56.44.jpeg",
+      "projects/2025_07-asynth/WhatsApp Video 2025-08-05 at 16.05.27.mp4"
+    ],
+    "tags": [
+      "#Audio"
+    ],
+    "enabled": true
+  },
+  {
     "id": "videogame-rideup",
     "title": "Ride Up",
     "type": "Video Game",
