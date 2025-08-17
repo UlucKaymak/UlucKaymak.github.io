@@ -1,27 +1,13 @@
-@font-face {
-    font-family: "Pixelated MS Sans Serif";
-    font-style: normal;
-    font-weight: 400;
-    src: url(design/webfont/w95font.woff) format("woff");
-    src: url(design/webfont/w95font.woff2) format("woff2");   
-}
-
-@font-face {
-    font-family: "Pixelated MS Sans Serif";
-    font-style: normal;
-    font-weight: 700;
-    src: url(design/webfont/w95font-bold.woff) format("woff");
-    src: url(design/webfont/w95font-bold2.woff) format("woff2");
-}
-
 html {
     height: 100%;
     background: linear-gradient(teal, rgb(0, 80, 80));
-    font-size: 16px;
+    font-family: Arial;
+    -webkit-font-smoothing: none;
+    font-size: 11px;
     line-height: 1.3;
 }
 
-/* scanlines */
+
 body::after {
     content: "";
     position: fixed;
@@ -60,9 +46,7 @@ select,
 table,
 textarea,
 ul.tree-view {
-    -webkit-font-smoothing: none;
-    font-family: "Pixelated MS Sans Serif", Arial;
-    font-size: 14px
+    font-size: 11px
 }
 
 h1 {
@@ -253,7 +237,8 @@ input[type=submit]:disabled {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='8' height='7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h1V4h1V3H2V2H1V1H0V0z' fill='%23000'/%3E%3C/svg%3E");
     background-position: top 3px left 4px;
     background-repeat: no-repeat;
-    margin-left: 2px
+    margin-left: 2px;
+    margin-right: 4px
 }
 
 .status-bar {
@@ -995,8 +980,10 @@ table>tbody>tr>* {
     flex-direction: column;
     flex-wrap: wrap;
     grid-template-columns: 1fr;
+    font-size: 11px;
     gap: 20px;
     padding: 16px;
+    margin-left: 10px;
     width: 100px;
 }
 
@@ -1018,8 +1005,7 @@ table>tbody>tr>* {
     cursor: pointer;
     color: rgb(255, 255, 255);
     gap: 5px;
-    font-family: "Pixelated MS Sans Serif", Arial;
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
 }
 
@@ -1029,65 +1015,64 @@ table>tbody>tr>* {
     image-rendering: pixelated;
 }
 
-
-/* Aktif pencere başlık çubuğunu belirginleştirir */
 .window.active .title-bar {
-    background: linear-gradient(90deg, #000080, #1084d0); /* Windows 98'in aktif başlık rengi */
+    background: linear-gradient(90deg, #000080, #1084d0);
 }
 
 .grid-container {
-    display: flex; /* Esnek kutu modelini etkinleştirir */
-    flex-wrap: wrap; /* Gerekirse alt satıra geçmesini sağlar */
-    gap: 10px; /* Öğeler arasında boşluk bırakır */
-    justify-content: flex-start; /* Öğeleri baştan itibaren hizalar */
-    align-content: flex-start; /* İçeriği pencere içinde yukarıya hizalar */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 
 
 
-/* Proje klasörü içindeki ikonlar için stil */
 .project-shortcut {
-    /* İkonları ortalar */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
-    /* Boyut ve renk */
+
     width: 210px;
     cursor: pointer;
-    color: #222; /* İkon yazısı için daha okunabilir bir renk */
+    color: #222;
+
     gap: 5px;
-    font-family: "Pixelated MS Sans Serif", Arial;
-    font-size: 12px;
-    
-    /* Seçim efekti için geçişler */
+    font-family: Arial;
+    font-size: 11px;
+
     transition: background-color 0.2s, box-shadow 0.2s;
     user-select: none;
     padding: 5px;
 }
 
-/* Fareyle üzerine gelindiğinde (hover) efekti */
 .project-shortcut:hover {
-    background-color: rgba(0, 0, 128, 0.2); /* Hafif mavi arka plan */
-    color: #fff; /* Yazı rengini beyaza çevir */
-    box-shadow: inset 0 0 0 1px #000080, 
-                inset 0 0 0 2px #fff; /* Beyaz bir kenarlık ekler */
-    opacity: 0.8; /* Hafif şeffaflık */
+    background-color: rgba(0, 0, 128, 0.2);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #000080,
+        inset 0 0 0 2px #fff;
+    opacity: 0.8;
 }
 
-/* Tıklama anındaki (active) efekti */
 .project-shortcut:active {
-    background-color: navy; /* Koyuluk ve belirginlik için */
+    background-color: navy;
     color: #fff;
     box-shadow: inset 0 0 0 1px #fff,
-                inset 0 0 0 2px #000;
+        inset 0 0 0 2px #000;
 }
 
-/* İkon görseli için */
+
 .project-shortcut img {
     width: 200px;
     height: 200px;
-    /* image-rendering: pixelated; */
     border: 1px solid transparent;
+}
+
+.media-scroll-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #797979;
+    padding: 5px;
 }

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Global Değişkenler ---
-    let highestZIndex = 10;
+    let highestZIndex = 20;
     let projectsData = [];
 
     // Tüm a etiketlerini seç
@@ -76,16 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         win.style.display = 'block';
 
-        // Pencereyi ortala (eğer daha önce konumu ayarlanmamışsa)
-        if (!win.style.left || win.style.left === '0px') {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            const width = win.offsetWidth;
-            const height = win.offsetHeight;
+        // Pencereyi her zaman ortala
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const width = win.offsetWidth;
+        const height = win.offsetHeight;
 
-            win.style.left = `${(vw - width) / 2}px`;
-            win.style.top = `${(vh - height) / 2}px`;
-        }
+        // Pencerenin ekran dışına taşmasını engelle
+        let newLeft = (vw - width) / 2;
+        let newTop = (vh - height) / 2;
+
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+
+        win.style.left = `${newLeft}px`;
+        win.style.top = `${newTop}px`;
 
         bringToFront(win);
     };
@@ -178,6 +183,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('project-title').textContent = project.title;
         const contentElem = document.getElementById('project-content');
 
+        // Medya HTML'ini oluştur
+        const mediaHtml = (project.media || []).map(src => {
+            const isVideo = src.endsWith('.mp4') || src.endsWith('.mov') || src.endsWith('.webm');
+            const mediaTitle = src.split('/').pop();
+            const classes = "project-media-item";
+
+            if (isVideo) {
+                return `
+                    <div class="${classes}" data-src="${src}" data-title="${mediaTitle}">
+                        <video src="${src}" style="max-width: 100%; height: auto; border: 1px solid grey;" muted autoplay loop></video>
+                        <div style="text-align: center; font-size: 10px; color: #555;">(Video)</div>
+                    </div>
+                `;
+            } else {
+                return `
+                    <img src="${src}" alt="${mediaTitle}" class="${classes}" style="max-width: 150px; height: auto; border: 1px solid grey; cursor: pointer;" data-src="${src}" data-title="${mediaTitle}" />
+                `;
+            }
+        }).join('');
+
         contentElem.innerHTML = `
             <h3>${project.title}</h3>
             <p><strong>Type:</strong> ${project.type}</p>
@@ -186,12 +211,85 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${marked.parse(project.description || '-')}</p>
             <p><strong>Tags:</strong> ${(project.tags || []).join(', ')}</p>
             <hr/>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                ${(project.media || []).map(src => `<img src="${src}" alt="media" style="max-width: 150px; height: auto; border: 1px solid grey;">`).join('')}
+            <div id="project-media-container" class="media-scroll-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                ${mediaHtml}
             </div>
         `;
         openWindow('project-detail');
+
+        // Olay dinleyici (event listener)
+        const mediaContainer = document.getElementById('project-media-container');
+        mediaContainer.addEventListener('click', (e) => {
+            const mediaItem = e.target.closest('.project-media-item, img');
+            if (mediaItem) {
+                const src = mediaItem.getAttribute('data-src');
+                const title = mediaItem.getAttribute('data-title');
+                if (src) {
+                    openMediaWindow(src, title);
+                }
+            }
+        });
     };
+
+
+    // Medya dosyalarını yeni bir pencerede açar
+    const openMediaWindow = (src, title) => {
+        const mediaWin = document.createElement('div');
+        mediaWin.className = 'window';
+        mediaWin.style.position = 'absolute';
+        mediaWin.style.minWidth = '600px';
+        mediaWin.style.maxWidth = '1280px'; // Pencerenin maksimum genişliğini 1280px olarak sınırlar
+        mediaWin.style.maxHeight = '720px'; // Pencerenin maksimum yüksekliğini 720px olarak sınırlar
+        mediaWin.style.zIndex = '15';
+
+        // Pencereyi rastgele bir konumda aç
+        mediaWin.style.left = `${Math.random() * (window.innerWidth - 300)}px`;
+        mediaWin.style.top = `${Math.random() * (window.innerHeight - 300)}px`;
+
+        const isVideo = src.endsWith('.mp4') || src.endsWith('.mov') || src.endsWith('.webm');
+
+        let mediaContent = '';
+
+        if (isVideo) {
+            mediaContent = `<video src="${src}" controls style="max-width: 100%; max-height: 100%;"></video>`;
+        } else {
+            mediaContent = `<img src="${src}" alt="${title}" style="max-width: 100%; max-height: 100%;" />`;
+        }
+
+        mediaWin.innerHTML = `
+        <div class="title-bar">
+            <div class="title-bar-text">${title}</div>
+            <div class="title-bar-controls">
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body" style="padding: 10px; overflow: auto;">
+            ${mediaContent}
+        </div>
+    `;
+
+        document.body.appendChild(mediaWin);
+
+        // Pencereyi ortala (eğer ilk kez açılıyorsa)
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const width = mediaWin.offsetWidth;
+        const height = mediaWin.offsetHeight;
+        let newLeft = (vw - width) / 2;
+        let newTop = (vh - height) / 2;
+
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+
+        mediaWin.style.left = `${newLeft}px`;
+        mediaWin.style.top = `${newTop}px`;
+
+        // Yeni pencereyi sürüklenebilir ve kapatılabilir yap
+        makeAllWindowsDraggable();
+        mediaWin.querySelector('.close-btn').addEventListener('click', () => closeWindow(mediaWin));
+        bringToFront(mediaWin);
+    };
+
 
     // --- Event Listeners (Olay Dinleyicileri) ---
 
@@ -265,5 +363,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Başlangıç Fonksiyonları ---
     makeAllWindowsDraggable();
     loadProjects();
-    openWindow('welcome'); // Sayfa açıldığında welcome penceresini aç
+    // openWindow('welcome'); // Sayfa açıldığında welcome penceresini aç
 });

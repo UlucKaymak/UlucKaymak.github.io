@@ -8,11 +8,11 @@
     <meta name="description" content="Alternative portfolio of Uluç Kaymak. multidisciplinary artist." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="design/images/favicon.png" type="image/png" />
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Coral+Pixels&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
-    <script src="design/oneko/oneko.js"></script>
-
     <!-- Desktop icons -->
     <div class="desktop">
         <div class="desktop-icon" data-window-id="welcome">
@@ -20,16 +20,16 @@
             <span>welcome.txt</span>
         </div>
         <div class="desktop-icon" data-window-id="about">
-            <img src="design/icons_png/w98_address_book_pad.png" alt="About Me Icon" />
+            <img src="design/icons_png/w2k_uninstall.png" alt="About Me Icon" />
             <span>about_me.txt</span>
-        </div>
-        <div class="desktop-icon" data-window-id="img-uluc">
-            <img src="design/icons_png/w2k_uninstall.png" alt="Photo of Uluç" />
-            <span>uluc.jpeg</span>
         </div>
         <div class="desktop-icon" data-external-link="https://linktr.ee/uluckaymak">
             <img src="design/icons_png/w98_world_network_directories.png" alt="Links Icon" />
-            <span>linktr.ee</span>
+            <span>linktree.link</span>
+        </div>
+        <div class="desktop-icon" data-external-link="http://buymeacoffee.com/uluckaymak">
+            <img src="design/icons_png/w2k_default_printer_floppy.png" alt="Links Icon" />
+            <span>BuyMeACoffee.link</span>
         </div>
         <div class="desktop-icon" id="cat-spawner">
             <img src="design/icons_png/w2k_cd_player.png" alt="Cat Spawner Icon" />
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="window" id="version_update" style="top: 15%; left: 35%; width: 350px;">
+    <div class="window" id="version_update" style="top: 15%; left: 35%; width: 350px; z-index: 15;">
         <div class="title-bar">
             <div class="title-bar-text">bugs.txt</div>
             <div class="title-bar-controls">
@@ -81,8 +81,9 @@
         <div class="window-body">
             <p>Hi! I'm <strong>UluçKaymak</strong></p>
 
-            <p>This is my porfolio, <span class="highlight">but it has some bugs right now.</span><br>
-                You should try to enjoy these bugs if you can.</p>
+            <p>This is my alternative porfolio, <span class="highlight">but it has some bugs right now.</span> You
+                should
+                try to enjoy these bugs if you can.</p>
             <p>Don't forget to pet my virtual cat, Sonic<br>
                 <span class="highlight">She loves to be petted.</span>
             </p>
@@ -147,7 +148,9 @@
         </div>
     </div>
 
-    <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 100;">
+
+    <!-- Images -->
+    <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 1;">
         <div class="title-bar">
             <div class="title-bar-text">uluc.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -162,7 +165,7 @@
         </div>
     </div>
 
-    <div class="window" id="img-uluc2" style="min-width: 280px; left: 323px; top: 261px; z-index: 101;">
+    <div class="window" id="img-uluc2" style="min-width: 280px; left: 423px; top: 261px; z-index: 2;">
         <div class="title-bar">
             <div class="title-bar-text">uluc2.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -177,7 +180,7 @@
         </div>
     </div>
 
-    <div class="window" id="img-cat1" style="min-width: 280px; left: 730px; top: 234px; z-index: 100;">
+    <!-- <div class="window" id="img-cat1" style="min-width: 280px; left: 730px; top: 234px; z-index: 3;">
         <div class="title-bar">
             <div class="title-bar-text">cat.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -190,9 +193,9 @@
             <p class="status-bar-field">Format: Neko</p>
             <p class="status-bar-field">Type: angry</p>
         </div>
-    </div>
+    </div> -->
 
-    <div class="window" id="img-cat2" style="min-width: 280px; left: 612px; top: 365px; z-index: 101;">
+    <div class="window" id="img-cat2" style="min-width: 280px; left: 630px; top: 345px; z-index: 1;">
         <div class="title-bar">
             <div class="title-bar-text">cat2.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -207,7 +210,9 @@
         </div>
     </div>
 
-    <div class="window" id="projects-table" style="width: 550px; display: none;">
+
+    <!-- projects -->
+    <div class="window" id="projects-table" style="width: 680px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">project_list.exe</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -215,7 +220,7 @@
         <div class="window-body">
             <p>All projects that I worked so far.</p>
         </div>
-        <div class="sunken-panel" style="height: 300px; width: 550px; overflow-y: auto;">
+        <div class="sunken-panel" style="height: 300px; width: 680px; overflow-y: auto;">
             <table class="interactive" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
@@ -234,7 +239,7 @@
         </div>
     </div>
 
-    <div id="project-folder" class="window" style="width: 950px; height: 600px; display: none;">
+    <div id="project-folder" class="window" style="width: 950px; height: 585px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">All Projects</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -261,6 +266,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="main.js"></script>
+    <script src="design/oneko/oneko.js"></script>
 </body>
 
 </html>
