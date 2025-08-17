@@ -1101,10 +1101,10 @@ table>tbody>tr>* {
 .taskbar-windows {
     display: flex;
     flex-grow: 1;
-    /* Geriye kalan tüm alanı kaplamasını sağlar */
+
     gap: 4px;
     overflow-x: auto;
-    /* Çok fazla buton olduğunda kaydırma çubuğu çıkarır */
+
     height: 22px;
 }
 
@@ -1113,16 +1113,16 @@ table>tbody>tr>* {
     border: none;
     box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
     min-width: 150px;
-    /* Butonların minimum genişliği */
+
     height: 22px;
     padding: 0 5px;
     text-align: left;
     white-space: nowrap;
-    /* Metnin tek satırda kalmasını sağlar */
+
     overflow: hidden;
-    /* Taşmayı gizler */
+
     text-overflow: ellipsis;
-    /* Taşma durumunda ... ekler */
+
     user-select: none;
 }
 

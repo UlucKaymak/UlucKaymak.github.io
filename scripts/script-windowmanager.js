@@ -40,6 +40,7 @@ export const openWindow = (id) => {
 // Pencere kapatma fonksiyonu
 export const closeWindow = (win) => {
     win.style.display = 'none';
+    win.classList.remove('active');
 };
 
 export const makeAllWindowsDraggable = () => {

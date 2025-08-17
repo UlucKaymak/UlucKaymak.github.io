@@ -12,111 +12,29 @@
 
 <body>
 
-<!-- 
     <div class="taskbar">
         <button class="start-button" id="start-button">
-            <img src="https://win98.guide/assets/images/windows-98-logo.png" alt="Start" />
+            <img src="design/icons_png/winlogo.png" alt="Start" />
             Start
         </button>
 
         <div class="taskbar-windows">
         </div>
 
-        <script>
-            function addWindowToTaskbar(windowId, windowTitle) {
-                const taskbarWindows = document.querySelector('.taskbar-windows');
-                const existingButton = document.querySelector(`.taskbar-button[data-window-id="${windowId}"]`);
-
-                if (existingButton) {
-                    return; // Buton zaten varsa tekrar ekleme
-                }
-
-                const button = document.createElement('button');
-                button.className = 'taskbar-button';
-                button.dataset.windowId = windowId;
-                button.textContent = windowTitle;
-
-                button.addEventListener('click', () => {
-                    const windowElement = document.getElementById(windowId);
-                    // Pencereyi öne getir
-                    bringWindowToFront(windowElement);
-
-                    if (windowElement.style.display === 'none') {
-                        windowElement.style.display = 'block';
-                    }
-                });
-
-                taskbarWindows.appendChild(button);
-            }
-
-            function removeWindowFromTaskbar(windowId) {
-                const button = document.querySelector(`.taskbar-button[data-window-id="${windowId}"]`);
-                if (button) {
-                    button.remove();
-                }
-            }
-
-            // Masaüstü ikonlarına tıklama olayını dinleme
-            document.querySelectorAll('.desktop-icon[data-window-id]').forEach(icon => {
-                icon.addEventListener('dblclick', () => {
-                    const windowId = icon.dataset.windowId;
-                    const windowElement = document.getElementById(windowId);
-                    const windowTitle = windowElement.querySelector('.title-bar-text').textContent;
-
-                    if (windowElement.style.display === 'none') {
-                        windowElement.style.display = 'block';
-                        addWindowToTaskbar(windowId, windowTitle);
-                    }
-                });
-            });
-
-            // Kapatma butonlarına tıklama olayını dinleme
-            document.querySelectorAll('.close-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const windowElement = e.target.closest('.window');
-                    if (windowElement) {
-                        windowElement.style.display = 'none';
-                        removeWindowFromTaskbar(windowElement.id);
-                    }
-                });
-            });
-        </script>
-
         <div class="start-menu" id="start-menu" style="display: none;">
             <div class="start-menu-sidebar"></div>
             <ul class="start-menu-list">
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w98_help.png" alt="Help" /> Help</a>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_help.png" alt="Help" /> Help</a>
                 </li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w98_run.png" alt="Run" /> Run...</a>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_run.png" alt="Run" /> Run...</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w98_shutdown.png" alt="Shutdown" />
-                        Shut Down...</a></li>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_shutdown.png" alt="Shutdown" /> Shut Down...</a></li>
             </ul>
         </div>
-        <script>
-            document.getElementById('start-button').addEventListener('click', function () {
-                const startMenu = document.getElementById('start-menu');
-                if (startMenu.style.display === 'none') {
-                    startMenu.style.display = 'flex';
-                } else {
-                    startMenu.style.display = 'none';
-                }
-            });
-        </script>
     </div>
-  -->
 
-    <menu class="context-menu" style="display: none;">
-        <li><a href="#">Open</a></li>
-        <li><a href="#">Rename</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Delete</a></li>
-    </menu>
-
-
-
-    <!-- Desktop icons -->
+    <!-- desktop icons -->
     <div class="desktop">
         <div class="desktop-icon" data-window-id="welcome">
             <img src="design/icons_png/w2k_unknown_11.png" alt="Welcome Icon" />
@@ -150,10 +68,6 @@
             <img src="design/icons_png/w98_phone_desk.png" alt="Contact Icon" />
             <span>contact.exe</span>
         </div>
-        <!-- <div class="desktop-icon" data-window-id="MSpaint">
-            <img src="design/icons_png/w98_phone_desk.png" alt="MSpaint" />
-            <span>MSpaint.exe</span>
-        </div> -->
     </div>
 
     <!-- Windows and Popups -->
@@ -312,7 +226,7 @@
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Size: smol</p>
-            <p class="status-bar-field">Format: Neko</p>
+            <p class="status-bar-field">Format: neko</p>
             <p class="status-bar-field">Type: wink</p>
 
         </div>
