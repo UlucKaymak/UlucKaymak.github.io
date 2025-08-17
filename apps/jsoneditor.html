@@ -176,6 +176,9 @@
             transform: rotate(90deg);
         }
     </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 </head>
 
 <body>
@@ -292,19 +295,35 @@
                     } else {
                         const formGroup = document.createElement('div');
                         formGroup.className = 'form-group';
+
                         const isDescription = key === 'description';
                         const inputElement = isDescription ? 'textarea' : 'input';
                         const inputType = isDescription ? '' : 'type="text"';
                         const value = project[key] !== null ? project[key] : '';
-
-                        // Placeholder ekle
                         const placeholderText = isDescription ? 'Proje hakkında detaylı bir açıklama girin...' : '';
 
                         formGroup.innerHTML = `
-                        <label for="${key}-${index}">${key.charAt(0).toUpperCase() + key.slice(1)}:</label>
-                        <${inputElement} id="${key}-${index}" data-key="${key}" ${inputType} value="${value}" rows="${isDescription ? 4 : 1}" placeholder="${placeholderText}"></${inputElement}>
-                    `;
+        <label for="${key}-${index}">${key.charAt(0).toUpperCase() + key.slice(1)}:</label>
+        <${inputElement} id="${key}-${index}" data-key="${key}" ${inputType} rows="${isDescription ? 4 : 1}" placeholder="${placeholderText}">${value}</${inputElement}>
+    `;
                         accordionContent.appendChild(formGroup);
+
+                        // Eğer description alanıysa EasyMDE'yi başlat
+                        if (isDescription) {
+                            const textareaId = `${key}-${index}`;
+                            setTimeout(() => {
+                                const easyMDE = new EasyMDE({
+                                    element: document.getElementById(textareaId),
+                                    initialValue: value,
+                                    spellChecker: false,
+                                    forceSync: true, // Form submit edildiğinde textarea'yı günceller
+                                    status: false,
+                                    toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen"]
+                                });
+                                // EasyMDE nesnesini daha sonra erişmek için bir yere kaydet
+                                project.easyMDEInstance = easyMDE;
+                            }, 0); // DOM'un güncellenmesini bekler
+                        }
                     }
                 }
                 accordionItem.appendChild(accordionContent);
@@ -341,48 +360,69 @@
             const newItemInput = listContainer.nextElementSibling;
             newItemInput.value = '';
         }
-
         function saveChanges() {
             const updatedData = [];
             const accordionItems = document.querySelectorAll('.accordion-item');
 
             accordionItems.forEach((item, index) => {
-                const project = {};
+                const originalProject = jsonData[index];
+                const updatedProject = {
+                    ...originalProject
+                };
+
                 const content = item.querySelector('.accordion-content');
 
-                const inputs = content.querySelectorAll('input[type="text"], textarea');
-                inputs.forEach(input => {
+                const descriptionTextarea = content.querySelector('textarea[data-key="description"]');
+                if (descriptionTextarea) {
+                    const easyMDEInstance = jsonData[index].easyMDEInstance;
+                    if (easyMDEInstance) {
+                        updatedProject.description = easyMDEInstance.value();
+                    } else {
+                        updatedProject.description = descriptionTextarea.value;
+                    }
+                }
+
+                const textInputs = content.querySelectorAll('input[type="text"]');
+                textInputs.forEach(input => {
                     const key = input.dataset.key;
                     if (key) {
-                        project[key] = input.value;
+                        if (input.value.trim() !== '') {
+                            updatedProject[key] = input.value.trim();
+                        }
                     }
                 });
 
                 const checkbox = content.querySelector('input[type="checkbox"]');
                 if (checkbox) {
                     const key = checkbox.dataset.key;
-                    project[key] = checkbox.checked;
+                    updatedProject[key] = checkbox.checked;
                 }
 
+                // --- Düzeltilen Kısım: Boş elemanları filtrele ---
+
+                // Media listesini al ve boş stringleri filtrele
                 const mediaItems = content.querySelectorAll('.media-list span');
-                project.media = Array.from(mediaItems).map(span => span.textContent.trim());
+                updatedProject.media = Array.from(mediaItems)
+                    .map(span => span.textContent.trim().replace(/\s*x$/, ''))
+                    .filter(item => item !== ''); // Boş stringleri kaldır
 
+                // Etiket (tags) listesini al ve boş stringleri filtrele
                 const tagsItems = content.querySelectorAll('.tags-list span');
-                project.tags = Array.from(tagsItems).map(span => span.textContent.trim());
+                updatedProject.tags = Array.from(tagsItems)
+                    .map(span => span.textContent.trim().replace(/\s*x$/, ''))
+                    .filter(item => item !== ''); // Boş stringleri kaldır
 
-                project.id = jsonData[index].id;
+                // --- Düzeltilen Kısım Bitişi ---
 
-                const orderedProject = {};
-                Object.keys(jsonData[index]).forEach(key => {
-                    orderedProject[key] = project[key] !== undefined ? project[key] : jsonData[index][key];
-                });
+                delete updatedProject.easyMDEInstance;
 
-                updatedData.push(orderedProject);
+                updatedData.push(updatedProject);
             });
 
-            // Güncellenmiş JSON verisini bir dosyaya dönüştür ve indir
             const jsonString = JSON.stringify(updatedData, null, 2);
-            const blob = new Blob([jsonString], { type: 'application/json' });
+            const blob = new Blob([jsonString], {
+                type: 'application/json'
+            });
             const url = URL.createObjectURL(blob);
 
             const a = document.createElement('a');
@@ -390,14 +430,12 @@
             a.download = 'projects.json';
             document.body.appendChild(a);
             a.click();
-
-            // Oluşturulan URL'i temizle
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
             alert('Değişiklikler projects.json dosyası olarak indirildi!');
         }
-
+        
         document.addEventListener('DOMContentLoaded', createForm);
     </script>
 
