@@ -20,19 +20,21 @@ export const openWindow = (id) => {
 
     win.style.display = 'block';
 
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const width = win.offsetWidth;
-    const height = win.offsetHeight;
+    if (window.innerWidth > 768) {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const width = win.offsetWidth;
+        const height = win.offsetHeight;
 
-    let newLeft = (vw - width) / 2;
-    let newTop = (vh - height) / 2;
+        let newLeft = (vw - width) / 2;
+        let newTop = (vh - height) / 2;
 
-    if (newLeft < 0) newLeft = 0;
-    if (newTop < 0) newTop = 0;
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
 
-    win.style.left = `${newLeft}px`;
-    win.style.top = `${newTop}px`;
+        win.style.left = `${newLeft}px`;
+        win.style.top = `${newTop}px`;
+    }
 
     bringToFront(win);
 };
@@ -44,6 +46,10 @@ export const closeWindow = (win) => {
 };
 
 export const makeAllWindowsDraggable = () => {
+    if (window.innerWidth <= 768) {
+        return; // Ekran küçükse sürükleme özelliğini aktif etme
+    }
+
     document.querySelectorAll('.window').forEach(win => {
         const titleBar = win.querySelector('.title-bar');
         if (!titleBar) return;
@@ -85,8 +91,10 @@ export const makeAllWindowsDraggable = () => {
 
 // Masaüstü ikonlarına çift tıklama
 const setupDesktopIcons = () => {
+const eventType = window.innerWidth <= 768 ? 'click' : 'dblclick';
+
     document.querySelectorAll('.desktop-icon').forEach(icon => {
-        icon.addEventListener('dblclick', () => {
+        icon.addEventListener(eventType, () => {
             const windowId = icon.dataset.windowId;
             const externalLink = icon.dataset.externalLink;
 

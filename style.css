@@ -1,3 +1,16 @@
+:root {
+    --color-black: #0a0a0a;
+    --color-white: #fff;
+    --color-light-gray: #dfdfdf;
+    --color-gray: grey;
+    --color-silver: silver;
+    --color-navy: navy;
+    --color-blue: #1084d0;
+    --color-teal: teal;
+    --button-height: 22px;
+    --taskbar-height: 30px;
+}
+
 html {
     height: 100%;
     background: linear-gradient(teal, rgb(0, 80, 80));
@@ -33,6 +46,9 @@ body::after {
     padding: 0.1em 0.1em;
 }
 
+.multiline {
+  white-space: pre-wrap;
+}
 
 .title-bar,
 .window,
@@ -1094,6 +1110,7 @@ table>tbody>tr>* {
     z-index: 1000;
 
     display: flex;
+    justify-self: space-between;
     align-items: center;
     gap: 4px;
 }
@@ -1128,6 +1145,23 @@ table>tbody>tr>* {
 
 .taskbar-windows .taskbar-button:active {
     box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.taskbar-right {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    height: 100%;
+    font-size: 14px;
+    background: #c0c0c0; /* Görev çubuğu rengi */
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.taskbar-time {
+    padding: 0 4px;
 }
 
 .start-button {
@@ -1271,4 +1305,64 @@ table>tbody>tr>* {
     margin: 2px 0;
     padding: 0;
     pointer-events: none;
+}
+
+
+
+/* --- MOBİL UYUMLULUK STILLERİ --- */
+@media (max-width: 768px) {
+
+    /* 1. Masaüstü ve İkonları Tek Sütuna Dizelim */
+    .desktop {
+        flex-direction: row; /* İkonların dikey değil, yatayda akmasını sağlar */
+        flex-wrap: wrap;     /* Sığmayan ikonların aşağı kaymasını sağlar */
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 10px;
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        gap: auto;
+    }
+
+    .desktop-icon {
+        width: 120px; /* İkonların kapladığı alanı biraz küçültelim */
+    }
+
+    /* 2. Pencereleri Tam Ekran Moduna Alalım */
+    .window {
+        position: fixed; /* Ekranın geri kalanından bağımsız olmasını sağlar */
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100%;
+        max-height: 100%;
+        z-index: 100 !important; /* Her zaman en üstte kalır */
+        display: none; /* Varsayılan olarak gizli kalsınlar */
+    }
+    
+    .window-body {
+        height: calc(100% - 70px); /* Başlık ve durum çubuğu hariç tüm alanı kaplasın */
+        overflow-y: auto;         /* İçerik sığmazsa kaydırma çubuğu çıksın */
+    }
+
+    /* 3. Görev Çubuğunu (Taskbar) Gizleyelim */
+    .taskbar {
+        display: none;
+    }
+
+    /* 4. Proje klasöründeki grid yapısını düzenleyelim */
+    #project-grid {
+        justify-content: center; /* Projeleri ortalayalım */
+    }
+
+    .project-shortcut {
+        width: 150px; /* Küçük ekranda daha iyi görünmeleri için */
+    }
+
+    .project-shortcut img {
+        width: 140px;
+        height: 140px;
+    }
 }

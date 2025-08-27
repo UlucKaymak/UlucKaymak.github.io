@@ -12,26 +12,68 @@
 
 <body>
 
+
     <div class="taskbar">
         <button class="start-button" id="start-button">
             <img src="design/icons_png/winlogo.png" alt="Start" />
             Start
         </button>
-
         <div class="taskbar-windows">
+            
+        </div>
+        
+        <div class="taskbar-right">
+            <div class="taskbar-time"></div>
         </div>
 
-        <div class="start-menu" id="start-menu" style="display: none;">
+        <nav class="start-menu" id="start-menu" style="display: none;">
             <div class="start-menu-sidebar"></div>
             <ul class="start-menu-list">
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_help.png" alt="Help" /> Help</a>
-                </li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_run.png" alt="Run" /> Run...</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_shutdown.png" alt="Shutdown" /> Shut Down...</a></li>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_help.png" alt="Yardım" />
+                        Yardım</a></li>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_run.png" alt="Çalıştır" />
+                        Çalıştır...</a></li>
+                <li class="divider" role="separator"></li>
+                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_shutdown.png" alt="Kapat" />
+                        Bilgisayarı Kapat...</a></li>
             </ul>
-        </div>
+        </nav>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const startButton = document.getElementById('start-button');
+                const startMenu = document.getElementById('start-menu');
+
+                startButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Menü dışı tıklama olayını engelle
+                    if (startMenu.style.display === 'none' || startMenu.style.display === '') {
+                        startMenu.style.display = 'block';
+                    } else {
+                        startMenu.style.display = 'none';
+                    }
+                });
+
+                // Menü dışına tıklanınca menüyü kapat
+                document.addEventListener('click', (event) => {
+                    if (!startMenu.contains(event.target) && event.target !== startButton) {
+                        startMenu.style.display = 'none';
+                    }
+                });
+            });
+
+
+            const taskbarTime = document.querySelector('.taskbar-time');
+
+            function updateTime() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                taskbarTime.textContent = `${hours}:${minutes}`;
+            }
+
+            updateTime();
+            setInterval(updateTime, 1000);
+        </script>
+    </div>
     </div>
 
     <!-- desktop icons -->
@@ -71,7 +113,7 @@
     </div>
 
     <!-- Windows and Popups -->
-    <div class="window" id="welcome" style="top: 50px; left: 175px;">
+    <div class="window" id="welcome" style="top: 50px; left: 175px; min-width: 430px;">
         <div class="title-bar">
             <div class="title-bar-text">welcome.txt</div>
             <div class="title-bar-controls">
@@ -79,7 +121,19 @@
             </div>
         </div>
         <div class="window-body">
-            <p>Hi! I'm</p><strong>UluçKaymak</strong>
+            <p>Hi! I'm</p>
+            <pre>
+ _    _ _              _  __                           _    
+| |  | | |            | |/ /                          | |   
+| |  | | |_   _  ___  | ' / __ _ _   _ _ __ ___   __ _| | __
+| |  | | | | | |/ __| |  < / _` | | | | '_ ` _ \ / _` | |/ /
+| |__| | | |_| | (__  | . \ (_| | |_| | | | | | | (_| |   < 
+ \____/|_|\__,_|\___| |_|\_\__,_|\__, |_| |_| |_|\__,_|_|\_\
+                 )_)              __/ |                     
+ A person who loves and creating |___/ new things.
+</pre>
+
+            <div></div>
             <p>A person who loves <span class="highlight"> and creating new things.</span></p>
             <p>I am a multidisciplinary artist who combines <span class="highlight">conceptual art with the
                     figurative aspects of the culture I was born and raised</span>, in auditory and/or visual,
@@ -92,7 +146,7 @@
         </div>
     </div>
 
-    <div class="window" id="version_update" style="top: 15%; left: 35%; width: 350px; z-index: 15;">
+    <div class="window" id="version_update" style="top: 15%; left: 35%; z-index: 15;">
         <div class="title-bar">
             <div class="title-bar-text">bugs.txt</div>
             <div class="title-bar-controls">
@@ -100,8 +154,7 @@
             </div>
         </div>
         <div class="window-body">
-            <p>Hi! I'm <strong>UluçKaymak</strong></p>
-
+            <p>Hi! I'm <strong>Uluç Kaymak.</strong></p>
             <p>This is my alternative porfolio, <span class="highlight">but it has some bugs right now.</span> You
                 should
                 try to enjoy these bugs if you can.</p>
@@ -171,7 +224,7 @@
 
 
     <!-- Images -->
-    <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 1;">
+    <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 2;">
         <div class="title-bar">
             <div class="title-bar-text">uluc.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -186,7 +239,7 @@
         </div>
     </div>
 
-    <div class="window" id="img-uluc2" style="min-width: 280px; left: 423px; top: 261px; z-index: 2;">
+    <div class="window" id="img-uluc2" style="min-width: 280px; left: 423px; top: 261px; z-index: 3;">
         <div class="title-bar">
             <div class="title-bar-text">uluc2.jpeg</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -201,7 +254,7 @@
         </div>
     </div>
 
-    <div class="window" id="img-art1" style="min-width: 280px; left: 870px; top: 100px; z-index: 2;">
+    <div class="window" id="img-art1" style="min-width: 280px; left: 870px; top: 150px; z-index: 4;">
         <div class="title-bar">
             <div class="title-bar-text">ulucvecini.gif</div>
             <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
@@ -210,9 +263,24 @@
             <img src="design/images/ART-ciniveben.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
-            <p class="status-bar-field">Size: unknown</p>
+            <p class="status-bar-field">Made with: Blender3d</p>
             <p class="status-bar-field">Format: Art</p>
             <p class="status-bar-field">Type: Orientalist</p>
+        </div>
+    </div>
+
+    <div class="window" id="img-art2" style="min-width: 280px; left: 220px; top: 260px; z-index: 1;">
+        <div class="title-bar">
+            <div class="title-bar-text">uluc-gozkapalitaslak.gif</div>
+            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+        </div>
+        <div class="window-body">
+            <img src="design/images/movieout.1.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Made with: Python</p>
+            <p class="status-bar-field">Format: Art Sketch</p>
+            <p class="status-bar-field">Type: Retro</p>
         </div>
     </div>
 
@@ -290,7 +358,7 @@
     <script type="module" src="scripts/script-windowmanager.js"></script>
     <script type="module" src="scripts/script-projectmanager.js"></script>
     <script type="module" src="scripts/script-utils.js"></script>
-    <script src="design/oneko/oneko.js"></script>
+    <script src="scripts/oneko/oneko.js"></script>
 </body>
 
 </html>

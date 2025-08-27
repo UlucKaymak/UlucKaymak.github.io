@@ -29,6 +29,8 @@ const populateProjectsTable = () => {
     const openBtn = document.getElementById('open-project-btn');
     let selectedProject = null;
 
+    const eventType = window.innerWidth <= 768 ? 'click' : 'dblclick';
+
     tbody.innerHTML = '';
     document.getElementById('project-count-table').textContent = projectsData.length;
 
@@ -50,7 +52,7 @@ const populateProjectsTable = () => {
             openBtn.onclick = () => showProjectDetail(selectedProject);
         });
 
-        tr.addEventListener('dblclick', () => showProjectDetail(proj));
+        tr.addEventListener(eventType, () => showProjectDetail(proj));
         tbody.appendChild(tr);
     });
 
@@ -63,6 +65,8 @@ const populateProjectsFolder = () => {
     grid.innerHTML = '';
     document.getElementById('project-count-folder').textContent = projectsData.length;
 
+    const eventType = window.innerWidth <= 768 ? 'click' : 'dblclick';
+
     projectsData.forEach(project => {
         const shortcut = document.createElement('div');
         shortcut.className = 'project-shortcut';
@@ -70,7 +74,7 @@ const populateProjectsFolder = () => {
             <img src="${project.thumbnail}" alt="${project.title}" />
             <div>${project.title}</div>
         `;
-        shortcut.addEventListener('dblclick', () => showProjectDetail(project));
+        shortcut.addEventListener(eventType, () => showProjectDetail(project));
         grid.appendChild(shortcut);
     });
 };
