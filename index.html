@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>HomePage.exe | uluckaymak</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <meta name="description" content="Alternative portfolio of Uluç Kaymak. multidisciplinary artist." />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="design/images/favicon.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+    <link rel="icon" href="assets/images/favicon.png" type="image/png" />
+
 </head>
 
 <body>
@@ -15,13 +16,13 @@
 
     <div class="taskbar">
         <button class="start-button" id="start-button">
-            <img src="design/icons_png/winlogo.png" alt="Start" />
+            <img src="assets/icons/winlogo.png" alt="Start" />
             Start
         </button>
         <div class="taskbar-windows">
-            
+
         </div>
-        
+
         <div class="taskbar-right">
             <div class="taskbar-time"></div>
         </div>
@@ -29,49 +30,117 @@
         <nav class="start-menu" id="start-menu" style="display: none;">
             <div class="start-menu-sidebar"></div>
             <ul class="start-menu-list">
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_help.png" alt="Yardım" />
-                        Yardım</a></li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_run.png" alt="Çalıştır" />
-                        Çalıştır...</a></li>
+                <li><a href="#" class="start-menu-item" data-action="open-analytics"><img src="assets/icons/w95_50.png" alt="Analytics" />
+                        Analytics</a></li>
+                <li><a href="#" class="start-menu-item" data-action="open-projects"><img src="assets/icons/w2k_unknown_14.png" alt="Projects" />
+                        All Projects</a></li>
+                <li><a href="#" class="start-menu-item" data-action="open-contact"><img src="assets/icons/w98_phone_desk.png" alt="Contact" />
+                        Contact</a></li>
                 <li class="divider" role="separator"></li>
-                <li><a href="#" class="start-menu-item"><img src="design/icons_png/w2k_shutdown.png" alt="Kapat" />
-                        Bilgisayarı Kapat...</a></li>
+                <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img src="assets/icons/w2k_unknown_11.png" alt="Theme" />
+                        Toggle Theme</a></li>
+                <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png" alt="Refresh" />
+                        Refresh Page</a></li>
+                <li><a href="#" class="start-menu-item"><img src="assets/icons/w2k_help.png" alt="About" />
+                        About This Site</a></li>
+                <li class="divider" role="separator"></li>
+                <li><a href="#" class="start-menu-item" id="shutdown-button"><img src="assets/icons/w2k_shutdown.png" alt="Shutdown" />
+                        Close Browser</a></li>
             </ul>
         </nav>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const startButton = document.getElementById('start-button');
-                const startMenu = document.getElementById('start-menu');
+            // Optimized startup script
+            (function() {
+                'use strict';
+                
+                let startButton, startMenu, taskbarTime;
+                const actionHandlers = {
+                    'open-analytics': () => window.openWindow?.('analytics'),
+                    'open-projects': () => window.openWindow?.('project-folder'),
+                    'open-contact': () => window.openWindow?.('contact'),
+                    'toggle-theme': toggleTheme,
+                    'refresh-page': () => window.location.reload()
+                };
 
-                startButton.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Menü dışı tıklama olayını engelle
-                    if (startMenu.style.display === 'none' || startMenu.style.display === '') {
-                        startMenu.style.display = 'block';
-                    } else {
-                        startMenu.style.display = 'none';
+                // Theme management
+                function toggleTheme() {
+                    const root = document.documentElement;
+                    const currentTheme = root.getAttribute('data-theme') || 'light';
+                    const newTheme = currentTheme === 'light' ? 'pink' : 'light';
+                    
+                    root.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                }
+
+                // Optimized time update
+                function updateTime() {
+                    if (!taskbarTime) return;
+                    const now = new Date();
+                    taskbarTime.textContent = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                }
+
+                // Initialize components
+                function init() {
+                    // Load saved theme immediately
+                    const savedTheme = localStorage.getItem('theme') || 'light';
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+
+                    // Cache DOM elements
+                    startButton = document.getElementById('start-button');
+                    startMenu = document.getElementById('start-menu');
+                    taskbarTime = document.querySelector('.taskbar-time');
+
+                    if (startButton && startMenu) {
+                        // Start menu toggle
+                        startButton.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            startMenu.style.display = startMenu.style.display === 'block' ? 'none' : 'block';
+                        });
+
+                        // Close menu on outside click
+                        document.addEventListener('click', (e) => {
+                            if (!startMenu.contains(e.target) && e.target !== startButton) {
+                                startMenu.style.display = 'none';
+                            }
+                        });
+
+                        // Delegated event handling for menu items
+                        startMenu.addEventListener('click', (e) => {
+                            const item = e.target.closest('[data-action]');
+                            if (item) {
+                                e.preventDefault();
+                                const action = item.dataset.action;
+                                actionHandlers[action]?.();
+                                startMenu.style.display = 'none';
+                            }
+                        });
+
+                        // Shutdown button
+                        const shutdownBtn = document.getElementById('shutdown-button');
+                        if (shutdownBtn) {
+                            shutdownBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                if (confirm('Are you sure you want to close the browser window?')) {
+                                    try { window.close(); } catch(e) { window.location.href = 'about:blank'; }
+                                }
+                                startMenu.style.display = 'none';
+                            });
+                        }
                     }
-                });
 
-                // Menü dışına tıklanınca menüyü kapat
-                document.addEventListener('click', (event) => {
-                    if (!startMenu.contains(event.target) && event.target !== startButton) {
-                        startMenu.style.display = 'none';
-                    }
-                });
-            });
+                    // Start clock
+                    updateTime();
+                    setInterval(updateTime, 60000); // Update every minute instead of every second
+                }
 
+                // Initialize when DOM is ready
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', init);
+                } else {
+                    init();
+                }
+            })();
 
-            const taskbarTime = document.querySelector('.taskbar-time');
-
-            function updateTime() {
-                const now = new Date();
-                const hours = now.getHours().toString().padStart(2, '0');
-                const minutes = now.getMinutes().toString().padStart(2, '0');
-                taskbarTime.textContent = `${hours}:${minutes}`;
-            }
-
-            updateTime();
-            setInterval(updateTime, 1000);
         </script>
     </div>
     </div>
@@ -79,44 +148,49 @@
     <!-- desktop icons -->
     <div class="desktop">
         <div class="desktop-icon" data-window-id="welcome">
-            <img src="design/icons_png/w2k_unknown_11.png" alt="Welcome Icon" />
+            <img src="assets/icons/w2k_unknown_11.png" alt="Welcome Icon" />
             <span>welcome.txt</span>
         </div>
         <div class="desktop-icon" data-window-id="about">
-            <img src="design/icons_png/w2k_uninstall.png" alt="About Me Icon" />
+            <img src="assets/icons/w2k_uninstall.png" alt="About Me Icon" />
             <span>about_me.txt</span>
         </div>
         <div class="desktop-icon" data-external-link="https://linktr.ee/uluckaymak">
-            <img src="design/icons_png/w98_world_network_directories.png" alt="Links Icon" />
+            <img src="assets/icons/w98_world_network_directories.png" alt="Links Icon" />
             <span>linktree.link</span>
         </div>
         <div class="desktop-icon" data-external-link="http://buymeacoffee.com/uluckaymak">
-            <img src="design/icons_png/w2k_default_printer_floppy.png" alt="Links Icon" />
+            <img src="assets/icons/w2k_default_printer_floppy.png" alt="Links Icon" />
             <span>BuyMeACoffee.link</span>
         </div>
         <div class="desktop-icon" id="cat-spawner">
-            <img src="design/icons_png/w2k_cd_player.png" alt="Cat Spawner Icon" />
+            <img src="assets/icons/w2k_cd_player.png" alt="Cat Spawner Icon" />
             <span>cat_spawner.exe</span>
         </div>
         <div class="desktop-icon" data-window-id="projects-table">
-            <img src="design/icons_png/w2k_unknown_14.png" alt="Portfolio Icon" />
+            <img src="assets/icons/w2k_unknown_14.png" alt="Portfolio Icon" />
             <span>project_list.exe</span>
         </div>
         <div class="desktop-icon" data-window-id="project-folder">
-            <img src="design/icons_png/w2k_folder_closed.png" alt="All Projects Icon" />
+            <img src="assets/icons/w2k_folder_closed.png" alt="All Projects Icon" />
             <span>All Projects</span>
         </div>
         <div class="desktop-icon" data-window-id="contact">
-            <img src="design/icons_png/w98_phone_desk.png" alt="Contact Icon" />
+            <img src="assets/icons/w98_phone_desk.png" alt="Contact Icon" />
             <span>contact.exe</span>
+        </div>
+        <div class="desktop-icon" data-window-id="analytics">
+            <img src="assets/icons/w95_50.png" alt="Analytics Icon" />
+            <span>analytics.exe</span>
         </div>
     </div>
 
     <!-- Windows and Popups -->
     <div class="window" id="welcome" style="top: 50px; left: 175px; min-width: 430px;">
         <div class="title-bar">
-            <div class="title-bar-text">welcome.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">welcome.txt</div>
             <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
         </div>
@@ -144,12 +218,16 @@
             <p>On my personal projects, I work on fractured emotions and thoughts through various forms of digital
                 projection, focusing on interactive audio-visual experience.</p>
         </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Connected to Uluç.</p>
+        </div>
     </div>
 
     <div class="window" id="version_update" style="top: 15%; left: 35%; z-index: 15;">
         <div class="title-bar">
-            <div class="title-bar-text">bugs.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">bugs.txt</div>
             <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
         </div>
@@ -169,8 +247,9 @@
 
     <div class="window" id="about" style="display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">about_me.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">about_me.txt</div>
             <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
         </div>
@@ -188,8 +267,9 @@
 
     <div class="window" id="contact" style="width: 350px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">contact.exe</div>
+            <div class="title-bar-text"><img src="assets/icons/w98_phone_desk.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">contact.exe</div>
             <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
         </div>
@@ -222,15 +302,52 @@
         </div>
     </div>
 
+    <div class="window" id="analytics" style="width: 550px; display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text"><img src="assets/icons/w95_50.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">analytics.exe</div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="field-row">
+                <button id="refresh-analytics">🔄 Refresh Data</button>
+            </div>
+            <div id="analytics-content">
+                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
+                    <h3 style="margin-top: 0;">📊 Site Statistics</h3>
+                    <div id="analytics-stats"></div>
+                </div>
+                
+                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
+                    <h3 style="margin-top: 0;">🔥 Popular Projects</h3>
+                    <div id="popular-projects"></div>
+                </div>
+                
+                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
+                    <h3 style="margin-top: 0;">📱 Device Usage</h3>
+                    <div id="device-stats"></div>
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Privacy-friendly analytics</p>
+            <p class="status-bar-field" id="last-updated">Last updated: Never</p>
+        </div>
+    </div>
+
 
     <!-- Images -->
     <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 2;">
         <div class="title-bar">
-            <div class="title-bar-text">uluc.jpeg</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc.jpeg</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
-            <img src="design/images/uluc.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;" />
+            <img src="assets/images/uluc.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Size: 280x512</p>
@@ -241,11 +358,13 @@
 
     <div class="window" id="img-uluc2" style="min-width: 280px; left: 423px; top: 261px; z-index: 3;">
         <div class="title-bar">
-            <div class="title-bar-text">uluc2.jpeg</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc2.jpeg</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
-            <img src="design/images/uluc2.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;" />
+            <img src="assets/images/uluc2.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Size: 280x512</p>
@@ -256,11 +375,13 @@
 
     <div class="window" id="img-art1" style="min-width: 280px; left: 870px; top: 150px; z-index: 4;">
         <div class="title-bar">
-            <div class="title-bar-text">ulucvecini.gif</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">ulucvecini.gif</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
-            <img src="design/images/ART-ciniveben.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
+            <img src="assets/images/ART-ciniveben.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Made with: Blender3d</p>
@@ -271,11 +392,13 @@
 
     <div class="window" id="img-art2" style="min-width: 280px; left: 220px; top: 260px; z-index: 1;">
         <div class="title-bar">
-            <div class="title-bar-text">uluc-gozkapalitaslak.gif</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc-gozkapalitaslak.gif</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
-            <img src="design/images/movieout.1.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
+            <img src="assets/images/movieout.1.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Made with: Python</p>
@@ -286,11 +409,13 @@
 
     <div class="window" id="img-cat2" style="min-width: 280px; left: 630px; top: 345px; z-index: 1;">
         <div class="title-bar">
-            <div class="title-bar-text">cat2.jpeg</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_cd_player.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">cat2.jpeg</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
-            <img src="design/images/neko3.jpg" alt="NekoNekoNii" style="width: 100%; height: auto;" />
+            <img src="assets/images/neko3.jpg" alt="NekoNekoNii" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">Size: smol</p>
@@ -304,8 +429,10 @@
     <!-- projects -->
     <div class="window" id="projects-table" style="width: 680px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">project_list.exe</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_14.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">project_list.exe</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
             <p>All projects that I worked so far.</p>
@@ -331,8 +458,10 @@
 
     <div id="project-folder" class="window" style="width: 950px; height: 585px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text">All Projects</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_folder_closed.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">All Projects</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body">
             <p>All projects that I worked.</p>
@@ -346,8 +475,10 @@
 
     <div class="window" id="project-detail" style="width: 550px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text" id="project-title">Project Detail</div>
-            <div class="title-bar-controls"><button class="close-btn" aria-label="Close"></button></div>
+            <div class="title-bar-text" id="project-title"><img src="assets/icons/w2k_unknown_14.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">Project Detail</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
         </div>
         <div class="window-body" id="project-content"></div>
     </div>
@@ -355,10 +486,90 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script type="module" src="scripts/script-windowmanager.js"></script>
-    <script type="module" src="scripts/script-projectmanager.js"></script>
-    <script type="module" src="scripts/script-utils.js"></script>
-    <script src="scripts/oneko/oneko.js"></script>
+    <script type="module" src="assets/js/windows.js"></script>
+    <script type="module" src="assets/js/projects.js"></script>
+    <script type="module" src="assets/js/utils.js"></script>
+    <script type="module" src="assets/js/portfolio.js"></script>
+    <script src="assets/js/oneko/oneko.js"></script>
+    
+    <script>
+        // Optimized Analytics
+        (function() {
+            'use strict';
+            
+            const Analytics = {
+                init() {
+                    const refreshBtn = document.getElementById('refresh-analytics');
+                    if (refreshBtn) refreshBtn.addEventListener('click', this.update);
+                    
+                    // Lazy update when analytics window is opened
+                    document.addEventListener('click', (e) => {
+                        if (e.target.closest('[data-window-id="analytics"]')) {
+                            setTimeout(() => this.update(), 100);
+                        }
+                    });
+                },
+                
+                update() {
+                    const system = window.portfolioSystem;
+                    const elements = {
+                        stats: document.getElementById('analytics-stats'),
+                        popular: document.getElementById('popular-projects'),
+                        device: document.getElementById('device-stats'),
+                        lastUpdated: document.getElementById('last-updated')
+                    };
+                    
+                    if (!system) {
+                        const noData = '<p style="font-size:11px;color:#666">Analytics system not initialized.</p>';
+                        Object.values(elements).forEach(el => { if (el) el.innerHTML = noData; });
+                        return;
+                    }
+                    
+                    const data = system.getAnalytics();
+                    this.render(data, elements);
+                    
+                    if (elements.lastUpdated) {
+                        elements.lastUpdated.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+                    }
+                },
+                
+                render(data, elements) {
+                    if (elements.stats) {
+                        elements.stats.innerHTML = `
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
+                                <div><strong>Total Views:</strong> ${data.totalViews}</div>
+                                <div><strong>Search Queries:</strong> ${data.searchQueries}</div>
+                                <div><strong>Session Time:</strong> ${Math.floor(data.sessionTime / 60000)}m</div>
+                                <div><strong>Total Sessions:</strong> ${data.totalSessions}</div>
+                            </div>`;
+                    }
+                    
+                    if (elements.popular) {
+                        elements.popular.innerHTML = data.popularProjects.length === 0 ? 
+                            '<p style="font-size:11px;color:#666">No project views yet.</p>' :
+                            data.popularProjects.map(([id, views]) => 
+                                `<div style="font-size:11px;padding:3px 0;display:flex;justify-content:space-between">
+                                    <span>${id}</span><span><strong>${views} views</strong></span>
+                                </div>`).join('');
+                    }
+                    
+                    if (elements.device) {
+                        const mobileRatio = data.mobileUsageRatio.toFixed(1);
+                        elements.device.innerHTML = `
+                            <div style="font-size:11px">
+                                <div style="margin-bottom:5px"><strong>Mobile:</strong> ${data.mobileViews} views (${mobileRatio}%)</div>
+                                <div style="background:var(--color-silver);height:15px;border:1px inset #999">
+                                    <div style="background:var(--color-teal);height:100%;width:${mobileRatio}%;transition:width .3s"></div>
+                                </div>
+                                <div style="margin-top:5px"><strong>Desktop:</strong> ${data.totalViews - data.mobileViews} views (${(100 - data.mobileUsageRatio).toFixed(1)}%)</div>
+                            </div>`;
+                    }
+                }
+            };
+            
+            document.addEventListener('DOMContentLoaded', () => Analytics.init());
+        })();
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 :root {
+    /* Base Colors */
     --color-black: #0a0a0a;
     --color-white: #fff;
     --color-light-gray: #dfdfdf;
@@ -7,17 +8,63 @@
     --color-navy: navy;
     --color-blue: #1084d0;
     --color-teal: teal;
-    --button-height: 22px;
+    
+    /* Typography */
+    --base-font-size: 11px;
+    --base-font-family: sans-serif;
+    --base-line-height: 1.3;
+    --title-font-size: 13px;
+    --small-font-size: 10px;
+    --large-font-size: 18px;
+    --button-font-size: 11px;
+    --menu-font-size: 11px;
+    --status-font-size: 10px;
+    --desktop-icon-font-size: 11px;
+    --window-title-font-size: 11px;
+    --taskbar-font-size: 11px;
+    --pre-font-size: 10px;
+    --icon-size: 16px;
+    
+    /* Layout */
+    --button-height: var(--button-height);
     --taskbar-height: 30px;
+    --window-border-width: 2px;
+    --window-padding: 8px;
+    --desktop-icon-size: 48px;
+    
+    /* Effects */
+    --window-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    --button-border: 1px solid #999;
+    --highlight-color: #316ac5;
+    
+    /* Background */
+    --desktop-bg-start: teal;
+    --desktop-bg-end: rgb(0, 80, 80);
+    --window-bg: #c0c0c0;
+    --taskbar-bg: #c0c0c0;
+}
+
+/* Dark theme variables */
+:root[data-theme="pink"] {
+    --color-white: #1a1a1a;
+    --color-black: #ffffff;
+    --color-light-gray: #404040;
+    --color-gray: #808080;
+    --color-silver: #606060;
+    --desktop-bg-start: #2d4a4a;
+    --desktop-bg-end: #1a3333;
+    --window-bg: #404040;
+    --taskbar-bg: #303030;
+    --highlight-color: #a84ae2;
 }
 
 html {
     height: 100%;
-    background: linear-gradient(teal, rgb(0, 80, 80));
-    font-family: Arial, sans-serif;
+    background: linear-gradient(var(--desktop-bg-start), var(--desktop-bg-end));
+    font-family: var(--base-font-family);
     -webkit-font-smoothing: none;
-    font-size: 11px;
-    line-height: 1.3;
+    font-size: var(--base-font-size);
+    line-height: var(--base-line-height);
 }
 
 
@@ -996,7 +1043,7 @@ table>tbody>tr>* {
     flex-direction: column;
     flex-wrap: wrap;
     grid-template-columns: 1fr;
-    font-size: 11px;
+    font-size: var(--base-font-size);
     gap: 20px;
     padding: 16px;
     margin-left: 10px;
@@ -1021,7 +1068,7 @@ table>tbody>tr>* {
     cursor: pointer;
     color: rgb(255, 255, 255);
     gap: 5px;
-    font-size: 11px;
+    font-size: var(--base-font-size);
     text-align: center;
 }
 
@@ -1057,7 +1104,7 @@ table>tbody>tr>* {
 
     gap: 5px;
     font-family: Arial;
-    font-size: 11px;
+    font-size: var(--base-font-size);
 
     transition: background-color 0.2s, box-shadow 0.2s;
     user-select: none;
@@ -1122,7 +1169,7 @@ table>tbody>tr>* {
     gap: 4px;
     overflow-x: auto;
 
-    height: 22px;
+    height: var(--button-height);
 }
 
 .taskbar-windows .taskbar-button {
@@ -1131,7 +1178,7 @@ table>tbody>tr>* {
     box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
     min-width: 150px;
 
-    height: 22px;
+    height: var(--button-height);
     padding: 0 5px;
     text-align: left;
     white-space: nowrap;
@@ -1147,13 +1194,18 @@ table>tbody>tr>* {
     box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
 }
 
+.taskbar-windows .taskbar-button.active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    background: var(--window-bg);
+}
+
 .taskbar-right {
     display: flex;
     align-items: center;
     padding: 0 5px;
     height: 100%;
     font-size: 14px;
-    background: #c0c0c0; /* Görev çubuğu rengi */
+    background: var(--window-bg); /* Görev çubuğu rengi */
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     border-bottom: 2px solid #000;
@@ -1165,7 +1217,7 @@ table>tbody>tr>* {
 }
 
 .start-button {
-    height: 22px;
+    height: var(--button-height);
     display: flex;
     align-items: center;
     gap: 4px;
@@ -1311,58 +1363,265 @@ table>tbody>tr>* {
 
 /* --- MOBİL UYUMLULUK STILLERİ --- */
 @media (max-width: 768px) {
+    /* Base mobile optimizations */
+    html {
+        font-size: 12px;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
 
-    /* 1. Masaüstü ve İkonları Tek Sütuna Dizelim */
+    body {
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 1. Masaüstü ve İkonları Responsive Grid */
     .desktop {
-        flex-direction: row; /* İkonların dikey değil, yatayda akmasını sağlar */
-        flex-wrap: wrap;     /* Sığmayan ikonların aşağı kaymasını sağlar */
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 20px;
+        padding: 20px 15px;
         width: 100%;
         height: auto;
         margin-left: 0;
-        gap: auto;
+        justify-items: center;
     }
 
     .desktop-icon {
-        width: 120px; /* İkonların kapladığı alanı biraz küçültelim */
+        width: 90px;
+        font-size: var(--base-font-size);
+        text-align: center;
+        padding: 10px 5px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .desktop-icon:active {
+        background: rgba(0, 0, 128, 0.2);
+        transform: scale(0.95);
+    }
+
+    .desktop-icon img {
+        width: 48px !important;
+        height: 48px !important;
+        margin-bottom: 8px;
     }
 
     /* 2. Pencereleri Tam Ekran Moduna Alalım */
     .window {
-        position: fixed; /* Ekranın geri kalanından bağımsız olmasını sağlar */
+        position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        height: 100% !important;
-        max-width: 100%;
-        max-height: 100%;
-        z-index: 100 !important; /* Her zaman en üstte kalır */
-        display: none; /* Varsayılan olarak gizli kalsınlar */
+        height: 100vh !important;
+        height: 100dvh !important; /* Dynamic viewport height */
+        max-width: 100% !important;
+        max-height: 100% !important;
+        z-index: 100 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
     }
     
     .window-body {
-        height: calc(100% - 70px); /* Başlık ve durum çubuğu hariç tüm alanı kaplasın */
-        overflow-y: auto;         /* İçerik sığmazsa kaydırma çubuğu çıksın */
+        height: calc(100vh - 50px) !important;
+        height: calc(100dvh - 50px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 15px !important;
+        font-size: 13px;
     }
 
-    /* 3. Görev Çubuğunu (Taskbar) Gizleyelim */
+    /* Enhanced title bar for mobile */
+    .title-bar {
+        height: 50px !important;
+        padding: 10px !important;
+        font-size: 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+
+    .title-bar-text {
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    .title-bar-controls {
+        display: flex !important;
+        gap: 10px !important;
+    }
+
+    .title-bar-controls button {
+        min-width: 35px !important;
+        min-height: 35px !important;
+        padding: 0 !important;
+        border-radius: 4px !important;
+        background-size: 60% !important;
+        background-position: center !important;
+    }
+
+    /* 3. Görev Çubuğunu ve diğer desktop elementlerini gizle */
     .taskbar {
-        display: none;
+        display: none !important;
     }
 
-    /* 4. Proje klasöründeki grid yapısını düzenleyelim */
+    /* 4. Proje klasöründeki grid yapısını düzenle */
     #project-grid {
-        justify-content: center; /* Projeleri ortalayalım */
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+        gap: 15px !important;
+        padding: 10px !important;
+        justify-content: center !important;
     }
 
     .project-shortcut {
-        width: 150px; /* Küçük ekranda daha iyi görünmeleri için */
+        width: 100% !important;
+        max-width: 180px !important;
+        padding: 15px !important;
+        border-radius: 8px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .project-shortcut:active {
+        transform: scale(0.98) !important;
+        background-color: rgba(0, 0, 128, 0.1) !important;
     }
 
     .project-shortcut img {
-        width: 140px;
-        height: 140px;
+        width: 100% !important;
+        height: 120px !important;
+        border-radius: 4px !important;
+    }
+
+    /* 5. Form elementlerini mobile-friendly yap */
+    input[type=text],
+    input[type=email],
+    input[type=password],
+    select,
+    textarea {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        padding: 12px !important;
+        height: auto !important;
+        min-height: 44px !important; /* Touch target size */
+    }
+
+    button {
+        min-height: 44px !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        border-radius: 4px !important;
+    }
+
+    /* 6. Tables responsive */
+    .sunken-panel table {
+        font-size: 12px !important;
+    }
+
+    table th,
+    table td {
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+    }
+
+    /* 7. Status bar improvements */
+    .status-bar {
+        flex-direction: column !important;
+        gap: 5px !important;
+        padding: 10px !important;
+    }
+
+    .status-bar-field {
+        font-size: 11px !important;
+        padding: 5px !important;
+    }
+
+    /* 8. Media scroll containers */
+    .media-scroll-container {
+        max-height: 300px !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* 9. Search interface mobile optimizations */
+    #search-window {
+        width: 95% !important;
+        height: auto !important;
+        max-height: 80vh !important;
+        top: 10px !important;
+    }
+
+    #search-input {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+
+    .tag-filter {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        margin: 2px !important;
+        border-radius: 20px !important;
+    }
+
+    /* 10. Image optimizations */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* 11. Accessibility improvements */
+    .desktop-icon,
+    .project-shortcut,
+    button {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* 12. Safe area insets for newer phones */
+    @supports (padding: max(0px)) {
+        .window {
+            padding-left: max(0px, env(safe-area-inset-left)) !important;
+            padding-right: max(0px, env(safe-area-inset-right)) !important;
+        }
+        
+        .window-body {
+            padding-bottom: max(15px, env(safe-area-inset-bottom)) !important;
+        }
+    }
+
+    /* 13. Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .window {
+            background: #2d2d2d !important;
+        }
+        
+        .window-body {
+            background: #2d2d2d !important;
+            color: #ffffff !important;
+        }
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .desktop-icon img,
+    .title-bar-controls button {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: optimize-contrast;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .desktop {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+        padding: 10px !important;
+    }
+    
+    .desktop-icon {
+        width: 80px !important;
+        font-size: 10px !important;
+    }
+    
+    .desktop-icon img {
+        width: 40px !important;
+        height: 40px !important;
     }
 }

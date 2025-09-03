@@ -2,12 +2,12 @@
 // Bu dosya, projelerin yüklenmesini, tabloda ve klasörde gösterilmesini yönetir.
 
 // Gerekli fonksiyonları windowmanager.js dosyasından import ediyoruz
-import { openWindow, bringToFront } from './script-windowmanager.js';
+import { openWindow, bringToFront } from './windows.js';
 
 let projectsData = [];
 
 // --- Proje Verilerini Yükleme ---
-const loadProjects = async () => {
+export const loadProjects = async () => {
     try {
         const response = await fetch('projects.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -80,7 +80,7 @@ const populateProjectsFolder = () => {
 };
 
 // Proje detay penceresini gösterir
-const showProjectDetail = (project) => {
+export const showProjectDetail = (project) => {
     const detailWin = document.getElementById('project-detail');
     const contentElem = document.getElementById('project-content');
 
@@ -214,6 +214,9 @@ const openMediaWindow = (src, title) => {
         isDragging = false;
     });
 };
+
+// Make showProjectDetail globally available
+window.showProjectDetail = showProjectDetail;
 
 // Sayfa yüklendiğinde projeleri başlat
 document.addEventListener('DOMContentLoaded', loadProjects);

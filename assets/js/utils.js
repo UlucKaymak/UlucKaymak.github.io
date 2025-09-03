@@ -2,7 +2,7 @@
 // Genel yardımcı işlevleri içerir.
 
 // Gereksinim duyulan fonksiyonları windowmanager.js dosyasından import ediyoruz.
-import { openWindow, bringToFront, closeWindow, makeAllWindowsDraggable } from './script-windowmanager.js';
+import { openWindow, bringToFront, closeWindow, makeAllWindowsDraggable } from './windows.js';
 
 // Kedi oluşturucu
 export const setupCatSpawner = () => {
