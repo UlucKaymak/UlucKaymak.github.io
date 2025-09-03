@@ -8,7 +8,7 @@
     --color-navy: navy;
     --color-blue: #1084d0;
     --color-teal: teal;
-    
+
     /* Typography */
     --base-font-size: 11px;
     --base-font-family: sans-serif;
@@ -24,19 +24,19 @@
     --taskbar-font-size: 11px;
     --pre-font-size: 10px;
     --icon-size: 16px;
-    
+
     /* Layout */
     --button-height: var(--button-height);
     --taskbar-height: 30px;
     --window-border-width: 2px;
     --window-padding: 8px;
     --desktop-icon-size: 48px;
-    
+
     /* Effects */
-    --window-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    --window-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     --button-border: 1px solid #999;
-    --highlight-color: #316ac5;
-    
+    --highlight-color:  rgba(255, 255, 150, 0.4);
+
     /* Background */
     --desktop-bg-start: teal;
     --desktop-bg-end: rgb(0, 80, 80);
@@ -44,18 +44,18 @@
     --taskbar-bg: #c0c0c0;
 }
 
-/* Dark theme variables */
+/* Trans flag theme */
 :root[data-theme="pink"] {
-    --color-white: #1a1a1a;
-    --color-black: #ffffff;
-    --color-light-gray: #404040;
-    --color-gray: #808080;
-    --color-silver: #606060;
-    --desktop-bg-start: #2d4a4a;
-    --desktop-bg-end: #1a3333;
-    --window-bg: #404040;
-    --taskbar-bg: #303030;
-    --highlight-color: #a84ae2;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-light-gray: #f5a9b8;
+    --color-gray: #5bcefa;
+    --color-silver: #f5a9b8;
+    --desktop-bg-start: #f5a9b8;
+    --desktop-bg-end: #a9737e;
+    --window-bg: #ffffff;
+    --taskbar-bg: #f5a9b8;
+    --highlight-color: #5bcefa;
 }
 
 html {
@@ -66,6 +66,8 @@ html {
     font-size: var(--base-font-size);
     line-height: var(--base-line-height);
 }
+
+
 
 
 body::after {
@@ -89,12 +91,12 @@ body::after {
 }
 
 .highlight {
-    background: rgba(255, 239, 150, 0.4);
+    background: var(--highlight-color);
     padding: 0.1em 0.1em;
 }
 
 .multiline {
-  white-space: pre-wrap;
+    white-space: pre-wrap;
 }
 
 .title-bar,
@@ -1205,7 +1207,8 @@ table>tbody>tr>* {
     padding: 0 5px;
     height: 100%;
     font-size: 14px;
-    background: var(--window-bg); /* Görev çubuğu rengi */
+    background: var(--window-bg);
+    /* Görev çubuğu rengi */
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     border-bottom: 2px solid #000;
@@ -1363,6 +1366,7 @@ table>tbody>tr>* {
 
 /* --- MOBİL UYUMLULUK STILLERİ --- */
 @media (max-width: 768px) {
+
     /* Base mobile optimizations */
     html {
         font-size: 12px;
@@ -1414,14 +1418,15 @@ table>tbody>tr>* {
         left: 0 !important;
         width: 100% !important;
         height: 100vh !important;
-        height: 100dvh !important; /* Dynamic viewport height */
+        height: 100dvh !important;
+        /* Dynamic viewport height */
         max-width: 100% !important;
         max-height: 100% !important;
         z-index: 100 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
     }
-    
+
     .window-body {
         height: calc(100vh - 50px) !important;
         height: calc(100dvh - 50px) !important;
@@ -1499,10 +1504,12 @@ table>tbody>tr>* {
     input[type=password],
     select,
     textarea {
-        font-size: 16px !important; /* Prevents zoom on iOS */
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
         padding: 12px !important;
         height: auto !important;
-        min-height: 44px !important; /* Touch target size */
+        min-height: 44px !important;
+        /* Touch target size */
     }
 
     button {
@@ -1580,7 +1587,7 @@ table>tbody>tr>* {
             padding-left: max(0px, env(safe-area-inset-left)) !important;
             padding-right: max(0px, env(safe-area-inset-right)) !important;
         }
-        
+
         .window-body {
             padding-bottom: max(15px, env(safe-area-inset-bottom)) !important;
         }
@@ -1591,7 +1598,7 @@ table>tbody>tr>* {
         .window {
             background: #2d2d2d !important;
         }
-        
+
         .window-body {
             background: #2d2d2d !important;
             color: #ffffff !important;
@@ -1600,7 +1607,9 @@ table>tbody>tr>* {
 }
 
 /* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
     .desktop-icon img,
     .title-bar-controls button {
         image-rendering: -webkit-optimize-contrast;
@@ -1614,12 +1623,12 @@ table>tbody>tr>* {
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
         padding: 10px !important;
     }
-    
+
     .desktop-icon {
         width: 80px !important;
         font-size: 10px !important;
     }
-    
+
     .desktop-icon img {
         width: 40px !important;
         height: 40px !important;
