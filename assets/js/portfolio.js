@@ -2,87 +2,6 @@
  * Optimized Portfolio System - Combined modules for better performance
  */
 
-// Analytics System
-class Analytics {
-    constructor() {
-        this.events = [];
-        this.sessionStart = Date.now();
-        this.popularProjects = new Map();
-        this.loadStoredData();
-    }
-
-    track(eventType, data = {}) {
-        const event = {
-            type: eventType,
-            timestamp: Date.now(),
-            sessionTime: Date.now() - this.sessionStart,
-            isMobile: window.innerWidth <= 768,
-            ...data
-        };
-        
-        this.events.push(event);
-        this.processEvent(event);
-        this.saveToStorage();
-    }
-
-    processEvent(event) {
-        if (event.type === 'project_view') {
-            const count = this.popularProjects.get(event.projectId) || 0;
-            this.popularProjects.set(event.projectId, count + 1);
-        }
-    }
-
-    getInsights() {
-        const totalViews = this.events.filter(e => e.type === 'project_view').length;
-        const mobileViews = this.events.filter(e => e.type === 'project_view' && e.isMobile).length;
-        const searchQueries = this.events.filter(e => e.type === 'search_query').length;
-        
-        return {
-            totalViews,
-            mobileViews,
-            searchQueries,
-            sessionTime: Date.now() - this.sessionStart,
-            popularProjects: Array.from(this.popularProjects.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5),
-            totalSessions: this.getTotalSessions(),
-            mobileUsageRatio: totalViews > 0 ? (mobileViews / totalViews) * 100 : 0
-        };
-    }
-
-    loadStoredData() {
-        try {
-            const stored = localStorage.getItem('portfolio_analytics');
-            if (stored) {
-                const data = JSON.parse(stored);
-                this.popularProjects = new Map(data.popularProjects || []);
-            }
-        } catch (e) {
-            console.warn('Could not load analytics data:', e);
-        }
-    }
-
-    saveToStorage() {
-        try {
-            const data = {
-                popularProjects: Array.from(this.popularProjects.entries()),
-                lastUpdate: Date.now()
-            };
-            localStorage.setItem('portfolio_analytics', JSON.stringify(data));
-        } catch (e) {
-            console.warn('Could not save analytics data:', e);
-        }
-    }
-
-    getTotalSessions() {
-        try {
-            const sessions = localStorage.getItem('portfolio_sessions') || '0';
-            const count = parseInt(sessions) + 1;
-            localStorage.setItem('portfolio_sessions', count.toString());
-            return count;
-        } catch (e) {
-            return 1;
-        }
-    }
-}
 
 // Portfolio Loader
 class PortfolioLoader {
@@ -185,7 +104,6 @@ class SmartSearch {
 class PortfolioSystem {
     constructor() {
         this.loader = new PortfolioLoader();
-        this.analytics = new Analytics();
         this.projects = [];
         this.search = null;
         this.isInitialized = false;
@@ -204,18 +122,11 @@ class PortfolioSystem {
             this.setupGlobalHotkeys(searchWindow);
             this.setupProjectRecommendations();
             
-            this.analytics.track('portfolio_loaded', {
-                projectCount: this.projects.length,
-                isMobile: window.innerWidth <= 768,
-                loadTime: Date.now() - this.analytics.sessionStart
-            });
-            
             this.isInitialized = true;
             console.log('🚀 Portfolio system loaded');
             
         } catch (error) {
             console.error('Failed to initialize portfolio:', error);
-            this.analytics.track('load_error', { error: error.message });
         }
     }
 
@@ -236,27 +147,10 @@ class PortfolioSystem {
         searchWindow.style.display = 'block';
         const searchInput = searchWindow.querySelector('#search-input');
         if (searchInput) searchInput.focus();
-        this.analytics.track('search_opened');
     }
 
     setupProjectRecommendations() {
-        const originalShowProjectDetail = window.showProjectDetail;
-        
-        window.showProjectDetail = (project) => {
-            this.analytics.track('project_view', { 
-                projectId: project.id,
-                projectType: project.type,
-                isMobile: window.innerWidth <= 768
-            });
-            
-            if (originalShowProjectDetail) {
-                originalShowProjectDetail(project);
-            }
-        };
-    }
-
-    getAnalytics() {
-        return this.analytics.getInsights();
+        // Project recommendations functionality can be added here if needed
     }
 
     getProjects() {

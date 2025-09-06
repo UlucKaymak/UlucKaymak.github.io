@@ -13,7 +13,6 @@
 
 <body>
 
-
     <div class="taskbar">
         <button class="start-button" id="start-button">
             <img src="assets/icons/winlogo.png" alt="Start" />
@@ -30,8 +29,6 @@
         <nav class="start-menu" id="start-menu" style="display: none;">
             <div class="start-menu-sidebar"></div>
             <ul class="start-menu-list">
-                <!-- <li><a href="#" class="start-menu-item" data-action="open-analytics"><img src="assets/icons/w95_50.png" alt="Analytics" />
-                        Analytics</a></li> -->
                 <li><a href="#" class="start-menu-item" data-action="open-projects"><img src="assets/icons/w2k_unknown_14.png" alt="Projects" />
                         All Projects</a></li>
                 <li><a href="#" class="start-menu-item" data-action="open-contact"><img src="assets/icons/w98_phone_desk.png" alt="Contact" />
@@ -55,7 +52,6 @@
                 
                 let startButton, startMenu, taskbarTime;
                 const actionHandlers = {
-                    'open-analytics': () => window.openWindow?.('analytics'),
                     'open-projects': () => window.openWindow?.('project-folder'),
                     'open-contact': () => window.openWindow?.('contact'),
                     'toggle-theme': toggleTheme,
@@ -179,14 +175,10 @@
             <img src="assets/icons/w98_phone_desk.png" alt="Contact Icon" />
             <span>contact.exe</span>
         </div>
-        <!-- <div class="desktop-icon" data-window-id="analytics">
-            <img src="assets/icons/w95_50.png" alt="Analytics Icon" />
-            <span>analytics.exe</span>
-        </div> -->
     </div>
 
     <!-- Windows and Popups -->
-    <div class="window" id="welcome" style="top: 50px; left: 175px; min-width: 430px;">
+    <div class="window" id="welcome" style="top: 50px; left: 175px; min-width: 550px;">
         <div class="title-bar">
             <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">welcome.txt</div>
             <div class="title-bar-controls">
@@ -301,42 +293,6 @@
             <p class="status-bar-field">Feel free to ask anything.</p>
         </div>
     </div>
-
-    <div class="window" id="analytics" style="width: 550px; display: none;">
-        <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w95_50.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">analytics.exe</div>
-            <div class="title-bar-controls">
-                <button class="minimize-btn" aria-label="Minimize"></button>
-                <button class="close-btn" aria-label="Close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <div class="field-row">
-                <button id="refresh-analytics">🔄 Refresh Data</button>
-            </div>
-            <div id="analytics-content">
-                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
-                    <h3 style="margin-top: 0;">📊 Site Statistics</h3>
-                    <div id="analytics-stats"></div>
-                </div>
-                
-                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
-                    <h3 style="margin-top: 0;">🔥 Popular Projects</h3>
-                    <div id="popular-projects"></div>
-                </div>
-                
-                <div class="sunken-panel" style="padding: 10px; margin: 10px 0;">
-                    <h3 style="margin-top: 0;">📱 Device Usage</h3>
-                    <div id="device-stats"></div>
-                </div>
-            </div>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">Privacy-friendly analytics</p>
-            <p class="status-bar-field" id="last-updated">Last updated: Never</p>
-        </div>
-    </div>
-
 
     <!-- Images -->
     <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 2;">
@@ -493,82 +449,6 @@
     <script src="assets/js/oneko/oneko.js"></script>
     
     <script>
-        // Optimized Analytics
-        (function() {
-            'use strict';
-            
-            const Analytics = {
-                init() {
-                    const refreshBtn = document.getElementById('refresh-analytics');
-                    if (refreshBtn) refreshBtn.addEventListener('click', this.update);
-                    
-                    // Lazy update when analytics window is opened
-                    document.addEventListener('click', (e) => {
-                        if (e.target.closest('[data-window-id="analytics"]')) {
-                            setTimeout(() => this.update(), 100);
-                        }
-                    });
-                },
-                
-                update() {
-                    const system = window.portfolioSystem;
-                    const elements = {
-                        stats: document.getElementById('analytics-stats'),
-                        popular: document.getElementById('popular-projects'),
-                        device: document.getElementById('device-stats'),
-                        lastUpdated: document.getElementById('last-updated')
-                    };
-                    
-                    if (!system) {
-                        const noData = '<p style="font-size:11px;color:#666">Analytics system not initialized.</p>';
-                        Object.values(elements).forEach(el => { if (el) el.innerHTML = noData; });
-                        return;
-                    }
-                    
-                    const data = system.getAnalytics();
-                    this.render(data, elements);
-                    
-                    if (elements.lastUpdated) {
-                        elements.lastUpdated.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
-                    }
-                },
-                
-                render(data, elements) {
-                    if (elements.stats) {
-                        elements.stats.innerHTML = `
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
-                                <div><strong>Total Views:</strong> ${data.totalViews}</div>
-                                <div><strong>Search Queries:</strong> ${data.searchQueries}</div>
-                                <div><strong>Session Time:</strong> ${Math.floor(data.sessionTime / 60000)}m</div>
-                                <div><strong>Total Sessions:</strong> ${data.totalSessions}</div>
-                            </div>`;
-                    }
-                    
-                    if (elements.popular) {
-                        elements.popular.innerHTML = data.popularProjects.length === 0 ? 
-                            '<p style="font-size:11px;color:#666">No project views yet.</p>' :
-                            data.popularProjects.map(([id, views]) => 
-                                `<div style="font-size:11px;padding:3px 0;display:flex;justify-content:space-between">
-                                    <span>${id}</span><span><strong>${views} views</strong></span>
-                                </div>`).join('');
-                    }
-                    
-                    if (elements.device) {
-                        const mobileRatio = data.mobileUsageRatio.toFixed(1);
-                        elements.device.innerHTML = `
-                            <div style="font-size:11px">
-                                <div style="margin-bottom:5px"><strong>Mobile:</strong> ${data.mobileViews} views (${mobileRatio}%)</div>
-                                <div style="background:var(--color-silver);height:15px;border:1px inset #999">
-                                    <div style="background:var(--color-teal);height:100%;width:${mobileRatio}%;transition:width .3s"></div>
-                                </div>
-                                <div style="margin-top:5px"><strong>Desktop:</strong> ${data.totalViews - data.mobileViews} views (${(100 - data.mobileUsageRatio).toFixed(1)}%)</div>
-                            </div>`;
-                    }
-                }
-            };
-            
-            document.addEventListener('DOMContentLoaded', () => Analytics.init());
-        })();
     </script>
 </body>
 

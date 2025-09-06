@@ -35,8 +35,39 @@ export const setupCatSpawner = () => {
         // Yeni pencereyi de sürüklenebilir ve kapatılabilir yap
         bringToFront(catWindow);
 
-        catWindow.querySelector('.title-bar').addEventListener('mousedown', () => {
-             bringToFront(catWindow);
+        // Add draggable functionality
+        const titleBar = catWindow.querySelector('.title-bar');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        titleBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - catWindow.offsetLeft;
+            offsetY = e.clientY - catWindow.offsetTop;
+            bringToFront(catWindow);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const winWidth = catWindow.offsetWidth;
+            const winHeight = catWindow.offsetHeight;
+
+            if (newLeft < 0) newLeft = 0;
+            if (newTop < 0) newTop = 0;
+            if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
+            if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
+
+            catWindow.style.left = `${newLeft}px`;
+            catWindow.style.top = `${newTop}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
         });
 
         catWindow.querySelector('.close-btn').addEventListener('click', () => {
