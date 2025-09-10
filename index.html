@@ -29,27 +29,32 @@
         <nav class="start-menu" id="start-menu" style="display: none;">
             <div class="start-menu-sidebar"></div>
             <ul class="start-menu-list">
-                <li><a href="#" class="start-menu-item" data-action="open-projects"><img src="assets/icons/w2k_unknown_14.png" alt="Projects" />
+                <li><a href="#" class="start-menu-item" data-action="open-projects"><img
+                            src="assets/icons/w2k_unknown_14.png" alt="Projects" />
                         All Projects</a></li>
-                <li><a href="#" class="start-menu-item" data-action="open-contact"><img src="assets/icons/w98_phone_desk.png" alt="Contact" />
+                <li><a href="#" class="start-menu-item" data-action="open-contact"><img
+                            src="assets/icons/w98_phone_desk.png" alt="Contact" />
                         Contact</a></li>
                 <li class="divider" role="separator"></li>
-                <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img src="assets/icons/w2k_unknown_11.png" alt="Theme" />
+                <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img
+                            src="assets/icons/w2k_unknown_11.png" alt="Theme" />
                         Toggle Theme</a></li>
-                <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png" alt="Refresh" />
+                <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png"
+                            alt="Refresh" />
                         Refresh Page</a></li>
                 <li><a href="#" class="start-menu-item"><img src="assets/icons/w2k_help.png" alt="About" />
                         About This Site</a></li>
                 <li class="divider" role="separator"></li>
-                <li><a href="#" class="start-menu-item" id="shutdown-button"><img src="assets/icons/w2k_shutdown.png" alt="Shutdown" />
+                <li><a href="#" class="start-menu-item" id="shutdown-button"><img src="assets/icons/w2k_shutdown.png"
+                            alt="Shutdown" />
                         Close Browser</a></li>
             </ul>
         </nav>
         <script>
             // Optimized startup script
-            (function() {
+            (function () {
                 'use strict';
-                
+
                 let startButton, startMenu, taskbarTime;
                 const actionHandlers = {
                     'open-projects': () => window.openWindow?.('project-folder'),
@@ -63,7 +68,7 @@
                     const root = document.documentElement;
                     const currentTheme = root.getAttribute('data-theme') || 'light';
                     const newTheme = currentTheme === 'light' ? 'pink' : 'light';
-                    
+
                     root.setAttribute('data-theme', newTheme);
                     localStorage.setItem('theme', newTheme);
                 }
@@ -117,7 +122,7 @@
                             shutdownBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
                                 if (confirm('Are you sure you want to close the browser window?')) {
-                                    try { window.close(); } catch(e) { window.location.href = 'about:blank'; }
+                                    try { window.close(); } catch (e) { window.location.href = 'about:blank'; }
                                 }
                                 startMenu.style.display = 'none';
                             });
@@ -175,12 +180,17 @@
             <img src="assets/icons/w98_phone_desk.png" alt="Contact Icon" />
             <span>contact.exe</span>
         </div>
+        <div class="desktop-icon" data-window-id="programs-folder">
+            <img src="assets/icons/w2k_folder_closed.png" alt="Programs Folder Icon" />
+            <span>programs that i use</span>
+        </div>
     </div>
 
     <!-- Windows and Popups -->
     <div class="window" id="welcome" style="top: 50px; left: 175px; min-width: 550px;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">welcome.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">welcome.txt</div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
@@ -217,7 +227,8 @@
 
     <div class="window" id="version_update" style="top: 15%; left: 35%; z-index: 15;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">bugs.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">bugs.txt</div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
@@ -239,7 +250,8 @@
 
     <div class="window" id="about" style="display: none;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">about_me.txt</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">about_me.txt</div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
@@ -259,7 +271,8 @@
 
     <div class="window" id="contact" style="width: 350px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w98_phone_desk.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">contact.exe</div>
+            <div class="title-bar-text"><img src="assets/icons/w98_phone_desk.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">contact.exe</div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
@@ -297,7 +310,8 @@
     <!-- Images -->
     <div class="window" id="img-uluc" style="min-width: 280px; left: 300px; top: 120px; z-index: 2;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc.jpeg</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc.jpeg</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -314,7 +328,8 @@
 
     <div class="window" id="img-uluc2" style="min-width: 280px; left: 423px; top: 261px; z-index: 3;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc2.jpeg</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc2.jpeg</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -331,7 +346,8 @@
 
     <div class="window" id="img-art1" style="min-width: 280px; left: 870px; top: 150px; z-index: 4;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">ulucvecini.gif</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">ulucvecini.gif</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -348,7 +364,9 @@
 
     <div class="window" id="img-art2" style="min-width: 280px; left: 220px; top: 260px; z-index: 1;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc-gozkapalitaslak.gif</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">uluc-gozkapalitaslak.gif
+            </div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -365,7 +383,8 @@
 
     <div class="window" id="img-cat2" style="min-width: 280px; left: 630px; top: 345px; z-index: 1;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_cd_player.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">cat2.jpeg</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_cd_player.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">cat2.jpeg</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -385,7 +404,8 @@
     <!-- projects -->
     <div class="window" id="projects-table" style="width: 680px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_14.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">project_list.exe</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_14.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">project_list.exe</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -414,7 +434,8 @@
 
     <div id="project-folder" class="window" style="width: 950px; height: 585px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text"><img src="assets/icons/w2k_folder_closed.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">All Projects</div>
+            <div class="title-bar-text"><img src="assets/icons/w2k_folder_closed.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">All Projects</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
@@ -431,12 +452,96 @@
 
     <div class="window" id="project-detail" style="width: 550px; display: none;">
         <div class="title-bar">
-            <div class="title-bar-text" id="project-title"><img src="assets/icons/w2k_unknown_14.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">Project Detail</div>
+            <div class="title-bar-text" id="project-title"><img src="assets/icons/w2k_unknown_14.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">Project Detail</div>
             <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
                 <button class="close-btn" aria-label="Close"></button>
             </div>
         </div>
         <div class="window-body" id="project-content"></div>
+    </div>
+
+    <div id="programs-folder" class="window" style="width: 600px; height: 400px; display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text"><img src="assets/icons/w2k_folder_closed.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">programs that i use
+            </div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body" style="">
+            <p>Programs that I use regularly.</p>
+            <div id="programs-grid" class="grid-container sunken-panel"
+                style="height: 320px; overflow-y: scroll; padding: 25px 15px; color: black;">
+                
+                <!-- Adobe Creative Suite -->
+                <div style="width: 100%; text-align: left; font-weight: bold; margin: 10px 0 1px 0; color: #666; font-size: 12px; text-transform: uppercase;">From Adobe Creative Suite + Davinci</div>
+                <div class="desktop-icon">
+                    <img
+                        src="https://cdn.worldvectorlogo.com/logos/adobe-photoshop-2.svg" />
+                    <span style="color: black;">Photoshop</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/after-effects-1.svg" />
+                    <span style="color: black;">After Effects</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/davinci-resolve-12.svg" />
+                    <span style="color: black;">Davinci Resolve</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/premiere-pro-cc.svg" />
+                    <span style="color: black;">Premiere Pro</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/adobe-illustrator-cc-3.svg" />
+                    <span style="color: black;">Illustrator</span>
+                </div>
+                
+                <!-- Audio Production -->
+                <div style="width: 100%; text-align: left; font-weight: bold; margin: 20px 0 1px 0; color: #666; font-size: 12px; text-transform: uppercase;">Audio Production</div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/abletonlive.svg" />
+                    <span style="color: black;">Ableton (my love)</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://seeklogo.com/images/V/vcv-rack-logo-7E0B4E22C0-seeklogo.com.png" />
+                    <span style="color: black;">VCV Rack</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/adobe-audition-cc-icon-2020-.svg" />
+                    <span style="color: black;">Audition</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/fmod.svg" />
+                    <span style="color: black;">Fmod</span>
+                </div>
+
+                <!-- Others -->
+                <div style="width: 100%; text-align: left; font-weight: bold; margin: 20px 0 1px 0; color: #666; font-size: 12px; text-transform: uppercase;">Other Things</div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.brandfetch.io/idJrtUaRf_/w/64/h/64/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1757414667576" />
+                    <span style="color: black;">TouchDesigner</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/blender-2.svg" />
+                    <span style="color: black;">Blender</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/GravitySketch.svg" />
+                    <span style="color: black;">GravitySketch</span>
+                </div>
+                <div class="desktop-icon">
+                    <img src="https://cdn.worldvectorlogo.com/logos/unity-69.svg" />
+                    <span style="color: black;">Unity</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="status-bar">
+            <p class="status-bar-field">Programs: 6</p>
+            <p class="status-bar-field">Double click to open</p>
+        </div> -->
     </div>
 
 
@@ -447,7 +552,7 @@
     <script type="module" src="assets/js/utils.js"></script>
     <script type="module" src="assets/js/portfolio.js"></script>
     <script src="assets/js/oneko/oneko.js"></script>
-    
+
     <script>
     </script>
 </body>
