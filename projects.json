@@ -64,7 +64,7 @@
       "#VideoGame",
       "#Audio"
     ],
-    "enabled": true
+    "enabled": hidden
   },
   {
     "id": "art-Persona",
