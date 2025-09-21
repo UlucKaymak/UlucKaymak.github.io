@@ -1,0 +1,59 @@
+:root {
+    /* Base Colors */
+    --color-black: #0a0a0a;
+    --color-white: #fff;
+    --color-light-gray: #dfdfdf;
+    --color-gray: grey;
+    --color-silver: silver;
+    --color-navy: navy;
+    --color-blue: #1084d0;
+    --color-teal: teal;
+
+    /* Typography */
+    --base-font-size: 16px;
+    --base-font-family: sans-serif;
+    --base-line-height: 1.3;
+    --title-font-size: 18px;
+    --small-font-size: 15px;
+    --large-font-size: 22px;
+    --button-font-size: 14px;
+    --menu-font-size: 14px;
+    --status-font-size: 13px;
+    --desktop-icon-font-size: 14px;
+    --window-title-font-size: 14px;
+    --taskbar-font-size: 14px;
+    --pre-font-size: 13px;
+    --icon-size: 16px;
+
+    /* Layout */
+    --button-height: var(--button-height);
+    --taskbar-height: 30px;
+    --window-border-width: 2px;
+    --window-padding: 8px;
+    --desktop-icon-size: 48px;
+
+    /* Effects */
+    --window-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    --button-border: 1px solid #999;
+    --highlight-color: rgba(255, 255, 150, 0.4);
+
+    /* Background */
+    --desktop-bg-start: teal;
+    --desktop-bg-end: rgb(0, 80, 80);
+    --window-bg: #c0c0c0;
+    --taskbar-bg: #c0c0c0;
+}
+
+/* Trans flag theme */
+:root[data-theme="pink"] {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-light-gray: #f5a9b8;
+    --color-gray: #5bcefa;
+    --color-silver: #f5a9b8;
+    --desktop-bg-start: #f5a9b8;
+    --desktop-bg-end: #a9737e;
+    --window-bg: #ffffff;
+    --taskbar-bg: #f5a9b8;
+    --highlight-color: #5bcefa;
+}

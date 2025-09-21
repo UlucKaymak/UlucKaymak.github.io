@@ -1041,15 +1041,15 @@ table>tbody>tr>* {
 }
 
 .desktop {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-auto-rows: auto;
     font-size: var(--base-font-size);
     gap: 20px;
     padding: 16px;
     margin-left: 10px;
     width: 100px;
+    align-content: start;
 }
 
 .desktop-icons {
@@ -1072,6 +1072,22 @@ table>tbody>tr>* {
     gap: 5px;
     font-size: var(--base-font-size);
     text-align: center;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 5px;
+}
+
+.desktop-icon:focus {
+    outline: none;
+}
+
+.desktop-icon:focus-visible {
+    outline: none;
+}
+
+.desktop-icon:hover {
+    background: rgba(0, 128, 255, 0.15);
 }
 
 .desktop-icon img {
@@ -1364,14 +1380,51 @@ table>tbody>tr>* {
 
 
 
-/* --- MOBİL UYUMLULUK STILLERİ --- */
+/* Mobile Navigation Hint */
+.mobile-nav-hint {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--window-bg);
+    border: 2px outset var(--window-bg);
+    padding: 10px 15px;
+    border-radius: 0;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    font-size: 14px;
+    max-width: 90%;
+}
+
+.mobile-nav-hint p {
+    margin: 0 15px 0 0;
+    display: inline;
+}
+
+.mobile-nav-hint button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    color: #000;
+}
+
+/* --- MOBILE RESPONSIVE STYLES --- */
 @media (max-width: 768px) {
+    /* Show mobile hint */
+    .mobile-nav-hint {
+        display: block;
+    }
 
     /* Base mobile optimizations */
     html {
-        font-size: 12px;
+        font-size: 14px;
         -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        -webkit-tap-highlight-color: rgba(0, 128, 255, 0.2);
     }
 
     body {
@@ -1379,230 +1432,430 @@ table>tbody>tr>* {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* 1. Masaüstü ve İkonları Responsive Grid */
+    /* Desktop icons responsive grid */
     .desktop {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-auto-rows: min-content;
         gap: 20px;
-        padding: 20px 15px;
+        padding: 20px 15px 100px 15px; /* Bottom padding for scroll space */
         width: 100%;
         height: auto;
         margin-left: 0;
         justify-items: center;
+        align-content: start;
     }
 
     .desktop-icon {
-        width: 90px;
-        font-size: var(--base-font-size);
+        width: 100px;
+        font-size: 14px;
         text-align: center;
-        padding: 10px 5px;
-        border-radius: 4px;
-        transition: all 0.2s ease;
+        padding: 15px 10px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(0, 128, 255, 0.3);
     }
 
+    .desktop-icon:hover,
     .desktop-icon:active {
-        background: rgba(0, 0, 128, 0.2);
-        transform: scale(0.95);
+        background: none;
+        color: rgb(255, 255, 255);
     }
 
     .desktop-icon img {
-        width: 48px !important;
-        height: 48px !important;
-        margin-bottom: 8px;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 12px;
     }
 
-    /* 2. Pencereleri Tam Ekran Moduna Alalım */
+    .desktop-icon span {
+        font-weight: 500;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        line-height: 1.2;
+        display: block;
+        word-wrap: break-word;
+    }
+
+    /* Mobile-first window styling - maintains Windows aesthetic */
     .window {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        /* Dynamic viewport height */
-        max-width: 100% !important;
-        max-height: 100% !important;
-        z-index: 100 !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: calc(100vw - 20px);
+        height: auto;
+        max-width: calc(100vw - 20px);
+        max-height: calc(100vh - 20px);
+        z-index: 100;
+        border-radius: 0;
+        /* Keep Windows-style borders but simplified */
+        border: 2px outset var(--window-bg);
+        box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Draggable window state */
+    .window.draggable {
+        position: absolute !important;
+        width: 90% !important;
+        height: 80% !important;
+        top: 10% !important;
+        left: 5% !important;
+        border: 2px solid #000080;
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+        z-index: 200 !important;
+    }
+
+    .window.draggable .title-bar {
+        background: linear-gradient(90deg, #0066cc, #1084d0);
+        border-bottom: 2px solid #004499;
+    }
+
+    .window.draggable .window-body {
+        height: calc(100% - 45px) !important;
+        padding: 12px;
+    }
+
+    /* Fix specific windows with inline styles */
+    #welcome {
+        min-width: auto !important;
+        top: 50px !important;
+        left: 10px !important;
+        transform: none !important;
+        width: calc(100vw - 20px) !important;
+    }
+
+    #version_update {
+        min-width: auto !important;
+        top: 50px !important;
+        left: 10px !important;
+        transform: none !important;
+        width: calc(100vw - 20px) !important;
     }
 
     .window-body {
-        height: calc(100vh - 50px) !important;
-        height: calc(100dvh - 50px) !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding: 15px !important;
+        height: auto;
+        max-height: calc(85vh - 100px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 15px;
         font-size: 16px;
+        line-height: 1.4;
     }
 
-    /* Enhanced title bar for mobile */
+    .window-body p {
+        margin: 8px 0;
+    }
+
+    .window-body pre {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .window-body .field-row-stacked {
+        gap: 8px;
+    }
+
+    .window-body .field-row-stacked > * {
+        margin-top: 6px;
+    }
+
+    /* Enhanced title bar for mobile - Windows aesthetic */
     .title-bar {
-        height: 50px !important;
-        padding: 10px !important;
-        font-size: 16px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
+        height: 45px;
+        padding: 8px 15px;
+        font-size: 14px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        /* Maintain Windows gradient style */
+        background: linear-gradient(90deg, navy, #1084d0);
+        border-bottom: 1px solid #000080;
+        cursor: move;
+        touch-action: none;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .title-bar-text {
-        font-size: 14px !important;
-        font-weight: bold !important;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .title-bar-text img {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        vertical-align: middle;
     }
 
     .title-bar-controls {
-        display: flex !important;
-        gap: 10px !important;
+        display: flex;
+        gap: 8px;
+        align-items: center;
     }
 
     .title-bar-controls button {
-        min-width: 35px !important;
-        min-height: 35px !important;
-        padding: 0 !important;
-        border-radius: 4px !important;
-        background-size: 60% !important;
-        background-position: center !important;
+        min-width: 32px;
+        min-height: 32px;
+        padding: 4px;
+        /* Keep Windows button style */
+        background: silver;
+        border: none;
+        box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+        background-size: 45%;
+        background-position: center;
+        background-repeat: no-repeat;
+        touch-action: manipulation;
+        transition: all 0.2s ease;
+        cursor: pointer;
     }
 
-    /* 3. Görev Çubuğunu ve diğer desktop elementlerini gizle */
+    .title-bar-controls button:active {
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+        background-color: #c0c0c0;
+    }
+
+    /* Hide taskbar on mobile */
     .taskbar {
-        display: none !important;
+        display: none;
     }
 
-    /* 4. Proje klasöründeki grid yapısını düzenle */
-    #project-grid {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
-        gap: 15px !important;
-        padding: 10px !important;
-        justify-content: center !important;
+    /* Project grid optimizations */
+    #project-grid,
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        padding: 15px;
+        justify-content: center;
     }
 
     .project-shortcut {
-        width: 100% !important;
-        max-width: 180px !important;
-        padding: 15px !important;
-        border-radius: 8px !important;
-        transition: all 0.2s ease !important;
+        width: 100%;
+        max-width: none;
+        padding: 20px 15px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        touch-action: manipulation;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-shortcut:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
 
     .project-shortcut:active {
-        transform: scale(0.98) !important;
-        background-color: rgba(0, 0, 128, 0.1) !important;
+        transform: translateY(0) scale(0.98);
+        background-color: rgba(0, 128, 255, 0.1);
     }
 
     .project-shortcut img {
-        width: 100% !important;
-        height: 120px !important;
-        border-radius: 4px !important;
+        width: 100%;
+        height: 140px;
+        border-radius: 8px;
+        object-fit: cover;
     }
 
-    /* 5. Form elementlerini mobile-friendly yap */
+    /* Form elements mobile optimization - Windows style */
     input[type=text],
     input[type=email],
     input[type=password],
+    input[type=search],
+    input[type=tel],
+    input[type=url],
     select,
     textarea {
-        font-size: 16px !important;
-        /* Prevents zoom on iOS */
-        padding: 12px !important;
-        height: auto !important;
-        min-height: 44px !important;
-        /* Touch target size */
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 15px 12px;
+        min-height: 50px;
+        /* Keep Windows input styling */
+        background-color: #fff;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+        border: none;
+        touch-action: manipulation;
     }
 
     button {
-        min-height: 44px !important;
-        padding: 12px 16px !important;
-        font-size: 14px !important;
-        border-radius: 4px !important;
+        min-height: 50px;
+        padding: 15px 20px;
+        font-size: 16px;
+        /* Keep Windows button styling */
+        background: silver;
+        border: none;
+        box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+        color: #000;
+        touch-action: manipulation;
+        cursor: pointer;
     }
 
-    /* 6. Tables responsive */
-    .sunken-panel table {
-        font-size: 12px !important;
+    button:active {
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    }
+
+    /* Table responsiveness */
+    .sunken-panel {
+        border-radius: 8px;
+        max-height: 60vh;
+    }
+
+    table {
+        font-size: 14px;
+        width: 100%;
     }
 
     table th,
     table td {
-        padding: 8px 4px !important;
-        font-size: 14px !important;
+        padding: 12px 8px;
+        font-size: 14px;
+        text-align: left;
     }
 
-    /* 7. Status bar improvements */
+    table th {
+        position: sticky;
+        top: 0;
+        background: var(--window-bg);
+        z-index: 5;
+    }
+
+    /* Status bar improvements */
     .status-bar {
-        flex-direction: column !important;
-        gap: 5px !important;
-        padding: 10px !important;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 8px 15px;
+        background: var(--window-bg);
+        border-top: 1px solid #999;
     }
 
     .status-bar-field {
-        font-size: 14px !important;
-        padding: 5px !important;
+        font-size: 12px;
+        padding: 4px 8px;
+        flex: 1;
+        min-width: 100px;
+        background: var(--window-bg);
+        border: 1px inset var(--window-bg);
+        box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px grey;
     }
 
-    /* 8. Media scroll containers */
+    /* Scroll containers */
     .media-scroll-container {
-        max-height: 300px !important;
-        -webkit-overflow-scrolling: touch !important;
+        max-height: 50vh;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 6px;
     }
 
-    /* 9. Search interface mobile optimizations */
-    #search-window {
-        width: 95% !important;
-        height: auto !important;
-        max-height: 80vh !important;
-        top: 10px !important;
-    }
-
-    #search-input {
-        font-size: 16px !important;
-        padding: 12px !important;
-    }
-
-    .tag-filter {
-        padding: 8px 12px !important;
-        font-size: 12px !important;
-        margin: 2px !important;
-        border-radius: 20px !important;
-    }
-
-    /* 10. Image optimizations */
+    /* Image optimizations */
     img {
-        max-width: 100% !important;
-        height: auto !important;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
     }
 
-    /* 11. Accessibility improvements */
-    .desktop-icon,
-    .project-shortcut,
-    button {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    /* Pre and code blocks */
+    pre {
+        font-size: 12px;
+        padding: 12px;
+        border-radius: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        word-wrap: normal;
     }
 
-    /* 12. Safe area insets for newer phones */
+    /* Make ASCII art readable on mobile */
+    #welcome pre {
+        font-size: 11px;
+        line-height: 1.2;
+        overflow-x: auto;
+        margin: 10px 0;
+    }
+
+    /* Enhanced mobile accessibility */
+    .desktop-icon:focus,
+    button:focus {
+        outline: none;
+        outline-offset: 0;
+        background: none;
+    }
+
+    /* Improve focus visibility on dark backgrounds */
+    .desktop-icon:focus-visible {
+        outline: none;
+        outline-offset: 0;
+        background: none;
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        .desktop-icon:focus,
+        button:focus {
+            outline: none;
+            background: none;
+        }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .desktop-icon,
+        .project-shortcut,
+        .window,
+        * {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+    }
+
+    /* Safe area insets for modern phones */
     @supports (padding: max(0px)) {
         .window {
-            padding-left: max(0px, env(safe-area-inset-left)) !important;
-            padding-right: max(0px, env(safe-area-inset-right)) !important;
+            padding-left: max(0px, env(safe-area-inset-left));
+            padding-right: max(0px, env(safe-area-inset-right));
         }
 
         .window-body {
-            padding-bottom: max(15px, env(safe-area-inset-bottom)) !important;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+        }
+
+        .title-bar {
+            padding-top: max(15px, env(safe-area-inset-top));
         }
     }
+}
 
-    /* 13. Dark mode support */
-    @media (prefers-color-scheme: dark) {
-        .window {
-            background: #2d2d2d !important;
-        }
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .desktop {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-auto-rows: min-content;
+        gap: 25px;
+        padding: 30px 20px;
+        align-content: start;
+    }
 
-        .window-body {
-            background: #2d2d2d !important;
-            color: #ffffff !important;
-        }
+    .desktop-icon {
+        width: 120px;
+    }
+
+    .window {
+        position: absolute;
+        width: 90%;
+        height: 90%;
+        max-width: 800px;
+        max-height: 600px;
+        top: 5%;
+        left: 5%;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -1617,20 +1870,164 @@ table>tbody>tr>* {
     }
 }
 
-/* Landscape mobile optimizations */
-@media (max-width: 768px) and (orientation: landscape) {
+/* Small mobile screens */
+@media (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
+
     .desktop {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
-        padding: 10px !important;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        grid-auto-rows: min-content;
+        gap: 15px;
+        padding: 15px 10px 80px 10px;
+        align-content: start;
     }
 
     .desktop-icon {
-        width: 80px !important;
-        font-size: 10px !important;
+        width: 90px;
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+    .desktop-icon:hover,
+    .desktop-icon:active {
+        background: none;
+        color: rgb(255, 255, 255);
     }
 
     .desktop-icon img {
-        width: 40px !important;
-        height: 40px !important;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+    }
+
+    .window-body {
+        padding: 8px;
+        font-size: 14px;
+        height: auto;
+        max-height: calc(85vh - 80px);
+        line-height: 1.25;
+    }
+
+    .window-body p {
+        margin: 6px 0;
+    }
+
+    .window-body pre {
+        margin: 8px 0;
+        padding: 8px;
+        font-size: 8px;
+    }
+
+    /* ASCII art for small screens */
+    #welcome pre {
+        font-size: 6px;
+        line-height: 1.0;
+    }
+
+    .title-bar {
+        height: 40px;
+        padding: 8px 12px;
+    }
+
+    .title-bar-text {
+        font-size: 13px;
+    }
+
+    .title-bar-controls button {
+        min-width: 28px;
+        min-height: 28px;
+    }
+
+    #project-grid,
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .project-shortcut {
+        padding: 15px 10px;
+    }
+
+    .project-shortcut img {
+        height: 120px;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .desktop {
+        grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+        grid-auto-rows: min-content;
+        gap: 15px;
+        padding: 15px 20px 60px 20px;
+        align-content: start;
+    }
+
+    .desktop-icon {
+        width: 85px;
+        font-size: 11px;
+        padding: 8px 5px;
+    }
+
+    .desktop-icon:hover,
+    .desktop-icon:active {
+        background: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .desktop-icon img {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 6px;
+    }
+
+    .window-body {
+        height: auto;
+        max-height: calc(85vh - 90px);
+        padding: 8px;
+        line-height: 1.25;
+    }
+
+    .window-body p {
+        margin: 6px 0;
+    }
+
+    /* ASCII art for landscape */
+    #welcome pre {
+        font-size: 7px;
+        line-height: 1.0;
+    }
+
+    .title-bar {
+        height: 42px;
+        padding: 8px 15px;
+    }
+
+    #project-grid,
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .project-shortcut img {
+        height: 100px;
+    }
+}
+
+/* Very large screens optimization */
+@media (min-width: 1025px) {
+    .desktop {
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 120px;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .desktop-icon {
+        width: 85px;
     }
 }

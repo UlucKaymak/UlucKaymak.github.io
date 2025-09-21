@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>HomePage.exe | uluckaymak</title>
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
     <meta name="description" content="Alternative portfolio of Uluç Kaymak. multidisciplinary artist." />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
     <link rel="icon" href="assets/images/favicon.png" type="image/png" />
 
 </head>
@@ -144,46 +144,121 @@
 
         </script>
     </div>
+
+    <!-- Mobile Window Drag Script -->
+    <script>
+        // Mobile window dragging functionality
+        (function () {
+            let isDragging = false;
+            let currentWindow = null;
+            let dragOffset = { x: 0, y: 0 };
+
+            // Only enable on mobile
+            if (window.innerWidth <= 768) {
+                document.addEventListener('touchstart', function (e) {
+                    const titleBar = e.target.closest('.title-bar');
+                    if (titleBar && !e.target.closest('.title-bar-controls')) {
+                        const window = titleBar.closest('.window');
+                        if (window && window.style.display !== 'none') {
+                            isDragging = true;
+                            currentWindow = window;
+
+                            const touch = e.touches[0];
+                            const rect = window.getBoundingClientRect();
+                            dragOffset.x = touch.clientX - rect.left;
+                            dragOffset.y = touch.clientY - rect.top;
+
+                            // Make window draggable on mobile by changing position
+                            window.style.position = 'fixed';
+                            window.style.width = 'calc(100vw - 40px)';
+                            window.style.height = 'auto';
+                            window.style.maxHeight = 'calc(100vh - 40px)';
+                            window.style.top = '20px';
+                            window.style.left = '20px';
+                            window.style.zIndex = '200';
+                            window.classList.add('draggable');
+
+                            e.preventDefault();
+                        }
+                    }
+                }, { passive: false });
+
+                document.addEventListener('touchmove', function (e) {
+                    if (isDragging && currentWindow) {
+                        const touch = e.touches[0];
+                        const newX = touch.clientX - dragOffset.x;
+                        const newY = touch.clientY - dragOffset.y;
+
+                        // Constrain to viewport with proper margins
+                        const windowWidth = currentWindow.offsetWidth;
+                        const windowHeight = currentWindow.offsetHeight;
+                        const maxX = window.innerWidth - windowWidth - 10;
+                        const maxY = window.innerHeight - windowHeight - 10;
+
+                        currentWindow.style.left = Math.max(10, Math.min(newX, maxX)) + 'px';
+                        currentWindow.style.top = Math.max(10, Math.min(newY, maxY)) + 'px';
+
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+
+                document.addEventListener('touchend', function (e) {
+                    isDragging = false;
+                    currentWindow = null;
+                });
+            }
+        })();
+    </script>
     </div>
 
     <!-- desktop icons -->
-    <div class="desktop">
-        <div class="desktop-icon" data-window-id="welcome">
-            <img src="assets/icons/w2k_unknown_11.png" alt="Welcome Icon" />
+    <main class="desktop" role="main" aria-label="Desktop with application icons">
+        <button class="desktop-icon" data-window-id="welcome" aria-label="Open welcome.txt file" tabindex="0">
+            <img src="assets/icons/w2k_unknown_11.png" alt="" role="presentation" />
             <span>welcome.txt</span>
-        </div>
-        <div class="desktop-icon" data-window-id="about">
-            <img src="assets/icons/w2k_uninstall.png" alt="About Me Icon" />
+        </button>
+        <button class="desktop-icon" data-window-id="about" aria-label="Open about_me.txt file" tabindex="0">
+            <img src="assets/icons/w2k_uninstall.png" alt="" role="presentation" />
             <span>about_me.txt</span>
-        </div>
-        <div class="desktop-icon" data-external-link="https://linktr.ee/uluckaymak">
-            <img src="assets/icons/w98_world_network_directories.png" alt="Links Icon" />
+        </button>
+        <button class="desktop-icon" data-external-link="https://linktr.ee/uluckaymak"
+            aria-label="Open linktree.link external website" tabindex="0">
+            <img src="assets/icons/w98_world_network_directories.png" alt="" role="presentation" />
             <span>linktree.link</span>
-        </div>
-        <div class="desktop-icon" data-external-link="http://buymeacoffee.com/uluckaymak">
-            <img src="assets/icons/w2k_default_printer_floppy.png" alt="Links Icon" />
+        </button>
+        <button class="desktop-icon" data-external-link="http://buymeacoffee.com/uluckaymak"
+            aria-label="Open BuyMeACoffee.link external website" tabindex="0">
+            <img src="assets/icons/w2k_default_printer_floppy.png" alt="" role="presentation" />
             <span>BuyMeACoffee.link</span>
-        </div>
-        <div class="desktop-icon" id="cat-spawner">
-            <img src="assets/icons/w2k_cd_player.png" alt="Cat Spawner Icon" />
+        </button>
+        <button class="desktop-icon" id="cat-spawner" aria-label="Run cat_spawner.exe program" tabindex="0">
+            <img src="assets/icons/w2k_cd_player.png" alt="" role="presentation" />
             <span>cat_spawner.exe</span>
-        </div>
-        <div class="desktop-icon" data-window-id="projects-table">
-            <img src="assets/icons/w2k_unknown_14.png" alt="Portfolio Icon" />
+        </button>
+        <button class="desktop-icon" data-window-id="projects-table" aria-label="Open project_list.exe application"
+            tabindex="0">
+            <img src="assets/icons/w2k_unknown_14.png" alt="" role="presentation" />
             <span>project_list.exe</span>
-        </div>
-        <div class="desktop-icon" data-window-id="project-folder">
-            <img src="assets/icons/w2k_folder_closed.png" alt="All Projects Icon" />
+        </button>
+        <button class="desktop-icon" data-window-id="project-folder" aria-label="Open All Projects folder" tabindex="0">
+            <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation" />
             <span>All Projects</span>
-        </div>
-        <div class="desktop-icon" data-window-id="contact">
-            <img src="assets/icons/w98_phone_desk.png" alt="Contact Icon" />
+        </button>
+        <button class="desktop-icon" data-window-id="contact" aria-label="Open contact.exe application" tabindex="0">
+            <img src="assets/icons/w98_phone_desk.png" alt="" role="presentation" />
             <span>contact.exe</span>
-        </div>
-        <div class="desktop-icon" data-window-id="programs-folder">
-            <img src="assets/icons/w2k_folder_closed.png" alt="Programs Folder Icon" />
+        </button>
+        <button class="desktop-icon" data-window-id="programs-folder" aria-label="Open programs that i use folder"
+            tabindex="0">
+            <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation" />
             <span>programs that i use</span>
-        </div>
+        </button>
+    </main>
+
+    <!-- Mobile Navigation Hint -->
+    <div class="mobile-nav-hint" id="mobile-nav-hint">
+        <p>Tap icons to open applications</p>
+        <button onclick="this.parentElement.style.display='none'" aria-label="Close hint">×</button>
     </div>
 
     <!-- Windows and Popups -->
@@ -323,6 +398,27 @@
             <p class="status-bar-field">Size: 280x512</p>
             <p class="status-bar-field">Format: Human</p>
             <p class="status-bar-field">Created: 2001</p>
+        </div>
+    </div>
+
+    <div class="window" id="img-uluc" style="min-width: 370px; left: 650px; top: 220px; z-index: 3;">
+        <div class="title-bar">
+            <div class="title-bar-text"><img src="assets/icons/w2k_unknown_11.png"
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">my_last_release.exe</div>
+            <div class="title-bar-controls"><button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <iframe style="border: 0; width: 350px; height: 470px;"
+                src="https://bandcamp.com/EmbeddedPlayer/album=4086122490/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
+                seamless>
+                <a href="https://uluc.bandcamp.com/album/bulut-ba-ka-yerde">Bulut, başka yerde byUluç</a>
+            </iframe>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Format: EP</p>
+            <p class="status-bar-field">Genre: Electronic, Experimental</p>
         </div>
     </div>
 
@@ -560,4 +656,5 @@
     <script src="assets/js/oneko/oneko.js"></script>
 
 </body>
+
 </html>

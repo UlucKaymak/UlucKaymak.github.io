@@ -1,0 +1,87 @@
+/* TASKBAR */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    background: silver;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #0a0a0a;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf;
+    display: flex;
+    align-items: center;
+    padding: 2px 3px;
+    z-index: 1000;
+    justify-self: space-between;
+    gap: 4px;
+}
+
+.taskbar-windows {
+    display: flex;
+    flex-grow: 1;
+    gap: 4px;
+    overflow-x: auto;
+    height: var(--button-height);
+}
+
+.taskbar-windows .taskbar-button {
+    background: silver;
+    border: none;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+    min-width: 150px;
+    height: var(--button-height);
+    padding: 0 5px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+}
+
+.taskbar-windows .taskbar-button:active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.taskbar-windows .taskbar-button.active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    background: var(--window-bg);
+}
+
+.taskbar-right {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    height: 100%;
+    font-size: 16px;
+    background: var(--window-bg);
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.taskbar-time {
+    padding: 0 4px;
+}
+
+.start-button {
+    height: var(--button-height);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 8px;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.start-button:active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.start-button img {
+    height: 15px;
+    width: 15px;
+    image-rendering: pixelated;
+}

@@ -1,0 +1,100 @@
+.desktop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-auto-rows: auto;
+    font-size: var(--base-font-size);
+    gap: 20px;
+    padding: 16px;
+    margin-left: 10px;
+    width: 100px;
+    align-content: start;
+}
+
+.desktop-icons {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: -1;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    gap: 5px;
+    font-size: var(--base-font-size);
+    text-align: center;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 5px;
+}
+
+.desktop-icon:focus {
+    outline: none;
+}
+
+.desktop-icon:focus-visible {
+    outline: none;
+}
+
+.desktop-icon:hover {
+    background: rgba(0, 128, 255, 0.15);
+}
+
+.desktop-icon img {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.project-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 210px;
+    cursor: pointer;
+    color: #222;
+    gap: 5px;
+    font-family: Arial;
+    font-size: var(--base-font-size);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    padding: 5px;
+}
+
+.project-shortcut:hover {
+    background-color: rgba(0, 0, 128, 0.2);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #000080,
+        inset 0 0 0 2px #fff;
+    opacity: 0.8;
+}
+
+.project-shortcut:active {
+    background-color: navy;
+    color: #fff;
+    box-shadow: inset 0 0 0 1px #fff,
+        inset 0 0 0 2px #000;
+}
+
+.project-shortcut img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid transparent;
+}
