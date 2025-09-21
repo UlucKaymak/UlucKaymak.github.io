@@ -142,56 +142,150 @@ export const closeWindow = (win) => {
     }
 };
 
+// Universal dragging system that works on all screen sizes and devices
 export const makeAllWindowsDraggable = () => {
-    if (window.innerWidth <= 768) {
-        return; // Ekran küçükse sürükleme özelliğini aktif etme
-    }
-
     document.querySelectorAll('.window').forEach(win => {
         const titleBar = win.querySelector('.title-bar');
         if (!titleBar) return;
 
         let isDragging = false;
         let offsetX, offsetY;
+        let startX, startY;
+        let hasMoved = false;
 
-        titleBar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - win.offsetLeft;
-            offsetY = e.clientY - win.offsetTop;
-            bringToFront(win);
-        });
+        // Helper function to get coordinates from mouse or touch event
+        const getEventCoords = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+            return { x: e.clientX, y: e.clientY };
+        };
 
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            let newLeft = e.clientX - offsetX;
-            let newTop = e.clientY - offsetY;
-
+        // Helper function to constrain window position
+        const constrainPosition = (x, y) => {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             const winWidth = win.offsetWidth;
             const winHeight = win.offsetHeight;
 
-            if (newLeft < 0) newLeft = 0;
-            if (newTop < 0) newTop = 0;
-            if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
-            if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
+            let newLeft = Math.max(0, Math.min(x, screenWidth - winWidth));
+            let newTop = Math.max(0, Math.min(y, screenHeight - winHeight));
 
-            win.style.left = `${newLeft}px`;
-            win.style.top = `${newTop}px`;
+            return { left: newLeft, top: newTop };
+        };
+
+        // Mouse events for desktop
+        titleBar.addEventListener('mousedown', (e) => {
+            // Don't start dragging if clicking on a button
+            if (e.target.closest('.title-bar-controls')) return;
+            
+            const coords = getEventCoords(e);
+            isDragging = true;
+            hasMoved = false;
+            startX = coords.x;
+            startY = coords.y;
+            offsetX = coords.x - win.offsetLeft;
+            offsetY = coords.y - win.offsetTop;
+            
+            bringToFront(win);
+            
+            // Prevent text selection during drag
+            e.preventDefault();
         });
 
+        // Touch events for mobile
+        titleBar.addEventListener('touchstart', (e) => {
+            // Don't start dragging if touching a button
+            if (e.target.closest('.title-bar-controls')) return;
+            
+            const coords = getEventCoords(e);
+            isDragging = true;
+            hasMoved = false;
+            startX = coords.x;
+            startY = coords.y;
+            offsetX = coords.x - win.offsetLeft;
+            offsetY = coords.y - win.offsetTop;
+            
+            bringToFront(win);
+            
+            // Prevent default touch behavior
+            e.preventDefault();
+        }, { passive: false });
+
+        // Mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const coords = getEventCoords(e);
+            const deltaX = Math.abs(coords.x - startX);
+            const deltaY = Math.abs(coords.y - startY);
+            
+            // Only start moving if we've moved more than 5 pixels (prevents accidental drags)
+            if (deltaX > 5 || deltaY > 5) {
+                hasMoved = true;
+            }
+            
+            if (hasMoved) {
+                const newLeft = coords.x - offsetX;
+                const newTop = coords.y - offsetY;
+                
+                const constrained = constrainPosition(newLeft, newTop);
+                
+                win.style.left = `${constrained.left}px`;
+                win.style.top = `${constrained.top}px`;
+            }
+        });
+
+        // Touch move
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const coords = getEventCoords(e);
+            const deltaX = Math.abs(coords.x - startX);
+            const deltaY = Math.abs(coords.y - startY);
+            
+            // Only start moving if we've moved more than 10 pixels (prevents accidental drags on mobile)
+            if (deltaX > 10 || deltaY > 10) {
+                hasMoved = true;
+            }
+            
+            if (hasMoved) {
+                const newLeft = coords.x - offsetX;
+                const newTop = coords.y - offsetY;
+                
+                const constrained = constrainPosition(newLeft, newTop);
+                
+                win.style.left = `${constrained.left}px`;
+                win.style.top = `${constrained.top}px`;
+                
+                // Prevent scrolling while dragging
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Mouse up
         document.addEventListener('mouseup', () => {
             isDragging = false;
+            hasMoved = false;
+        });
+
+        // Touch end
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+            hasMoved = false;
         });
     });
 };
 
-// Masaüstü ikonlarına çift tıklama
+// Desktop icon interaction with proper double-click detection
 const setupDesktopIcons = () => {
-const eventType = window.innerWidth <= 768 ? 'click' : 'dblclick';
-
     document.querySelectorAll('.desktop-icon').forEach(icon => {
-        icon.addEventListener(eventType, () => {
+        let clickCount = 0;
+        let clickTimer = null;
+        const isMobile = window.innerWidth <= 768;
+        
+        // For mobile, use single click. For desktop, use double click
+        const handleIconActivation = () => {
             const windowId = icon.dataset.windowId;
             const externalLink = icon.dataset.externalLink;
 
@@ -199,6 +293,38 @@ const eventType = window.innerWidth <= 768 ? 'click' : 'dblclick';
                 openWindow(windowId);
             } else if (externalLink) {
                 window.open(externalLink, '_blank');
+            }
+        };
+
+        icon.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (isMobile) {
+                // Mobile: single click to activate
+                handleIconActivation();
+            } else {
+                // Desktop: double click to activate
+                clickCount++;
+                
+                if (clickCount === 1) {
+                    // First click - start timer
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                        // Single click on desktop - could add selection behavior here
+                    }, 300);
+                } else if (clickCount === 2) {
+                    // Double click - activate
+                    clearTimeout(clickTimer);
+                    clickCount = 0;
+                    handleIconActivation();
+                }
+            }
+        });
+        
+        // Prevent context menu on long press for mobile
+        icon.addEventListener('contextmenu', (e) => {
+            if (isMobile) {
+                e.preventDefault();
             }
         });
     });

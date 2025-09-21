@@ -98,16 +98,18 @@
         position: fixed;
         top: 10px;
         left: 10px;
-        width: calc(100vw - 20px);
+        width: calc(90vw - 20px);
         height: auto;
-        max-width: calc(100vw - 20px);
-        max-height: calc(100vh - 20px);
+        max-width: calc(90vw - 20px);
+        max-height: calc(90vh - 20px);
         z-index: 100;
         border-radius: 0;
         border: 2px outset var(--window-bg);
         box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf;
         padding: 0;
         margin: 0;
+        transform: scale(0.9);
+        transform-origin: top left;
     }
 
     /* Draggable window state */
@@ -137,16 +139,18 @@
         min-width: auto !important;
         top: 50px !important;
         left: 10px !important;
-        transform: none !important;
-        width: calc(100vw - 20px) !important;
+        transform: scale(0.9) !important;
+        transform-origin: top left !important;
+        width: calc(90vw - 20px) !important;
     }
 
     #version_update {
         min-width: auto !important;
         top: 50px !important;
         left: 10px !important;
-        transform: none !important;
-        width: calc(100vw - 20px) !important;
+        transform: scale(0.9) !important;
+        transform-origin: top left !important;
+        width: calc(90vw - 20px) !important;
     }
 
     .window-body {
@@ -178,9 +182,9 @@
 
     /* Enhanced title bar for mobile */
     .title-bar {
-        height: 45px;
-        padding: 8px 15px;
-        font-size: 14px;
+        height: 26px;
+        padding: 2px 8px;
+        font-size: 12px;
         position: sticky;
         top: 0;
         z-index: 10;
@@ -195,36 +199,36 @@
     }
 
     .title-bar-text {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
         color: #fff;
         display: flex;
         align-items: center;
         flex: 1;
-        margin-right: 10px;
+        margin-right: 8px;
     }
 
     .title-bar-text img {
-        width: 16px;
-        height: 16px;
-        margin-right: 6px;
+        width: 12px;
+        height: 12px;
+        margin-right: 4px;
         vertical-align: middle;
     }
 
     .title-bar-controls {
         display: flex;
-        gap: 8px;
+        gap: 4px;
         align-items: center;
     }
 
     .title-bar-controls button {
-        min-width: 32px;
-        min-height: 32px;
-        padding: 4px;
+        min-width: 24px;
+        min-height: 24px;
+        padding: 2px;
         background: silver;
         border: none;
         box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-        background-size: 45%;
+        background-size: 50%;
         background-position: center;
         background-repeat: no-repeat;
         touch-action: manipulation;
@@ -529,17 +533,17 @@
     }
 
     .title-bar {
-        height: 40px;
-        padding: 8px 12px;
+        height: 24px;
+        padding: 2px 8px;
     }
 
     .title-bar-text {
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .title-bar-controls button {
-        min-width: 28px;
-        min-height: 28px;
+        min-width: 20px;
+        min-height: 20px;
     }
 
     #project-grid,
@@ -604,8 +608,8 @@
     }
 
     .title-bar {
-        height: 42px;
-        padding: 8px 15px;
+        height: 26px;
+        padding: 2px 10px;
     }
 
     #project-grid,

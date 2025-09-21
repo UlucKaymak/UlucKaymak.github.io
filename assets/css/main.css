@@ -221,6 +221,7 @@ input[type=submit]:disabled {
     position: absolute;
     width: 320px;
     user-select: none;
+    touch-action: none;
 }
 
 .title-bar {
@@ -229,7 +230,12 @@ input[type=submit]:disabled {
     display: flex;
     justify-content: space-between;
     padding: 3px 2px 3px 3px;
-
+    cursor: move;
+    touch-action: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .title-bar.inactive {
@@ -1087,7 +1093,7 @@ table>tbody>tr>* {
 }
 
 .desktop-icon:hover {
-    background: rgba(0, 128, 255, 0.15);
+    background: none !important;
 }
 
 .desktop-icon img {

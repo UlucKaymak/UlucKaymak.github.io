@@ -1,23 +1,18 @@
+/* Clean Desktop Layout */
 .desktop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    grid-auto-rows: auto;
-    font-size: var(--base-font-size);
-    gap: 20px;
-    padding: 16px;
-    margin-left: 10px;
-    width: 100px;
-    align-content: start;
-}
-
-.desktop-icons {
-    position: absolute;
-    top: 50px;
-    left: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    z-index: -1;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1;
 }
 
 .desktop-icon {
@@ -25,41 +20,46 @@
     flex-direction: column;
     align-items: center;
     width: 80px;
+    height: 100px;
     cursor: pointer;
-    color: rgb(255, 255, 255);
-    gap: 5px;
-    font-size: var(--base-font-size);
+    color: white;
     text-align: center;
-    background: none;
+    background: transparent;
     border: none;
     font-family: inherit;
-    padding: 5px;
+    font-size: 12px;
+    padding: 8px;
+    position: relative;
+    z-index: 15;
 }
 
-.desktop-icon:focus {
+.desktop-icon:hover,
+.desktop-icon:focus,
+.desktop-icon:active {
+    background: transparent;
     outline: none;
-}
-
-.desktop-icon:focus-visible {
-    outline: none;
-}
-
-.desktop-icon:hover {
-    background: rgba(0, 128, 255, 0.15);
+    border: none;
 }
 
 .desktop-icon img {
     width: 48px;
     height: 48px;
+    margin-bottom: 4px;
     image-rendering: pixelated;
 }
 
+.desktop-icon span {
+    word-wrap: break-word;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Grid containers for projects */
 .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
-    align-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .project-shortcut {
@@ -67,34 +67,43 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 210px;
+    width: 200px;
     cursor: pointer;
     color: #222;
-    gap: 5px;
-    font-family: Arial;
-    font-size: var(--base-font-size);
-    transition: background-color 0.2s, box-shadow 0.2s;
-    user-select: none;
-    padding: 5px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    transition: all 0.2s ease;
 }
 
 .project-shortcut:hover {
-    background-color: rgba(0, 0, 128, 0.2);
-    color: #fff;
-    box-shadow: inset 0 0 0 1px #000080,
-        inset 0 0 0 2px #fff;
-    opacity: 0.8;
-}
-
-.project-shortcut:active {
-    background-color: navy;
-    color: #fff;
-    box-shadow: inset 0 0 0 1px #fff,
-        inset 0 0 0 2px #000;
+    background-color: rgba(0, 128, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .project-shortcut img {
-    width: 200px;
-    height: 200px;
-    border: 1px solid transparent;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .desktop {
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .desktop-icon {
+        width: 70px;
+        height: 90px;
+        font-size: 11px;
+    }
+    
+    .desktop-icon img {
+        width: 40px;
+        height: 40px;
+    }
 }
