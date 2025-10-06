@@ -71,7 +71,7 @@
     cursor: pointer;
     color: #222;
     background: white;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 15px;
     transition: all 0.2s ease;
 }
