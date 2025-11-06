@@ -16,11 +16,34 @@ export const loadProjects = async () => {
 
         populateProjectsTable();
         populateProjectsFolder();
+        populateProjectsSubmenu();
     } catch (error) {
         console.error('Error loading projects:', error);
         document.getElementById('portfolio-projects-body').innerHTML = '<tr><td colspan="3">Projeler yüklenirken bir hata oluştu.</td></tr>';
         document.getElementById('project-grid').innerHTML = '<p>Projeler yüklenirken bir hata oluştu.</p>';
     }
+};
+
+// Populate the start menu submenu with projects
+const populateProjectsSubmenu = () => {
+    const submenu = document.getElementById('projects-submenu');
+    if (!submenu) return;
+
+    submenu.innerHTML = '';
+
+    projectsData.forEach(project => {
+        const li = document.createElement('li');
+        li.textContent = project.title;
+        li.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            showProjectDetail(project);
+            // Close the start menu
+            const startMenu = document.getElementById('start-menu');
+            if (startMenu) startMenu.style.display = 'none';
+        });
+        submenu.appendChild(li);
+    });
 };
 
 // Proje tablosunu doldurur

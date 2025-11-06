@@ -115,16 +115,6 @@
     image-rendering: pixelated;
 }
 
-.resize-handle {
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    cursor: nwse-resize;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 10;
-}
 
 .window.active .title-bar {
     background: linear-gradient(90deg, #000080, #1084d0);

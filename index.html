@@ -41,13 +41,10 @@
         <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img
                 src="assets/icons/w2k_unknown_11.png" alt="Theme"/>
             Toggle Theme</a></li>
-        <li><a href="#" class="start-menu-item" data-action="toggle-font"><img
-                src="assets/icons/w2k_uninstall.png" alt="Font"/>
-            Toggle Font</a></li>
         <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png"
                                                                                 alt="Refresh"/>
             Refresh Page</a></li>
-        <li><a href="#" class="start-menu-item"><img src="assets/icons/w2k_help.png" alt="About"/>
+        <li><a href="#" class="start-menu-item" data-action="open-about"><img src="assets/icons/w2k_help.png" alt="About"/>
             About This Site</a></li>
         <li class="divider" role="separator"></li>
         <li><a href="#" class="start-menu-item" id="shutdown-button"><img src="assets/icons/w2k_shutdown.png"
@@ -65,8 +62,8 @@
             'open-projects': () => window.openWindow?.('project-folder'),
             'open-contact': () => window.openWindow?.('contact'),
             'toggle-theme': toggleTheme,
-            'toggle-font': toggleFont,
-            'refresh-page': () => window.location.reload()
+            'refresh-page': () => window.location.reload(),
+            'open-about': () => window.openWindow?.('about-site')
         };
 
         // Theme management
@@ -77,21 +74,6 @@
 
             root.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-        }
-
-        // Font management
-        function toggleFont() {
-            const root = document.documentElement;
-            const currentFont = root.getAttribute('data-font') || '';
-            const newFont = currentFont === 'space-mono' ? '' : 'space-mono';
-
-            if (newFont === '') {
-                root.removeAttribute('data-font');
-                localStorage.removeItem('font');
-            } else {
-                root.setAttribute('data-font', newFont);
-                localStorage.setItem('font', newFont);
-            }
         }
 
         // Optimized time update
@@ -106,12 +88,6 @@
             // Load saved theme immediately
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-
-            // Load saved font immediately
-            const savedFont = localStorage.getItem('font');
-            if (savedFont) {
-                document.documentElement.setAttribute('data-font', savedFont);
-            }
 
             // Cache DOM elements
             startButton = document.getElementById('start-button');
@@ -191,6 +167,11 @@
         <img src="assets/icons/w98_world_network_directories.png" alt="" role="presentation"/>
         <span>linktree.link</span>
     </button>
+    <button class="desktop-icon" data-window-id="programs-folder" aria-label="Open programs that i use folder"
+            tabindex="0">
+        <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation"/>
+        <span>Programs & Apps</span>
+    </button>
     <button class="desktop-icon" data-external-link="http://buymeacoffee.com/uluckaymak"
             aria-label="Open BuyMeACoffee.link external website" tabindex="0">
         <img src="assets/icons/w2k_default_printer_floppy.png" alt="" role="presentation"/>
@@ -212,11 +193,6 @@
     <button class="desktop-icon" data-window-id="contact" aria-label="Open contact.exe application" tabindex="0">
         <img src="assets/icons/w98_phone_desk.png" alt="" role="presentation"/>
         <span>contact.exe</span>
-    </button>
-    <button class="desktop-icon" data-window-id="programs-folder" aria-label="Open programs that i use folder"
-            tabindex="0">
-        <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation"/>
-        <span>programs that i use</span>
     </button>
 </div>
 
@@ -364,6 +340,35 @@
     </div>
 </div>
 
+<div class="window" id="about-site" style="width: 450px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text"><img src="assets/icons/w2k_help.png"
+                                         style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">About This Site
+        </div>
+        <div class="title-bar-controls">
+            <button class="minimize-btn" aria-label="Minimize"></button>
+            <button class="close-btn" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-body">
+        <h3 style="margin-bottom: 1rem;">HomePage.exe v1.0</h3>
+        <p style="margin-bottom: 0.5rem;">This is an alternative portfolio website designed with a retro Windows 98/2000 aesthetic.</p>
+        <p style="margin-bottom: 0.5rem;"><strong>Features:</strong></p>
+        <ul style="margin-left: 1.5rem; margin-bottom: 0.5rem;">
+            <li>Draggable windows interface</li>
+            <li>Desktop icons and taskbar</li>
+            <li>Project gallery and details</li>
+            <li>Random duck spawner</li>
+            <li>Theme toggle (light/pink)</li>
+        </ul>
+        <p style="margin-bottom: 0.5rem;"><strong>Font:</strong> Space Mono</p>
+        <p style="margin-bottom: 0.5rem;"><strong>Built by:</strong> Uluç Kaymak</p>
+        <p><strong>Last Updated:</strong> 2025</p>
+    </div>
+    <div class="status-bar">
+        <p class="status-bar-field">Retro-futuristic portfolio</p>
+    </div>
+</div>
 
 <!-- Images -->
 <div class="window" id="img-uluc3" style="min-width: 280px; left: 25%; top: 12%; z-index: 2;">
@@ -609,7 +614,7 @@
     </div>
 </div>
 
-<div id="project-folder" class="window" style="width: 1080px; height: 600px; display: none;">
+<div id="project-folder" class="window" style="width: 1080px; height: 610px; display: none;">
     <div class="title-bar">
         <div class="title-bar-text">
             <img src="assets/icons/w2k_folder_closed.png"
@@ -665,7 +670,7 @@
     <div class="title-bar">
         <div class="title-bar-text">
             <img src="assets/icons/w2k_folder_closed.png"
-                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">programs that i use
+                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">Programs & Apps
         </div>
         <div class="title-bar-controls">
             <button class="minimize-btn" aria-label="Minimize"></button>
