@@ -13,9 +13,9 @@
     --color-teal: teal;
 
     /* Typography */
-    --base-font-size: 16px;
-    --base-font-family: sans-serif;
-    --base-line-height: 1.3;
+    --base-font-size: 13px;
+    --base-font-family: 'Space Mono', monospace;
+    --base-line-height: 1.5;
     --title-font-size: 18px;
     --small-font-size: 15px;
     --large-font-size: 22px;
@@ -61,34 +61,3 @@
     --highlight-color: #5bcefa;
 }
 
-/* Space Mono font option */
-:root[data-font="space-mono"] {
-    --base-font-family: 'Space Mono', monospace;
-    --base-font-size: 13px;
-    --base-line-height: 1.5;
-}
-
-:root[data-font="space-mono"] html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-:root[data-font="space-mono"] body,
-:root[data-font="space-mono"] *,
-:root[data-font="space-mono"] .title-bar,
-:root[data-font="space-mono"] .window,
-:root[data-font="space-mono"] button,
-:root[data-font="space-mono"] input,
-:root[data-font="space-mono"] label,
-:root[data-font="space-mono"] select,
-:root[data-font="space-mono"] table,
-:root[data-font="space-mono"] textarea {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 13px;
-}
-
-:root[data-font="space-mono"] code,
-:root[data-font="space-mono"] code * {
-    font-family: 'Space Mono', monospace;
-}

@@ -12,7 +12,8 @@ html {
     height: 100%;
     background: linear-gradient(var(--desktop-bg-start), var(--desktop-bg-end));
     font-family: var(--base-font-family);
-    -webkit-font-smoothing: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-size: var(--base-font-size);
     line-height: var(--base-line-height);
 }
