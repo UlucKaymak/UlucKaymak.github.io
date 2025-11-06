@@ -4,7 +4,7 @@
 // Gereksinim duyulan fonksiyonları windowmanager.js dosyasından import ediyoruz.
 import { openWindow, bringToFront, closeWindow, makeAllWindowsDraggable } from './windows.js';
 
-// Kedi oluşturucu
+// Duck oluşturucu (duck spawner)
 export const setupCatSpawner = () => {
     const catSpawner = document.getElementById('cat-spawner');
     if (!catSpawner) return;
@@ -17,7 +17,7 @@ export const setupCatSpawner = () => {
         catWindow.style.left = `${Math.random() * (window.innerWidth - 250)}px`;
         catWindow.style.top = `${Math.random() * (window.innerHeight - 250)}px`;
 
-        const catId = `cat_${Date.now()}`;
+        const catId = `duck_${Date.now()}`;
 
         catWindow.innerHTML = `
             <div class="title-bar">
@@ -27,7 +27,7 @@ export const setupCatSpawner = () => {
                 </div>
             </div>
             <div class="window-body">
-                <img src="https://cataas.com/cat/gif?${Date.now()}" alt="A random cat gif" style="width:100%;" />
+                <img src="https://random-d.uk/api/randomimg?type=gif&t=${Date.now()}" alt="A random duck gif" style="width:100%;" />
             </div>
         `;
         document.body.appendChild(catWindow);

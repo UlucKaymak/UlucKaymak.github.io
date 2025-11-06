@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
 :root {
     /* Base Colors */
     --color-black: #0a0a0a;
@@ -56,4 +59,36 @@
     --window-bg: #ffffff;
     --taskbar-bg: #f5a9b8;
     --highlight-color: #5bcefa;
+}
+
+/* Space Mono font option */
+:root[data-font="space-mono"] {
+    --base-font-family: 'Space Mono', monospace;
+    --base-font-size: 13px;
+    --base-line-height: 1.5;
+}
+
+:root[data-font="space-mono"] html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-font="space-mono"] body,
+:root[data-font="space-mono"] *,
+:root[data-font="space-mono"] .title-bar,
+:root[data-font="space-mono"] .window,
+:root[data-font="space-mono"] button,
+:root[data-font="space-mono"] input,
+:root[data-font="space-mono"] label,
+:root[data-font="space-mono"] select,
+:root[data-font="space-mono"] table,
+:root[data-font="space-mono"] textarea {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 13px;
+}
+
+:root[data-font="space-mono"] code,
+:root[data-font="space-mono"] code * {
+    font-family: 'Space Mono', monospace;
 }

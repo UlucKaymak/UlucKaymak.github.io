@@ -67,9 +67,6 @@ html {
     line-height: var(--base-line-height);
 }
 
-
-
-
 body::after {
     content: "";
     position: fixed;
@@ -1051,8 +1048,8 @@ table>tbody>tr>* {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     grid-auto-rows: auto;
     font-size: var(--base-font-size);
-    gap: 20px;
-    padding: 16px;
+    gap: 5px;
+    padding: 10px 10px 10px 30px;
     margin-left: 10px;
     width: 100px;
     align-content: start;

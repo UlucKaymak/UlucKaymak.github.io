@@ -41,6 +41,9 @@
             <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img
                         src="assets/icons/w2k_unknown_11.png" alt="Theme" />
                     Toggle Theme</a></li>
+            <li><a href="#" class="start-menu-item" data-action="toggle-font"><img
+                        src="assets/icons/w2k_uninstall.png" alt="Font" />
+                    Toggle Font</a></li>
             <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png"
                         alt="Refresh" />
                     Refresh Page</a></li>
@@ -62,6 +65,7 @@
                 'open-projects': () => window.openWindow?.('project-folder'),
                 'open-contact': () => window.openWindow?.('contact'),
                 'toggle-theme': toggleTheme,
+                'toggle-font': toggleFont,
                 'refresh-page': () => window.location.reload()
             };
 
@@ -73,6 +77,21 @@
 
                 root.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+            }
+
+            // Font management
+            function toggleFont() {
+                const root = document.documentElement;
+                const currentFont = root.getAttribute('data-font') || '';
+                const newFont = currentFont === 'space-mono' ? '' : 'space-mono';
+
+                if (newFont === '') {
+                    root.removeAttribute('data-font');
+                    localStorage.removeItem('font');
+                } else {
+                    root.setAttribute('data-font', newFont);
+                    localStorage.setItem('font', newFont);
+                }
             }
 
             // Optimized time update
@@ -87,6 +106,12 @@
                 // Load saved theme immediately
                 const savedTheme = localStorage.getItem('theme') || 'light';
                 document.documentElement.setAttribute('data-theme', savedTheme);
+
+                // Load saved font immediately
+                const savedFont = localStorage.getItem('font');
+                if (savedFont) {
+                    document.documentElement.setAttribute('data-font', savedFont);
+                }
 
                 // Cache DOM elements
                 startButton = document.getElementById('start-button');
@@ -171,9 +196,9 @@
             <img src="assets/icons/w2k_default_printer_floppy.png" alt="" role="presentation" />
             <span>BuyMeACoffee.link</span>
         </button>
-        <button class="desktop-icon" id="cat-spawner" aria-label="Run cat_spawner.exe program" tabindex="0">
+        <button class="desktop-icon" id="cat-spawner" aria-label="Run duck_spawner.exe program" tabindex="0">
             <img src="assets/icons/w2k_cd_player.png" alt="" role="presentation" />
-            <span>cat_spawner.exe</span>
+            <span>duck_spawner.exe</span>
         </button>
         <button class="desktop-icon" data-window-id="projects-table" aria-label="Open project_list.exe application"
             tabindex="0">
@@ -263,8 +288,8 @@
                     bugs right now.</span> You
                 should
                 try to enjoy these bugs if you can.</p>
-            <p>Don't forget to pet my virtual cat, Sonic<br>
-                <span class="highlight">She loves to be petted.</span>
+            <p>Don't forget to pet my cat Sonic!<br>
+                <span class="highlight">She loves to be petted</span>
             </p>
             <div style="text-align: right;">
                 <button class="close-btn">Bye :3</button>
@@ -292,7 +317,7 @@
             <p>As a sound designer, I craft personal works that people
                 categorize as simulations of <span class="highlight">mental
                     disorder.</span></p>
-            <p>As a person, <span class="highlight">I love cats.</span>
+            <p>As a person, <span class="highlight">I love ducks.</span>
             </p>
             <p>I'm also a partner and co-founder of the interactive
                 motion graphics and sound design firm, BizYapım.</p>
@@ -500,7 +525,7 @@
         <div class="title-bar">
             <div class="title-bar-text">
                 <img src="assets/icons/w2k_cd_player.png"
-                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">cat2.jpeg
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">duck2.jpeg
             </div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
@@ -508,7 +533,7 @@
             </div>
         </div>
         <div class="window-body">
-            <img src="assets/images/neko3.jpg" alt="NekoNekoNii" style="width: 100%; height: auto;" />
+            <img src="assets/images/neko3.jpg" alt="Duck duck quack" style="width: 100%; height: auto;" />
         </div>
         <div class="status-bar">
             <p class="status-bar-field">
@@ -517,7 +542,7 @@
             </p>
             <p class="status-bar-field">
                 Format:
-                neko
+                duck
             </p>
             <p class="status-bar-field">
                 Type:
@@ -637,14 +662,11 @@
         </div>
     </div>
 
-    <div id="programs-folder" class="window" style="width: 600px; height: 400px; display: none;">
+    <div id="programs-folder" class="window" style="width: 600px; display: none;">
         <div class="title-bar">
             <div class="title-bar-text">
                 <img src="assets/icons/w2k_folder_closed.png"
-                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">programs
-                that
-                i
-                use
+                    style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">programs that i use
             </div>
             <div class="title-bar-controls">
                 <button class="minimize-btn" aria-label="Minimize"></button>
@@ -652,99 +674,75 @@
             </div>
         </div>
         <div class="window-body">
-            <p>Programs that I use regularly.
-            </p>
-            <div id="programs-grid" class="grid-container sunken-panel"
-                style="height: 320px; overflow-y: scroll; padding: 25px 15px; color: black; display: flex; gap: 30px; align-items: flex-start;">
-
-                <!-- Adobe Creative Suite Group -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                    <div
-                        style="text-align: center; font-weight: bold; margin: 0 0 15px 0; color: #666; font-size: 12px; text-transform: uppercase;">
-                        From Adobe Creative Suite + Davinci
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/adobe-photoshop-2.svg" />
-                            <span style="color: black;">Photoshop</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/after-effects-1.svg" />
-                            <span style="color: black;">After Effects</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/davinci-resolve-12.svg" />
-                            <span style="color: black;">Davinci Resolve</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/premiere-pro-cc.svg" />
-                            <span style="color: black;">Premiere Pro</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/adobe-illustrator-cc-3.svg" />
-                            <span style="color: black;">Illustrator</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Audio Production Group -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                    <div
-                        style="text-align: center; font-weight: bold; margin: 0 0 15px 0; color: #666; font-size: 12px; text-transform: uppercase;">
-                        Audio Production
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                        <div class="desktop-icon">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/abletonlive.svg" />
-                            <span style="color: black;">Ableton (my love)</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://seeklogo.com/images/V/vcv-rack-logo-7E0B4E22C0-seeklogo.com.png" />
-                            <span style="color: black;">VCV Rack</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/adobe-audition-cc-icon-2020-.svg" />
-                            <span style="color: black;">Audition</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15.14.0/icons/fmod.svg" />
-                            <span style="color: black;">Fmod</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other Things Group -->
-                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                    <div
-                        style="text-align: center; font-weight: bold; margin: 0 0 15px 0; color: #666; font-size: 12px; text-transform: uppercase;">
-                        Other Things
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                        <div class="desktop-icon">
-                            <img
-                                src="https://cdn.brandfetch.io/idJrtUaRf_/w/64/h/64/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1757414667576" />
-                            <span style="color: black;">TouchDesigner</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/blender-2.svg" />
-                            <span style="color: black;">Blender</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/GravitySketch.svg" />
-                            <span style="color: black;">GravitySketch</span>
-                        </div>
-                        <div class="desktop-icon">
-                            <img src="https://cdn.worldvectorlogo.com/logos/unity-69.svg" />
-                            <span style="color: black;">Unity</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>Programs that I use regularly.</p>
         </div>
-        <!-- <div class="status-bar">
-<p class="status-bar-field">Programs: 6</p>
-<p class="status-bar-field">Double click to open</p>
-</button> -->
+        <div class="sunken-panel" style="height: 300px; width: 600px; overflow-y: auto;">
+            <table class="interactive" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Program Name</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Photoshop</td>
+                        <td>Adobe Creative Suite</td>
+                    </tr>
+                    <tr>
+                        <td>After Effects</td>
+                        <td>Adobe Creative Suite</td>
+                    </tr>
+                    <tr>
+                        <td>Davinci Resolve</td>
+                        <td>Video Editing</td>
+                    </tr>
+                    <tr>
+                        <td>Premiere Pro</td>
+                        <td>Adobe Creative Suite</td>
+                    </tr>
+                    <tr>
+                        <td>Illustrator</td>
+                        <td>Adobe Creative Suite</td>
+                    </tr>
+                    <tr>
+                        <td>Ableton Live</td>
+                        <td>Audio Production</td>
+                    </tr>
+                    <tr>
+                        <td>VCV Rack</td>
+                        <td>Audio Production</td>
+                    </tr>
+                    <tr>
+                        <td>Audition</td>
+                        <td>Adobe Creative Suite</td>
+                    </tr>
+                    <tr>
+                        <td>Fmod</td>
+                        <td>Audio Production</td>
+                    </tr>
+                    <tr>
+                        <td>TouchDesigner</td>
+                        <td>Interactive Media</td>
+                    </tr>
+                    <tr>
+                        <td>Blender</td>
+                        <td>3D Graphics</td>
+                    </tr>
+                    <tr>
+                        <td>Gravity Sketch</td>
+                        <td>3D Graphics</td>
+                    </tr>
+                    <tr>
+                        <td>Unity</td>
+                        <td>Game Engine</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Programs: 13</p>
+        </div>
     </div>
 
 

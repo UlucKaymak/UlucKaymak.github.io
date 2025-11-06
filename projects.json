@@ -1,5 +1,30 @@
 [
   {
+    "id": "2025_09_2-excuse-me-i-have-to-check-your-belonging",
+    "title": "Excuse Me! I Have to Check Your Belongings",
+    "type": "Video Game",
+    "date": "2025_09_2",
+    "description": "\"Imagine that you are a security guard. Your greatest pleasure is to feel the biscuit dipped in tea in your mouth. You can do anything to experience this pleasure every time. Do you really love biscuits, or is there another mystery behind this love? Ehm.. anyways, your boss was left alone during the shift. So you must do lots of things at the same time. Have a nice shift!\"\n\nCozy Cosmic horror with Simulation. I know it sounds confusing, right? Yeah, we were confused too.\n\nYou are one of the last living magnific members of this cult, “The Cult of Sclorbgoth”. You know that God is real and a way to return to his former glory. Take him enough biscuits. If you can offer him a biscuit as large as the first creature... then you will have access to glory and pleasures beyond creation. But if you can't reach it... You will suffer the wrath of Schlorbgoth.",
+    "role": "Soundtrack Composer, Audio Engineer, Game Designer",
+    "thumbnail": "projects/2025_09_2-Lumenfish-ExcuseMe/portfolio-belonging.jpeg",
+    "media": [
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame4.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame5.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame2.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame3.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame1.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame6.jpeg",
+      "projects/2025_09_2-Lumenfish-ExcuseMe/ExcuseMe-InGame7.jpeg"
+    ],
+    "tags": [
+      "#Audio",
+      "#Soundtrack",
+      "GameDesign",
+      "#VideoGame"
+    ],
+    "enabled": true
+  },
+  {
     "id": "reha-analogsynthesizer",
     "title": "Synthesizer Prototype",
     "type": "Musical Instrument",
