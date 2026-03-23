@@ -211,7 +211,7 @@ export const showProjectDetail = (project) => {
                             <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">S</span>earch</li>
                             <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">H</span>elp</li>
                         </ul>
-                        <div style="padding: 15px; overflow-y: auto; flex-grow: 1; font-family: 'Courier New', Courier, monospace; color: black; line-height: 1.2; font-size: 13px;">
+                        <div class="markdown-content" style="padding: 15px; overflow-y: auto; flex-grow: 1; font-family: 'Courier New', Courier, monospace; color: black; line-height: 1.2; font-size: 13px;">
                             ${marked.parse(project.description || '-')}
                         </div>
                         <div style="background: #c0c0c0; border-top: 1px solid #808080; padding: 2px 8px; display: flex; justify-content: flex-end; font-size: 10px; color: black; box-shadow: inset 1px 1px #fff;">

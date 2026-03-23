@@ -229,6 +229,20 @@ export const setupNoteApp = () => {
                 textArea.selectionStart = textArea.selectionEnd = start;
                 break;
             case 'select-all': textArea.select(); break;
+            case 'preview':
+                const previewDiv = document.getElementById('note-preview');
+                const isPreviewing = previewDiv.style.display === 'block';
+                if (isPreviewing) {
+                    previewDiv.style.display = 'none';
+                    textArea.style.display = 'block';
+                    document.getElementById('menu-preview').textContent = 'Preview Markdown';
+                } else {
+                    previewDiv.innerHTML = typeof marked !== 'undefined' ? marked.parse(textArea.value) : textArea.value;
+                    previewDiv.style.display = 'block';
+                    textArea.style.display = 'none';
+                    document.getElementById('menu-preview').textContent = 'Edit Note';
+                }
+                break;
         }
     };
 
@@ -241,7 +255,8 @@ export const setupNoteApp = () => {
     document.getElementById('menu-paste').onclick = () => handleAction('paste');
     document.getElementById('menu-delete').onclick = () => handleAction('delete');
     document.getElementById('menu-select-all').onclick = () => handleAction('select-all');
-    document.getElementById('menu-about').onclick = () => alert("Leave a Note v1.0\nA shared notebook by UlucKaymak.");
+    document.getElementById('menu-preview').onclick = () => handleAction('preview');
+    document.getElementById('menu-about').onclick = () => alert("Leave a Note v1.0\nA shared guestbook for Uluç's portfolio.");
 };
 
 // Sayfa yüklendiğinde tüm işlevleri başlatır

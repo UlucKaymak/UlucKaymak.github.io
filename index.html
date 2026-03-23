@@ -215,7 +215,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>Hi! I'm</p>
         <pre>
   _    _ _            _  __                           _    
@@ -258,7 +258,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>Hi! I'm <strong>Uluç Kaymak.</strong></p>
         <p>This is my alternative porfolio, <span class="highlight">but it has some
                     bugs right now.</span> You
@@ -306,14 +306,21 @@
             </ul>
         </li>
         <li style="position: relative;">
+            <span style="text-decoration: underline;">V</span>iew
+            <ul class="context-menu" id="view-menu" style="display: none; top: 18px; left: 0; min-width: 120px;">
+                <li id="menu-preview">Preview Markdown</li>
+            </ul>
+        </li>
+        <li style="position: relative;">
             <span style="text-decoration: underline;">H</span>elp
             <ul class="context-menu" id="help-menu" style="display: none; top: 18px; left: 0; min-width: 100px;">
                 <li id="menu-about">About</li>
             </ul>
         </li>
     </ul>
-    <div class="window-body" style="margin: 0;">
+    <div class="window-body" style="margin: 0; position: relative;">
         <textarea id="user-note" style="width: 100%; height: 250px; border: none; outline: none; padding: 10px; font-family: 'Courier New', Courier, monospace; font-size: 14px; resize: none; display: block; box-sizing: border-box;" placeholder="Type your note here..."></textarea>
+        <div id="note-preview" class="markdown-content sunken-panel" style="display: none; width: 100%; height: 250px; background: white; padding: 15px; overflow-y: auto; position: absolute; top: 0; left: 0; box-sizing: border-box; color: black; z-index: 5;"></div>
         <div class="status-bar">
             <p class="status-bar-field" id="note-status">Ready</p>
             <p class="status-bar-field" style="text-align: right; flex: 0 0 100px;">Ln 1, Col 1</p>
@@ -331,7 +338,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>As a digital artist, I create conceptual audio/visual
             pieces shaped by <span class="highlight">human
                     perception, experience, and psychology.</span></p>
@@ -358,7 +365,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>For inquiries, collaborations, or just to say
             hi, you can reach me at:</p>
         <div class="field-row-stacked" style="width: 330px">
@@ -400,7 +407,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <h3 style="margin-bottom: 1rem;">HomePage.exe v1.0</h3>
         <p style="margin-bottom: 0.5rem;">This is an alternative portfolio website designed with a retro Windows 98/2000 aesthetic.</p>
         <p style="margin-bottom: 0.5rem;"><strong>Features:</strong></p>
@@ -431,7 +438,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <img src="assets/images/uluc.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;"/>
     </div>
     <div class="status-bar">
@@ -458,7 +465,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6AVDZOVdQztDngSZpZWD1z?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
     <div class="status-bar">
@@ -485,7 +492,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <img src="assets/images/uluc2.jpeg" alt="Uluç Kaymak" style="width: 100%; height: auto;"/>
     </div>
     <div class="status-bar">
@@ -515,7 +522,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <img src="assets/images/ART-ciniveben.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;"/>
     </div>
     <div class="status-bar">
@@ -546,7 +553,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <img src="assets/images/movieout.1.gif" alt="Uluc ve Çini" style="width: 100%; height: auto;"/>
     </div>
     <div class="status-bar">
@@ -578,7 +585,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <img src="assets/images/neko3.jpg" alt="meow" style="width: 100%; height: auto;"/>
     </div>
     <div class="status-bar">
@@ -611,7 +618,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>All
             projects
             that
@@ -669,7 +676,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>All
             projects
             that
@@ -706,7 +713,7 @@
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <div class="window-body">
+    <div class="window-body markdown-content">
         <p>Programs that I use regularly.</p>
     </div>
     <div class="sunken-panel" style="height: 300px; width: 600px; overflow-y: auto;">
