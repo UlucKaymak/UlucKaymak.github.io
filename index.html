@@ -44,12 +44,10 @@
         <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png"
                                                                                 alt="Refresh"/>
             Refresh Page</a></li>
-        <li><a href="#" class="start-menu-item" data-action="open-about"><img src="assets/icons/w2k_help.png" alt="About"/>
-            About This Site</a></li>
         <li class="divider" role="separator"></li>
         <li><a href="#" class="start-menu-item" id="shutdown-button"><img src="assets/icons/w2k_shutdown.png"
                                                                           alt="Shutdown"/>
-            Close Browser</a></li>
+            Shutdown</a></li>
     </ul>
 </nav>
 <script>
@@ -124,13 +122,13 @@
                 if (shutdownBtn) {
                     shutdownBtn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        if (confirm('Are you sure you want to close the browser window?')) {
-                            try {
-                                window.close();
-                            } catch (e) {
+                        window.close();
+                        // Fallback if window.close() is blocked by browser
+                        setTimeout(() => {
+                            if (!window.closed) {
                                 window.location.href = 'about:blank';
                             }
-                        }
+                        }, 100);
                         startMenu.style.display = 'none';
                     });
                 }
