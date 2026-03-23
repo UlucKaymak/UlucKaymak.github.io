@@ -108,11 +108,25 @@ const populateProjectsFolder = () => {
 
 // Proje detay penceresini gösterir
 export const showProjectDetail = (project) => {
-    const detailWin = document.getElementById('project-detail');
-    const contentElem = document.getElementById('project-content');
+    const windowId = `project-detail-${project.id}`;
+    let detailWin = document.getElementById(windowId);
 
-    // Pencereyi açmadan önce içeriği hazırla
-    document.getElementById('project-title').textContent = project.title;
+    // Eğer pencere zaten varsa, sadece öne getir
+    if (detailWin) {
+        if (detailWin.style.display === 'none') {
+            openWindow(windowId);
+        } else {
+            bringToFront(detailWin);
+        }
+        return;
+    }
+
+    // Yeni pencere elementi oluştur
+    detailWin = document.createElement('div');
+    detailWin.className = 'window';
+    detailWin.id = windowId;
+    detailWin.style.width = '880px';
+    detailWin.style.display = 'none'; // openWindow handles showing it
 
     // Medya HTML'ini oluştur
     const mediaHtml = (project.media || []).map(src => {
@@ -156,73 +170,98 @@ export const showProjectDetail = (project) => {
         }
     }).join('');
 
-    contentElem.innerHTML = `
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-            <!-- Header Section -->
-            <div style="display: flex; gap: 15px; align-items: flex-start;">
-                <div class="sunken-panel" style="padding: 2px; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: #000;">
-                    <img src="${project.thumbnail}" alt="${project.title} Thumbnail" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                </div>
-                <div style="flex-grow: 1;">
-                    <h2 style="margin: 0 0 5px 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; color: navy;">
-                        <img src="assets/icons/w2k_unknown_14.png" style="width: 20px; height: 20px;"> 
-                        ${project.title}
-                    </h2>
-                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 11px;">
-                        <strong>Type:</strong> <span>${project.type}</span>
-                        <strong>Date:</strong> <span>${project.date}</span>
-                        <strong>Role:</strong> <span>${project.role || '-'}</span>
-                    </div>
-                </div>
+    detailWin.innerHTML = `
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="assets/icons/w2k_unknown_14.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">
+                ${project.title}
             </div>
-
-            <!-- Main Workspace Section -->
-            <div style="display: flex; gap: 10px; height: 480px;">
-                <!-- Notepad Editor (Left) -->
-                <div class="sunken-panel" style="flex: 2; background: white; display: flex; flex-direction: column; min-width: 0;">
-                    <ul class="menubar" style="border-bottom: 1px solid #808080; padding: 0 4px; display: flex; list-style: none; margin: 0; gap: 0; box-shadow: inset 1px 1px #fff;">
-                        <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">F</span>ile</li>
-                        <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">E</span>dit</li>
-                        <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">S</span>earch</li>
-                        <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">H</span>elp</li>
-                    </ul>
-                    <div style="padding: 15px; overflow-y: auto; flex-grow: 1; font-family: 'Courier New', Courier, monospace; color: black; line-height: 1.2; font-size: 13px;">
-                        ${marked.parse(project.description || '-')}
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Header Section -->
+                <div style="display: flex; gap: 15px; align-items: flex-start;">
+                    <div class="sunken-panel" style="padding: 2px; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: #000;">
+                        <img src="${project.thumbnail}" alt="${project.title} Thumbnail" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
-                    <div style="background: #c0c0c0; border-top: 1px solid #808080; padding: 2px 8px; display: flex; justify-content: flex-end; font-size: 10px; color: black; box-shadow: inset 1px 1px #fff;">
-                        UTF-8 | Ln 1, Col 1
+                    <div style="flex-grow: 1;">
+                        <h2 style="margin: 0 0 5px 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; color: navy;">
+                            <img src="assets/icons/w2k_unknown_14.png" style="width: 20px; height: 20px;"> 
+                            ${project.title}
+                        </h2>
+                        <div style="display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 11px;">
+                            <strong>Type:</strong> <span>${project.type}</span>
+                            <strong>Date:</strong> <span>${project.date}</span>
+                            <strong>Role:</strong> <span>${project.role || '-'}</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Media Gallery (Right) -->
-                <div class="sunken-panel" style="flex: 1; min-width: 220px; background: #dfdfdf; display: flex; flex-direction: column;">
-                    <div style="background: navy; color: white; padding: 2px 8px; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: space-between;">
-                        <span>Preview Explorer</span>
-                        <span style="font-size: 10px; opacity: 0.8;">${(project.media || []).length} items</span>
+                <!-- Main Workspace Section -->
+                <div style="display: flex; gap: 10px; height: 480px;">
+                    <!-- Notepad Editor (Left) -->
+                    <div class="sunken-panel" style="flex: 2; background: white; display: flex; flex-direction: column; min-width: 0;">
+                        <ul class="menubar" style="border-bottom: 1px solid #808080; padding: 0 4px; display: flex; list-style: none; margin: 0; gap: 0; box-shadow: inset 1px 1px #fff;">
+                            <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">F</span>ile</li>
+                            <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">E</span>dit</li>
+                            <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">S</span>earch</li>
+                            <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">H</span>elp</li>
+                        </ul>
+                        <div style="padding: 15px; overflow-y: auto; flex-grow: 1; font-family: 'Courier New', Courier, monospace; color: black; line-height: 1.2; font-size: 13px;">
+                            ${marked.parse(project.description || '-')}
+                        </div>
+                        <div style="background: #c0c0c0; border-top: 1px solid #808080; padding: 2px 8px; display: flex; justify-content: flex-end; font-size: 10px; color: black; box-shadow: inset 1px 1px #fff;">
+                            UTF-8 | Ln 1, Col 1
+                        </div>
                     </div>
-                    <div id="project-media-container" style="padding: 10px; overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
-                        ${mediaHtml || '<div style="color: #666; font-size: 11px; text-align: center; margin-top: 20px;">No media found.</div>'}
+
+                    <!-- Media Gallery (Right) -->
+                    <div class="sunken-panel" style="flex: 1; min-width: 220px; background: #dfdfdf; display: flex; flex-direction: column;">
+                        <div style="background: navy; color: white; padding: 2px 8px; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: space-between;">
+                            <span>Preview Explorer</span>
+                            <span style="font-size: 10px; opacity: 0.8;">${(project.media || []).length} items</span>
+                        </div>
+                        <div class="project-media-container" style="padding: 10px; overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
+                            ${mediaHtml || '<div style="color: #666; font-size: 11px; text-align: center; margin-top: 20px;">No media found.</div>'}
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Status Bar / Footer -->
-            <div class="status-bar" style="margin-top: -5px;">
-                <p class="status-bar-field" style="flex: 2;">Tags: ${(project.tags || []).join(', ')}</p>
-                <p class="status-bar-field" style="flex: 1;">Project ID: ${project.id}</p>
+                
+                <!-- Status Bar / Footer -->
+                <div class="status-bar" style="margin-top: -5px;">
+                    <p class="status-bar-field" style="flex: 2;">Tags: ${(project.tags || []).join(', ')}</p>
+                    <p class="status-bar-field" style="flex: 1;">Project ID: ${project.id}</p>
+                </div>
             </div>
         </div>
     `;
 
-    // Pencereyi açma işlemini openWindow fonksiyonuna bırakıyoruz
-    openWindow('project-detail');
+    document.body.appendChild(detailWin);
 
-    const mediaContainer = document.getElementById('project-media-container');
+    // Event listeners for the new window
+    const closeBtn = detailWin.querySelector('.close-btn');
+    if (closeBtn) {
+        closeBtn.onclick = () => detailWin.remove();
+    }
+
+    const minimizeBtn = detailWin.querySelector('.minimize-btn');
+    if (minimizeBtn) {
+        minimizeBtn.onclick = () => {
+            detailWin.style.display = 'none';
+            detailWin.classList.remove('active');
+            // updateWindowData is internal to windows.js, but openWindow handles taskbar.
+            // Since we're creating this dynamically, let's hope windows.js handles it.
+        };
+    }
+
+    // Media click listeners for the new window
+    const mediaContainer = detailWin.querySelector('.project-media-container');
     mediaContainer.addEventListener('click', (e) => {
-        // Eğer audio elementine tıklandıysa, pencereyi açma (lokal player çalışsın)
         if (e.target.tagName === 'AUDIO') return;
-
-        // En yakın project-media-item elementini bul
         const mediaItem = e.target.closest('.project-media-item');
         if (mediaItem) {
             const src = mediaItem.getAttribute('data-src');
@@ -231,6 +270,18 @@ export const showProjectDetail = (project) => {
                 openMediaWindow(src, title);
             }
         }
+    });
+
+    // Pencereyi açma işlemini openWindow fonksiyonuna bırakıyoruz
+    openWindow(windowId);
+
+    // Dynamic windows need to be made draggable if they weren't in the initial batch
+    // We should probably export a way to make a single window draggable or re-run the universal one.
+    import('./windows.js').then(mod => {
+        if (mod.bringToFront) mod.bringToFront(detailWin);
+        // Re-run draggable setup for the new window
+        // Note: this is a bit hacky as windows.js doesn't export a single-window version yet.
+        mod.makeAllWindowsDraggable();
     });
 };
 
