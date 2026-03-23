@@ -138,45 +138,75 @@ export const setupNoteApp = () => {
         noteWindow.querySelectorAll('.menubar > li').forEach(li => li.classList.remove('active'));
     });
 
-    const BUCKET_ID = '6dyvXREit6HzszpjUnY6Te';
-    const API_URL = `https://kvdb.io/${BUCKET_ID}/last_note`;
+    // We'll use Dweet.io for shared notes (very reliable for simple messaging)
+    const DWEET_THING = 'uluc-guestbook-notepad-v1';
+    const API_URL = `https://dweet.io/get/latest/dweet/for/${DWEET_THING}`;
 
     const fetchSharedNote = async () => {
-        if (statusField) statusField.textContent = "Connecting to global network...";
+        if (!noteWindow || noteWindow.style.display === 'none') return;
+        
+        statusField.textContent = "Checking guestbook...";
         try {
             const response = await fetch(API_URL);
             if (response.ok) {
-                textArea.value = await response.text();
-                if (statusField) statusField.textContent = "Shared note loaded.";
-            } else {
-                if (statusField) statusField.textContent = "Welcome! Be the first to leave a note.";
+                const data = await response.json();
+                if (data.this === "succeeded" && data.with && data.with.length > 0) {
+                    const latest = data.with[0].content;
+                    if (latest && latest.note) {
+                        textArea.value = latest.note;
+                        statusField.textContent = "Global note loaded.";
+                    }
+                } else {
+                    statusField.textContent = "Guestbook is empty.";
+                }
             }
         } catch (error) {
-            if (statusField) statusField.textContent = "Offline mode.";
+            console.error("Dweet fetch error:", error);
+            statusField.textContent = "Offline mode.";
             const savedNote = localStorage.getItem('user_note');
             if (savedNote) textArea.value = savedNote;
         }
     };
 
-    fetchSharedNote();
+    // Fetch note whenever the window becomes visible
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'style') {
+                const isVisible = noteWindow.style.display !== 'none';
+                if (isVisible) fetchSharedNote();
+            }
+        });
+    });
+    observer.observe(noteWindow, { attributes: true });
 
     // Menu Actions
     const handleSave = async () => {
         const note = textArea.value;
         if (note.trim() === "") return alert("Please type something!");
         
-        if (statusField) statusField.textContent = "Sending note...";
+        statusField.textContent = "Sending to next user...";
         try {
-            const response = await fetch(API_URL, { method: 'PUT', body: note });
+            const now = new Date();
+            const timestamp = `\n\n--- Sent on: ${now.toLocaleDateString()} ${now.toLocaleTimeString()} ---`;
+            const finalNote = note.includes('--- Sent on:') ? note : note + timestamp;
+
+            const saveUrl = `https://dweet.io/dweet/for/${DWEET_THING}`;
+            const response = await fetch(saveUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ note: finalNote })
+            });
+
             if (response.ok) {
-                localStorage.setItem('user_note', note);
-                alert("Note sent! Next user will see this.");
-                if (statusField) statusField.textContent = "Synced.";
+                localStorage.setItem('user_note', finalNote);
+                alert("Note saved to global guestbook!");
+                statusField.textContent = "Note synced.";
                 import('./windows.js').then(mod => mod.closeWindow(noteWindow));
             }
         } catch (e) {
             alert("Error syncing. Saved locally.");
             localStorage.setItem('user_note', note);
+            statusField.textContent = "Local save only.";
         }
     };
 

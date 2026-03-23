@@ -54,7 +54,7 @@ body::after {
         );
     background-size: 100% 3px, 100% 100%;
     z-index: 10000;
-    animation: crt-flicker 0.1s infinite;
+    animation: crt-flicker 10s infinite;
     mix-blend-mode: multiply;
 }
 
