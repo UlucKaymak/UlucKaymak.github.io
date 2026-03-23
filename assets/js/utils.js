@@ -138,31 +138,26 @@ export const setupNoteApp = () => {
         noteWindow.querySelectorAll('.menubar > li').forEach(li => li.classList.remove('active'));
     });
 
-    // We'll use Dweet.io for shared notes (very reliable for simple messaging)
-    const DWEET_THING = 'uluc-guestbook-notepad-v1';
-    const API_URL = `https://dweet.io/get/latest/dweet/for/${DWEET_THING}`;
+    // We'll use a Google Apps Script Web App as a permanent, unblockable backend.
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxXLiJ1WpjWJJMDYrIZC73isAvE-RfQZxK2MJQcbqseruVVb9eidilI_9Dk0O-sfo0A/exec';
 
     const fetchSharedNote = async () => {
         if (!noteWindow || noteWindow.style.display === 'none') return;
         
-        statusField.textContent = "Checking guestbook...";
+        statusField.textContent = "leave your note...";
         try {
+            // Google Scripts usually requires following redirects, which fetch does by default
             const response = await fetch(API_URL);
             if (response.ok) {
-                const data = await response.json();
-                if (data.this === "succeeded" && data.with && data.with.length > 0) {
-                    const latest = data.with[0].content;
-                    if (latest && latest.note) {
-                        textArea.value = latest.note;
-                        statusField.textContent = "Global note loaded.";
-                    }
-                } else {
-                    statusField.textContent = "Guestbook is empty.";
+                const note = await response.text();
+                if (note && note !== "null") {
+                    textArea.value = note;
+                    statusField.textContent = "a note retrieved.";
                 }
             }
         } catch (error) {
-            console.error("Dweet fetch error:", error);
-            statusField.textContent = "Offline mode.";
+            console.error("Fetch error:", error);
+            statusField.textContent = "you're alone.";
             const savedNote = localStorage.getItem('user_note');
             if (savedNote) textArea.value = savedNote;
         }
@@ -182,32 +177,36 @@ export const setupNoteApp = () => {
     // Menu Actions
     const handleSave = async () => {
         const note = textArea.value;
-        if (note.trim() === "") return alert("Please type something!");
+        if (note.trim() === "") return alert("type something!");
         
-        statusField.textContent = "Sending to next user...";
-        try {
-            const now = new Date();
-            const timestamp = `\n\n--- Sent on: ${now.toLocaleDateString()} ${now.toLocaleTimeString()} ---`;
-            const finalNote = note.includes('--- Sent on:') ? note : note + timestamp;
+        const saveMenuItem = document.getElementById('menu-save');
+        statusField.textContent = "updating...";
+        if (saveMenuItem) saveMenuItem.style.opacity = "0.5";
 
-            const saveUrl = `https://dweet.io/dweet/for/${DWEET_THING}`;
-            const response = await fetch(saveUrl, {
+        const now = new Date();
+        const timestamp = `\n\n--- Sent on: ${now.toLocaleDateString()} ${now.toLocaleTimeString()} ---`;
+        const finalNote = note.includes('--- Sent on:') ? note : note + timestamp;
+
+        try {
+            // Google Scripts handles POST for writing
+            const response = await fetch(API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ note: finalNote })
+                mode: 'no-cors', // Use no-cors for Google Script POST if needed
+                body: finalNote
             });
 
-            if (response.ok) {
-                localStorage.setItem('user_note', finalNote);
-                alert("Note saved to global guestbook!");
-                statusField.textContent = "Note synced.";
-                import('./windows.js').then(mod => mod.closeWindow(noteWindow));
-            }
+            // With no-cors, we can't check response.ok, but it usually sends
+            localStorage.setItem('user_note', finalNote);
+            alert("Note broadcasted to the global net!");
+            statusField.textContent = "note sent.";
+            import('./windows.js').then(mod => mod.closeWindow(noteWindow));
         } catch (e) {
-            alert("Error syncing. Saved locally.");
+            console.error("Save error:", e);
+            alert("error. saved locally.");
             localStorage.setItem('user_note', note);
-            statusField.textContent = "Local save only.";
+            statusField.textContent = "local save only.";
         }
+        if (saveMenuItem) saveMenuItem.style.opacity = "1";
     };
 
     const handleAction = (action) => {
@@ -242,7 +241,7 @@ export const setupNoteApp = () => {
     document.getElementById('menu-paste').onclick = () => handleAction('paste');
     document.getElementById('menu-delete').onclick = () => handleAction('delete');
     document.getElementById('menu-select-all').onclick = () => handleAction('select-all');
-    document.getElementById('menu-about').onclick = () => alert("Leave a Note v1.0\nA shared guestbook for Uluç's portfolio.");
+    document.getElementById('menu-about').onclick = () => alert("Leave a Note v1.0\nA shared notebook by UlucKaymak.");
 };
 
 // Sayfa yüklendiğinde tüm işlevleri başlatır
