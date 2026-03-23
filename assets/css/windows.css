@@ -115,6 +115,26 @@
     image-rendering: pixelated;
 }
 
+.resizer {
+    width: 12px;
+    height: 12px;
+    background: silver;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    cursor: nwse-resize;
+    z-index: 10;
+    /* Windows 98 resizer lines */
+    background-image: linear-gradient(135deg, 
+        transparent 0%, transparent 50%, 
+        grey 50%, grey 60%, 
+        transparent 60%, transparent 70%, 
+        grey 70%, grey 80%, 
+        transparent 80%, transparent 90%, 
+        grey 90%, grey 100%
+    );
+    background-size: 100% 100%;
+}
 
 .window.active .title-bar {
     background: linear-gradient(90deg, #000080, #1084d0);

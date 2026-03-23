@@ -145,137 +145,157 @@ export const closeWindow = (win) => {
 // Universal dragging system that works on all screen sizes and devices
 export const makeAllWindowsDraggable = () => {
     document.querySelectorAll('.window').forEach(win => {
-        const titleBar = win.querySelector('.title-bar');
-        if (!titleBar) return;
-
-        let isDragging = false;
-        let offsetX, offsetY;
-        let startX, startY;
-        let hasMoved = false;
-
-        // Helper function to get coordinates from mouse or touch event
-        const getEventCoords = (e) => {
-            if (e.touches && e.touches.length > 0) {
-                return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-            }
-            return { x: e.clientX, y: e.clientY };
-        };
-
-        // Helper function to constrain window position
-        const constrainPosition = (x, y) => {
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-            const winWidth = win.offsetWidth;
-            const winHeight = win.offsetHeight;
-
-            let newLeft = Math.max(0, Math.min(x, screenWidth - winWidth));
-            let newTop = Math.max(0, Math.min(y, screenHeight - winHeight));
-
-            return { left: newLeft, top: newTop };
-        };
-
-        // Mouse events for desktop
-        titleBar.addEventListener('mousedown', (e) => {
-            // Don't start dragging if clicking on a button
-            if (e.target.closest('.title-bar-controls')) return;
-            
-            const coords = getEventCoords(e);
-            isDragging = true;
-            hasMoved = false;
-            startX = coords.x;
-            startY = coords.y;
-            offsetX = coords.x - win.offsetLeft;
-            offsetY = coords.y - win.offsetTop;
-            
-            bringToFront(win);
-            
-            // Prevent text selection during drag
-            e.preventDefault();
-        });
-
-        // Touch events for mobile
-        titleBar.addEventListener('touchstart', (e) => {
-            // Don't start dragging if touching a button
-            if (e.target.closest('.title-bar-controls')) return;
-            
-            const coords = getEventCoords(e);
-            isDragging = true;
-            hasMoved = false;
-            startX = coords.x;
-            startY = coords.y;
-            offsetX = coords.x - win.offsetLeft;
-            offsetY = coords.y - win.offsetTop;
-            
-            bringToFront(win);
-            
-            // Prevent default touch behavior
-            e.preventDefault();
-        }, { passive: false });
-
-        // Mouse move
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            
-            const coords = getEventCoords(e);
-            const deltaX = Math.abs(coords.x - startX);
-            const deltaY = Math.abs(coords.y - startY);
-            
-            // Only start moving if we've moved more than 5 pixels (prevents accidental drags)
-            if (deltaX > 5 || deltaY > 5) {
-                hasMoved = true;
-            }
-            
-            if (hasMoved) {
-                const newLeft = coords.x - offsetX;
-                const newTop = coords.y - offsetY;
-                
-                const constrained = constrainPosition(newLeft, newTop);
-                
-                win.style.left = `${constrained.left}px`;
-                win.style.top = `${constrained.top}px`;
-            }
-        });
-
-        // Touch move
-        document.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            
-            const coords = getEventCoords(e);
-            const deltaX = Math.abs(coords.x - startX);
-            const deltaY = Math.abs(coords.y - startY);
-            
-            // Only start moving if we've moved more than 10 pixels (prevents accidental drags on mobile)
-            if (deltaX > 10 || deltaY > 10) {
-                hasMoved = true;
-            }
-            
-            if (hasMoved) {
-                const newLeft = coords.x - offsetX;
-                const newTop = coords.y - offsetY;
-                
-                const constrained = constrainPosition(newLeft, newTop);
-                
-                win.style.left = `${constrained.left}px`;
-                win.style.top = `${constrained.top}px`;
-                
-                // Prevent scrolling while dragging
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Mouse up
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            hasMoved = false;
-        });
-
-        // Touch end
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-            hasMoved = false;
-        });
+        setupDragging(win);
     });
 };
+
+const setupDragging = (win) => {
+    if (win.dataset.draggingSetup) return;
+    win.dataset.draggingSetup = "true";
+
+    const titleBar = win.querySelector('.title-bar');
+    if (!titleBar) return;
+
+    let isDragging = false;
+    let offsetX, offsetY;
+    let startX, startY;
+    let hasMoved = false;
+
+    // Helper function to get coordinates from mouse or touch event
+    const getEventCoords = (e) => {
+        if (e.touches && e.touches.length > 0) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+    };
+
+    // Helper function to constrain window position
+    const constrainPosition = (x, y) => {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const winWidth = win.offsetWidth;
+        const winHeight = win.offsetHeight;
+
+        let newLeft = Math.max(0, Math.min(x, screenWidth - winWidth));
+        let newTop = Math.max(0, Math.min(y, screenHeight - winHeight));
+
+        return { left: newLeft, top: newTop };
+    };
+
+    // Mouse events for desktop
+    titleBar.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.title-bar-controls')) return;
+        const coords = getEventCoords(e);
+        isDragging = true;
+        hasMoved = false;
+        startX = coords.x;
+        startY = coords.y;
+        offsetX = coords.x - win.offsetLeft;
+        offsetY = coords.y - win.offsetTop;
+        bringToFront(win);
+        e.preventDefault();
+    });
+
+    // Touch events for mobile
+    titleBar.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.title-bar-controls')) return;
+        const coords = getEventCoords(e);
+        isDragging = true;
+        hasMoved = false;
+        startX = coords.x;
+        startY = coords.y;
+        offsetX = coords.x - win.offsetLeft;
+        offsetY = coords.y - win.offsetTop;
+        bringToFront(win);
+        e.preventDefault();
+    }, { passive: false });
+
+    // Move events
+    const handleMove = (e) => {
+        if (!isDragging) return;
+        const coords = getEventCoords(e);
+        const deltaX = Math.abs(coords.x - startX);
+        const deltaY = Math.abs(coords.y - startY);
+        if (deltaX > 5 || deltaY > 5) hasMoved = true;
+        if (hasMoved) {
+            const newLeft = coords.x - offsetX;
+            const newTop = coords.y - offsetY;
+            const constrained = constrainPosition(newLeft, newTop);
+            win.style.left = `${constrained.left}px`;
+            win.style.top = `${constrained.top}px`;
+            if (e.type === 'touchmove') e.preventDefault();
+        }
+    };
+
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('touchmove', handleMove, { passive: false });
+
+    const handleUp = () => {
+        isDragging = false;
+        hasMoved = false;
+    };
+
+    document.addEventListener('mouseup', handleUp);
+    document.addEventListener('touchend', handleUp);
+};
+
+// Resizing system
+export const makeAllWindowsResizable = () => {
+    document.querySelectorAll('.window').forEach(win => {
+        setupResizing(win);
+    });
+};
+
+export const setupResizing = (win) => {
+    if (win.querySelector('.resizer') || win.dataset.resizingSetup) return;
+    win.dataset.resizingSetup = "true";
+
+    const resizer = document.createElement('div');
+    resizer.className = 'resizer';
+    win.appendChild(resizer);
+
+    let isResizing = false;
+    let startWidth, startHeight, startX, startY;
+
+    const startResize = (e) => {
+        isResizing = true;
+        const coords = e.touches ? e.touches[0] : e;
+        startWidth = parseInt(document.defaultView.getComputedStyle(win).width, 10);
+        startHeight = parseInt(document.defaultView.getComputedStyle(win).height, 10);
+        startX = coords.clientX;
+        startY = coords.clientY;
+        bringToFront(win);
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    resizer.addEventListener('mousedown', startResize);
+    resizer.addEventListener('touchstart', startResize, { passive: false });
+
+    const doResize = (e) => {
+        if (!isResizing) return;
+        const coords = e.touches ? e.touches[0] : e;
+        const newWidth = startWidth + (coords.clientX - startX);
+        const newHeight = startHeight + (coords.clientY - startY);
+        
+        // Minimum sizes
+        if (newWidth > 200) win.style.width = `${newWidth}px`;
+        if (newHeight > 100) win.style.height = `${newHeight}px`;
+        
+        if (e.type === 'touchmove') e.preventDefault();
+    };
+
+    const stopResize = () => {
+        isResizing = false;
+    };
+
+    document.addEventListener('mousemove', doResize);
+    document.addEventListener('touchmove', doResize, { passive: false });
+    document.addEventListener('mouseup', stopResize);
+    document.addEventListener('touchend', stopResize);
+};
+
+// Desktop icon interaction with proper double-click detection
 
 // Desktop icon interaction with proper double-click detection
 const setupDesktopIcons = () => {
@@ -389,6 +409,7 @@ const addDefaultWindowsToTaskbar = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     makeAllWindowsDraggable();
+    makeAllWindowsResizable();
     setupDesktopIcons();
     setupCloseButtons();
     setupMinimizeButtons();

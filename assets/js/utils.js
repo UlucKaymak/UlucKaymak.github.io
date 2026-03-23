@@ -103,9 +103,122 @@ export const setupMailSender = () => {
     });
 };
 
+// Note App Logic
+export const setupNoteApp = () => {
+    const textArea = document.getElementById('user-note');
+    const noteWindow = document.getElementById('leave-note');
+    const statusField = document.getElementById('note-status');
+
+    if (!textArea || !noteWindow) return;
+
+    // Dropdown Toggle Logic
+    const menuItems = noteWindow.querySelectorAll('.menubar > li');
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const dropdown = item.querySelector('.context-menu');
+            if (dropdown) {
+                const isVisible = dropdown.style.display === 'block';
+                
+                // Close all other dropdowns and remove active classes
+                noteWindow.querySelectorAll('.context-menu').forEach(d => d.style.display = 'none');
+                noteWindow.querySelectorAll('.menubar > li').forEach(li => li.classList.remove('active'));
+                
+                if (!isVisible) {
+                    dropdown.style.display = 'block';
+                    item.classList.add('active');
+                }
+                e.stopPropagation();
+            }
+        });
+    });
+
+    // Close dropdowns on global click
+    document.addEventListener('click', () => {
+        noteWindow.querySelectorAll('.context-menu').forEach(d => d.style.display = 'none');
+        noteWindow.querySelectorAll('.menubar > li').forEach(li => li.classList.remove('active'));
+    });
+
+    const BUCKET_ID = '6dyvXREit6HzszpjUnY6Te';
+    const API_URL = `https://kvdb.io/${BUCKET_ID}/last_note`;
+
+    const fetchSharedNote = async () => {
+        if (statusField) statusField.textContent = "Connecting to global network...";
+        try {
+            const response = await fetch(API_URL);
+            if (response.ok) {
+                textArea.value = await response.text();
+                if (statusField) statusField.textContent = "Shared note loaded.";
+            } else {
+                if (statusField) statusField.textContent = "Welcome! Be the first to leave a note.";
+            }
+        } catch (error) {
+            if (statusField) statusField.textContent = "Offline mode.";
+            const savedNote = localStorage.getItem('user_note');
+            if (savedNote) textArea.value = savedNote;
+        }
+    };
+
+    fetchSharedNote();
+
+    // Menu Actions
+    const handleSave = async () => {
+        const note = textArea.value;
+        if (note.trim() === "") return alert("Please type something!");
+        
+        if (statusField) statusField.textContent = "Sending note...";
+        try {
+            const response = await fetch(API_URL, { method: 'PUT', body: note });
+            if (response.ok) {
+                localStorage.setItem('user_note', note);
+                alert("Note sent! Next user will see this.");
+                if (statusField) statusField.textContent = "Synced.";
+                import('./windows.js').then(mod => mod.closeWindow(noteWindow));
+            }
+        } catch (e) {
+            alert("Error syncing. Saved locally.");
+            localStorage.setItem('user_note', note);
+        }
+    };
+
+    const handleAction = (action) => {
+        textArea.focus();
+        switch(action) {
+            case 'undo': document.execCommand('undo'); break;
+            case 'cut': document.execCommand('cut'); break;
+            case 'copy': document.execCommand('copy'); break;
+            case 'paste': 
+                navigator.clipboard.readText().then(text => {
+                    const start = textArea.selectionStart;
+                    const end = textArea.selectionEnd;
+                    textArea.value = textArea.value.substring(0, start) + text + textArea.value.substring(end);
+                    textArea.selectionStart = textArea.selectionEnd = start + text.length;
+                }).catch(() => document.execCommand('paste'));
+                break;
+            case 'delete':
+                const start = textArea.selectionStart;
+                textArea.value = textArea.value.substring(0, start) + textArea.value.substring(textArea.selectionEnd);
+                textArea.selectionStart = textArea.selectionEnd = start;
+                break;
+            case 'select-all': textArea.select(); break;
+        }
+    };
+
+    // Attach Menu Click Listeners
+    document.getElementById('menu-save').onclick = handleSave;
+    document.getElementById('menu-exit').onclick = () => import('./windows.js').then(mod => mod.closeWindow(noteWindow));
+    document.getElementById('menu-undo').onclick = () => handleAction('undo');
+    document.getElementById('menu-cut').onclick = () => handleAction('cut');
+    document.getElementById('menu-copy').onclick = () => handleAction('copy');
+    document.getElementById('menu-paste').onclick = () => handleAction('paste');
+    document.getElementById('menu-delete').onclick = () => handleAction('delete');
+    document.getElementById('menu-select-all').onclick = () => handleAction('select-all');
+    document.getElementById('menu-about').onclick = () => alert("Leave a Note v1.0\nA shared guestbook for Uluç's portfolio.");
+};
+
 // Sayfa yüklendiğinde tüm işlevleri başlatır
 document.addEventListener('DOMContentLoaded', () => {
     setupCatSpawner();
     setupExternalLinks();
     setupMailSender();
+    setupNoteApp();
 });

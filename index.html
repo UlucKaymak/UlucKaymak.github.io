@@ -188,6 +188,10 @@
         <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation"/>
         <span>All Projects</span>
     </button>
+    <button class="desktop-icon" data-window-id="leave-note" aria-label="Open leave_a_note.exe application" tabindex="0">
+        <img src="assets/icons/w2k_notepad_1.png" alt="" role="presentation"/>
+        <span>leave_a_note.exe</span>
+    </button>
     <button class="desktop-icon" data-window-id="contact" aria-label="Open contact.exe application" tabindex="0">
         <img src="assets/icons/w98_phone_desk.png" alt="" role="presentation"/>
         <span>contact.exe</span>
@@ -247,7 +251,7 @@
 <div class="window" id="version_update" style="top: 45%; left: 45%; z-index: 15;">
     <div class="title-bar">
         <div class="title-bar-text"><img src="assets/icons/w2k_uninstall.png"
-                                         style="width: 18px; height: 16px; margin-right: 4px; vertical-align: middle;">bugs.txt
+                                         style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">bugs.txt
         </div>
         <div class="title-bar-controls">
             <button class="minimize-btn" aria-label="Minimize"></button>
@@ -260,11 +264,59 @@
                     bugs right now.</span> You
             should
             try to enjoy these bugs if you can.</p>
-        <p>Don't forget to pet my duckling Sonic!<br>
+        <p>Don't forget to pet my cat Sonic!<br>
             <span class="highlight">She loves to be petted</span>
         </p>
         <div style="text-align: right;">
             <button class="close-btn">Bye :3</button>
+        </div>
+    </div>
+</div>
+
+<div class="window" id="leave-note" style="width: 450px; display: none; top: 20%; left: 30%;">
+    <div class="title-bar">
+        <div class="title-bar-text"><img src="assets/icons/w2k_notepad_1.png"
+                                         style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">Leave a Note - Notepad
+        </div>
+        <div class="title-bar-controls">
+            <button class="minimize-btn" aria-label="Minimize"></button>
+            <button class="close-btn" aria-label="Close"></button>
+        </div>
+    </div>
+    <ul class="menubar">
+        <li style="position: relative;">
+            <span style="text-decoration: underline;">F</span>ile
+            <ul class="context-menu" id="file-menu" style="display: none; top: 18px; left: 0; min-width: 100px;">
+                <li id="menu-save">Save</li>
+                <li class="divider"></li>
+                <li id="menu-exit">Exit</li>
+            </ul>
+        </li>
+        <li style="position: relative;">
+            <span style="text-decoration: underline;">E</span>dit
+            <ul class="context-menu" id="edit-menu" style="display: none; top: 18px; left: 0; min-width: 120px;">
+                <li id="menu-undo">Undo</li>
+                <li class="divider"></li>
+                <li id="menu-cut">Cut</li>
+                <li id="menu-copy">Copy</li>
+                <li id="menu-paste">Paste</li>
+                <li id="menu-delete">Delete</li>
+                <li class="divider"></li>
+                <li id="menu-select-all">Select All</li>
+            </ul>
+        </li>
+        <li style="position: relative;">
+            <span style="text-decoration: underline;">H</span>elp
+            <ul class="context-menu" id="help-menu" style="display: none; top: 18px; left: 0; min-width: 100px;">
+                <li id="menu-about">About</li>
+            </ul>
+        </li>
+    </ul>
+    <div class="window-body" style="margin: 0;">
+        <textarea id="user-note" style="width: 100%; height: 250px; border: none; outline: none; padding: 10px; font-family: 'Courier New', Courier, monospace; font-size: 14px; resize: none; display: block; box-sizing: border-box;" placeholder="Type your note here..."></textarea>
+        <div class="status-bar">
+            <p class="status-bar-field" id="note-status">Ready</p>
+            <p class="status-bar-field" style="text-align: right; flex: 0 0 100px;">Ln 1, Col 1</p>
         </div>
     </div>
 </div>

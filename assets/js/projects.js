@@ -275,12 +275,11 @@ export const showProjectDetail = (project) => {
     // Pencereyi açma işlemini openWindow fonksiyonuna bırakıyoruz
     openWindow(windowId);
 
-    // Dynamic windows need to be made draggable if they weren't in the initial batch
-    // We should probably export a way to make a single window draggable or re-run the universal one.
+    // Dynamic windows need to be made draggable/resizable
     import('./windows.js').then(mod => {
         if (mod.bringToFront) mod.bringToFront(detailWin);
+        if (mod.setupResizing) mod.setupResizing(detailWin);
         // Re-run draggable setup for the new window
-        // Note: this is a bit hacky as windows.js doesn't export a single-window version yet.
         mod.makeAllWindowsDraggable();
     });
 };
@@ -360,39 +359,10 @@ const openMediaWindow = (src, title) => {
         mediaWin.remove();
     });
 
-    // Pencereyi sürüklenebilir hale getir
-    const titleBar = mediaWin.querySelector('.title-bar');
-    let isDragging = false;
-    let offsetX, offsetY;
-
-    titleBar.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - mediaWin.offsetLeft;
-        offsetY = e.clientY - mediaWin.offsetTop;
-        bringToFront(mediaWin);
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        let newLeft = e.clientX - offsetX;
-        let newTop = e.clientY - offsetY;
-
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        const winWidth = mediaWin.offsetWidth;
-        const winHeight = mediaWin.offsetHeight;
-
-        if (newLeft < 0) newLeft = 0;
-        if (newTop < 0) newTop = 0;
-        if (newLeft + winWidth > screenWidth) newLeft = screenWidth - winWidth;
-        if (newTop + winHeight > screenHeight) newTop = screenHeight - winHeight;
-
-        mediaWin.style.left = `${newLeft}px`;
-        mediaWin.style.top = `${newTop}px`;
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
+    // Central systems handle dragging and resizing
+    import('./windows.js').then(mod => {
+        if (mod.makeAllWindowsDraggable) mod.makeAllWindowsDraggable();
+        if (mod.setupResizing) mod.setupResizing(mediaWin);
     });
 };
 
