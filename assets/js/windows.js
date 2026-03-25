@@ -142,6 +142,41 @@ export const closeWindow = (win) => {
     }
 };
 
+// Duck spawner logic moved here for better integration with desktop icons
+export const spawnDuck = () => {
+    const duckWindow = document.createElement('div');
+    duckWindow.className = 'window';
+    duckWindow.style.position = 'absolute';
+    duckWindow.style.width = '250px';
+    duckWindow.style.left = `${Math.random() * (window.innerWidth - 250)}px`;
+    duckWindow.style.top = `${Math.random() * (window.innerHeight - 250)}px`;
+
+    const duckId = `duck_${Date.now()}`;
+
+    duckWindow.innerHTML = `
+        <div class="title-bar">
+            <div class="title-bar-text">${duckId}.gif</div>
+            <div class="title-bar-controls">
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="https://random-d.uk/api/randomimg?type=gif&t=${Date.now()}" alt="A random duck gif" style="width:100%;" />
+        </div>
+    `;
+    document.body.appendChild(duckWindow);
+
+    // Make it focusable/draggable/resizable
+    bringToFront(duckWindow);
+    setupDragging(duckWindow);
+    setupResizing(duckWindow);
+    
+    // Setup close button for the dynamic duck window
+    duckWindow.querySelector('.close-btn').addEventListener('click', () => {
+        duckWindow.remove();
+    });
+};
+
 // Universal dragging system that works on all screen sizes and devices
 export const makeAllWindowsDraggable = () => {
     document.querySelectorAll('.window').forEach(win => {
@@ -308,11 +343,14 @@ const setupDesktopIcons = () => {
         const handleIconActivation = () => {
             const windowId = icon.dataset.windowId;
             const externalLink = icon.dataset.externalLink;
+            const action = icon.dataset.action;
 
             if (windowId) {
                 openWindow(windowId);
             } else if (externalLink) {
                 window.open(externalLink, '_blank');
+            } else if (action === 'spawn-duck') {
+                spawnDuck();
             }
         };
 
