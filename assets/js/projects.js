@@ -94,9 +94,12 @@ const populateProjectsFolder = () => {
         const shortcut = document.createElement('div');
         shortcut.className = 'project-shortcut';
         shortcut.style.position = 'relative'; // Ensure positioning context
+        const thumbnailUrl = (project.thumbnail && !project.thumbnail.startsWith('http'))
+            ? 'projects/' + project.thumbnail
+            : (project.thumbnail || 'assets/icons/w2k_unknown_14.png');
         shortcut.innerHTML = `
             <div style="position: relative; width: 150px; height: 150px;">
-                <img src="${project.thumbnail}" alt="${project.title}" style="width: 100%; height: 100%; object-fit: cover;" />
+                <img src="${thumbnailUrl}" alt="${project.title}" style="width: 100%; height: 100%; object-fit: cover;" />
                 <img src="assets/icons/w2k_shortcut_overlay.png" style="position: absolute; left: 0; bottom: 0; width: 16px; height: 16px; pointer-events: none;" />
             </div>
             <div>${project.title}</div>
@@ -107,7 +110,7 @@ const populateProjectsFolder = () => {
 };
 
 // Proje detay penceresini gösterir
-export const showProjectDetail = (project) => {
+export const showProjectDetail = async (project) => {
     const windowId = `project-detail-${project.id}`;
     let detailWin = document.getElementById(windowId);
 
@@ -121,6 +124,22 @@ export const showProjectDetail = (project) => {
         return;
     }
 
+    // Prepare description
+    let description = project.description || "";
+    if (project.contentPath && !description) {
+        try {
+            const fullContentPath = (!project.contentPath.startsWith('http') && !project.contentPath.startsWith('/'))
+                ? 'projects/' + project.contentPath
+                : project.contentPath;
+            const response = await fetch(fullContentPath);
+            if (response.ok) {
+                description = await response.text();
+            }
+        } catch (error) {
+            console.error('Error fetching description:', error);
+        }
+    }
+
     // Yeni pencere elementi oluştur
     detailWin = document.createElement('div');
     detailWin.className = 'window';
@@ -129,7 +148,8 @@ export const showProjectDetail = (project) => {
     detailWin.style.display = 'none'; // openWindow handles showing it
 
     // Medya HTML'ini oluştur
-    const mediaHtml = (project.media || []).map(src => {
+    const mediaHtml = (project.media || []).map(rawSrc => {
+        const src = (!rawSrc.startsWith('http') && !rawSrc.startsWith('/')) ? 'projects/' + rawSrc : rawSrc;
         const lowerSrc = src.toLowerCase();
         const isVideo = lowerSrc.endsWith('.mp4') || lowerSrc.endsWith('.mov') || lowerSrc.endsWith('.webm');
         const isAudio = lowerSrc.endsWith('.mp3') || lowerSrc.endsWith('.wav') || lowerSrc.endsWith('.ogg');
@@ -186,7 +206,7 @@ export const showProjectDetail = (project) => {
                 <!-- Header Section -->
                 <div style="display: flex; gap: 15px; align-items: flex-start;">
                     <div class="sunken-panel" style="padding: 2px; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: #000;">
-                        <img src="${project.thumbnail}" alt="${project.title} Thumbnail" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        <img src="${(!project.thumbnail.startsWith('http') && !project.thumbnail.startsWith('/')) ? 'projects/' + project.thumbnail : project.thumbnail}" alt="${project.title} Thumbnail" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
                     <div style="flex-grow: 1;">
                         <h2 style="margin: 0 0 5px 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; color: navy;">
@@ -212,7 +232,7 @@ export const showProjectDetail = (project) => {
                             <li style="padding: 1px 6px; font-size: 11px;"><span style="text-decoration: underline;">H</span>elp</li>
                         </ul>
                         <div class="markdown-content" style="padding: 15px; overflow-y: auto; flex-grow: 1; font-family: 'Courier New', Courier, monospace; color: black; line-height: 1.2; font-size: 13px;">
-                            ${marked.parse(project.description || '-')}
+                            ${marked.parse(description || '-')}
                         </div>
                         <div style="background: #c0c0c0; border-top: 1px solid #808080; padding: 2px 8px; display: flex; justify-content: flex-end; font-size: 10px; color: black; box-shadow: inset 1px 1px #fff;">
                             UTF-8 | Ln 1, Col 1
