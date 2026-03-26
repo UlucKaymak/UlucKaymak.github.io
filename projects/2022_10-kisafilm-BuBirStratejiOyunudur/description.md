@@ -1,0 +1,3 @@
+"Sadık (40) is an officer who does errands in the municipality. He is not valued at all at work and at home, and cannot express himself. But apart from all this, there is a place where Sadık finds himself: football fields in the neighborhoods. From the Director: People often think that life is not fair. Economic distributions, merit, love, and many more are never balanced. I have always been intrigued by the public's reaction to injustice, in chorus and loudest at football matches, especially through the referee. Why do we react so much to injustice in football? Is life so fair?"
+
+24th Izmir Short Film Festival, National Panorama Section, Screening Selection. 2023

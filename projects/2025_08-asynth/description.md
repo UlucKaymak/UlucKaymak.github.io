@@ -1,0 +1,4 @@
+From the project's engineer, Reha:       
+"Developed within Turkey’s growing music technology scene, focuses on creating a cost-effective analog synthesizer that preserves the warm and dynamic qualities of analog sound. A Voltage-Controlled Oscillator (VCO) with sawtooth and pulse outputs (including Pulse-Width Modulation) has been successfully implemented, along with a Voltage-Controlled Amplifier (VCA) for dynamic output control. Control Voltage (CV) functionality is also supported, enabling precise pitch control and modular integration. Future work will expand on these foundations to enhance the synthesizer’s versatility and usability."
+
+tldr: made musical blip-blop machine blocks with a very passionate team.
