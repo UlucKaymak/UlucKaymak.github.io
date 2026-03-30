@@ -1,5 +1,0 @@
-Prepared for Ali Emre's "SARNIÇ" exhibition, "What Did Cistern Hear?" is an auditory projection that contains the layers of space and time.
-
-Gülhane Cistern, where the exhibition was held, is basically a historical water tank, built in the 2nd century, witnessed the people of four different periods throughout its existence. The installation transforms the tones of each instrument representing these four different periods witnessed by the cistern into an algorithmic music.
-
-“The sound installation accompanying the exhibition reminds me of a flow that spread over time with the echo of the water, an echo that extends from prehistory to Rome, the Ottoman Empire, the Republic, and today's Istanbul. This sound makes the connection that man establishes with water, memory, and existence audible."       -Mehmet Lütfi Şen, Curator
