@@ -1,0 +1,43 @@
+name: Sync Projects from Database
+
+on:
+  repository_dispatch:
+    types: [update-projects]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN || github.token }}
+
+      - name: Update Submodule
+        run: |
+          git submodule update --remote --merge projects
+          
+      - name: Sync projects.json
+        run: |
+          if [ -f "projects/projects.json" ]; then
+            cp projects/projects.json projects.json
+            echo "projects.json synchronized."
+          else
+            echo "projects/projects.json not found!"
+            exit 1
+          fi
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add projects projects.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: sync projects from database [skip ci]"
+            git push
+          fi
