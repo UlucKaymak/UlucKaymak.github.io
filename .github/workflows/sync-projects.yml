@@ -20,6 +20,7 @@ jobs:
       - name: Setup Submodules
         run: |
           git submodule sync
+          git config --global url."https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git submodule update --init --recursive projects
           
       - name: Update Submodule
