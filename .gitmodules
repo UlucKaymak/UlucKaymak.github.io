@@ -1,3 +1,3 @@
 [submodule "projects"]
 	path = projects
-	url = ../projectDatabase.git
+	url = ../Portfolio-projectDatabase.git
