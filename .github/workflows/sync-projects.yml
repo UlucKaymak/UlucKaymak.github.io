@@ -37,6 +37,7 @@ jobs:
       - name: Sync projects.json
         run: |
           if [ -f "projects/projects.json" ]; then
+            rm -f projects.json
             cp projects/projects.json projects.json
             echo "projects.json synchronized."
           else
