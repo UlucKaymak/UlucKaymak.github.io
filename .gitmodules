@@ -1,3 +1,3 @@
 [submodule "projects"]
 	path = projects
-	url = https://github.com/UlucKaymak/projectDatabase.git
+	url = ../projectDatabase.git
