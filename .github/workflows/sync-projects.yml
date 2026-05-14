@@ -14,10 +14,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN || github.token }}
 
+      - name: Setup Submodules
+        run: |
+          git submodule sync
+          git submodule update --init --recursive projects
+          
       - name: Update Submodule
         run: |
           git submodule update --remote --merge projects
