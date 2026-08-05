@@ -1,5 +1,25 @@
 [
   {
+    "id": "stickurr",
+    "title": "Stickurr: Desktop Stickers",
+    "type": "App",
+    "date": "2026_08",
+    "role": "Creative Coder",
+    "thumbnail": "2026_08-uluc_app-Stickurr/Stickurr.jpeg",
+    "media": [
+      "2026_08-uluc_app-Stickurr/Stickurr.jpeg",
+      "2026_08-uluc_app-Stickurr/screenshot1.jpeg",
+      "2026_08-uluc_app-Stickurr/screenshot2.jpeg",
+      "2026_08-uluc_app-Stickurr/screenshot3.jpeg"
+    ],
+    "tags": [
+      "#CreativeCoding",
+      "#Visual"
+    ],
+    "enabled": true,
+    "contentPath": "2026_08-uluc_app-Stickurr/description.md"
+  },
+  {
     "id": "inevgames-kardiya",
     "title": "Kardiya: the Winds of Fate",
     "type": "Video Game",
