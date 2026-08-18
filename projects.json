@@ -25,6 +25,33 @@
     "type": "Video Game",
     "date": "2026_03_06",
     "role": "Soundtrack Composer, Audio Engineer, and some other things",
+    "thumbnail": "2026_04-InEvGames-Kardiya_Teaser/Kardiya-Teaser-ThumbnailKare.png",
+    "media": [
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/4c895c3260bb7861b0b0ae61935605b73bc978f7/ss_4c895c3260bb7861b0b0ae61935605b73bc978f7.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/f3377bace336efdd7faac681b9df35e5f47b8ed5/ss_f3377bace336efdd7faac681b9df35e5f47b8ed5.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/c2a174570ca5852c08f3b04bb9b71aaee982f167/ss_c2a174570ca5852c08f3b04bb9b71aaee982f167.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/328dcf226535094396c1f7e8c36bfe4560def957/ss_328dcf226535094396c1f7e8c36bfe4560def957.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/296a80256e8c76e834b36bae138b478652d329a5/ss_296a80256e8c76e834b36bae138b478652d329a5.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/ea09cd98258285c4d1e891d0f49c077c9e7c24ac/ss_ea09cd98258285c4d1e891d0f49c077c9e7c24ac.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/1c61778d30f44f7641210dad6af73b36d7940f78/ss_1c61778d30f44f7641210dad6af73b36d7940f78.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/5b8ad9f86e999fc5e69dd4b05fe06f2189e6f312/ss_5b8ad9f86e999fc5e69dd4b05fe06f2189e6f312.1920x1080.jpg",
+      "https://youtu.be/fWqNdUKE4DE"
+    ],
+    "tags": [
+      "#VideoProduction",
+      "#Audio",
+      "#Visual",
+      "#Soundtrack"
+    ],
+    "enabled": true,
+    "contentPath": "2026_04-InEvGames-Kardiya_Teaser/description.md"
+  },
+  {
+    "id": "inevgames-kardiya",
+    "title": "Kardiya: the Winds of Fate",
+    "type": "Video Game",
+    "date": "2026_03_06",
+    "role": "Soundtrack Composer, Audio Engineer, and some other things",
     "thumbnail": "2026_03_06-InEvGames-Kardiya/KardiyaCapsule_Square.png",
     "media": [
       "2026_03_06-InEvGames-Kardiya/KardiyaCapsule_Square.png",
