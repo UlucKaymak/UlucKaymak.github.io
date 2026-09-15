@@ -1,5 +1,33 @@
 [
   {
+    "id": "tuesdaymarket-potato",
+    "title": "Potato.Exe | Reveal Teaser",
+    "type": "Teaser Video",
+    "date": "2026_03_06",
+    "role": "Soundtrack Composer",
+    "thumbnail": "2026_08_15-TuesdayMarket-PotatoExe/PotatoTitleShot.jpeg",
+    "media": [
+      "https://video.fastly.steamstatic.com/store_trailers/5179880/219346040/dc85a7e98bdd26899362782296fa18483f5ef67a/1789502361/hls_264_master.m3u8?t=1789503137",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/9691a7e5baf27109c64a6f34a5372438410dc31b/ss_9691a7e5baf27109c64a6f34a5372438410dc31b.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/2182b67af8da6b1a2c29b7bd8a70dff167edee65/ss_2182b67af8da6b1a2c29b7bd8a70dff167edee65.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/f913bc18c65974008a3e22fa1180ab2b58bcf241/ss_f913bc18c65974008a3e22fa1180ab2b58bcf241.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/fa71631fea9ac6396e6cc6edf35024544cc17802/ss_fa71631fea9ac6396e6cc6edf35024544cc17802.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/064dd300bbdf0ee655c90c440c0edcf1e9a5416e/ss_064dd300bbdf0ee655c90c440c0edcf1e9a5416e.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/3ff5987529bf6b6351275267df9757b053f585a3/ss_3ff5987529bf6b6351275267df9757b053f585a3.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/264f9100ac821cc2e168bce14c396923cae62898/ss_264f9100ac821cc2e168bce14c396923cae62898.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/4f9234c4db041d8094c9894013abd40961f8ec98/ss_4f9234c4db041d8094c9894013abd40961f8ec98.1920x1080.jpg?t=1789503138",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/33996c1afc4425fd947bc120d695c293404efbb7/ss_33996c1afc4425fd947bc120d695c293404efbb7.1920x1080.jpg?t=1789503138"
+    ],
+    "tags": [
+      "#VideoProduction",
+      "#Audio",
+      "#Visual",
+      "#Soundtrack"
+    ],
+    "enabled": true,
+    "contentPath": "2026_08_15-TuesdayMarket-PotatoExe/description.md"
+  },
+  {
     "id": "stickurr",
     "title": "Stickurr: Desktop Stickers",
     "type": "App",
@@ -100,7 +128,7 @@
   {
     "id": "ulucart-sarnicneduydu",
     "title": "Sarnıç Ne Duydu?",
-    "type": "Audio Installation",
+    "type": "Algorithmic Music Installation",
     "date": "2025_09_18",
     "role": "Artist, Creative Coder",
     "thumbnail": "2025_10_28-SarnicNeDuydu/SarnicNeDuydu0.jpeg",
@@ -221,6 +249,34 @@
     ],
     "enabled": true,
     "contentPath": "2025_06_11-Art-Persona/description.md"
+  },
+  {
+    "id": "live-focsel_SS25",
+    "title": "Focsel's SS25'Launch Party",
+    "type": "Live Improvised Set",
+    "date": "2025_05_13",
+    "role": "Performer, Graphic Artist",
+    "thumbnail": "2025_06-InEvGames-Livber/Livber-Square.jpeg",
+    "media": [
+      "2025_05_13-Focsel_ss25/2025-10-10_12-33-32_DPoPp8LjF_L-0001.png",
+      "2025_05_13-Focsel_ss25/2025-05-15_14-31-19_DJrXqIpIGrC_1.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-15_14-31-19_DJrXqIpIGrC_4.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-16_15-27-14_DJuC2lsIZHZ_1.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-16_15-27-14_DJuC2lsIZHZ_2.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-16_15-27-14_DJuC2lsIZHZ_3.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-16_15-27-14_DJuC2lsIZHZ_4.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_1.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_2.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_3.jpg",
+      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_4.jpg",
+      "https://www.instagram.com/justalways.col/reel/DPonZ4RDFNu/?hl=om-et"
+    ],
+    "tags": [
+      "#Audio",
+      "#Live"
+    ],
+    "enabled": true,
+    "contentPath": "2025_05_13-Focsel_ss25/description.md"
   },
   {
     "id": "inevgames-livber",
