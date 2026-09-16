@@ -11,6 +11,22 @@
 </head>
 
 <body>
+
+<!-- Mobile Warning Window -->
+<div id="mobile-warning" class="window draggable" style="display: none; width: 320px; z-index: 9999;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="assets/icons/w98_msg_warning.png" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;" alt="Warning">
+            Mobile Notice
+        </div>
+    </div>
+    <div class="window-body" style="text-align: center; padding: 20px;">
+        <img src="assets/icons/w98_msg_warning.png" alt="Warning" style="width: 32px; height: 32px; margin-bottom: 15px;">
+        <p style="margin-bottom: 20px;">This website is not optimized for mobile devices. Please visit the main portfolio site.</p>
+        <button onclick="window.location.href='https://uluckaymak.com'" style="width: 100%; font-weight: bold; padding: 10px;">okay :/</button>
+    </div>
+</div>
+
 <div class="taskbar">
 
     <button class="start-button" id="start-button">
@@ -43,7 +59,7 @@
         <li class="divider" role="separator"></li>
         <li><a href="#" class="start-menu-item" data-action="toggle-theme"><img
                 src="assets/icons/w2k_unknown_11.png" alt="Theme"/>
-            Toggle Theme</a></li>
+            Change Theme</a></li>
         <li><a href="#" class="start-menu-item" data-action="refresh-page"><img src="assets/icons/w2k_run.png"
                                                                                 alt="Refresh"/>
             Refresh Page</a></li>
@@ -68,13 +84,17 @@
         };
 
         // Theme management
+        const THEME_ORDER = ['light', 'pink', 'y2k'];
+
         function toggleTheme() {
             const root = document.documentElement;
             const currentTheme = root.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'light' ? 'pink' : 'light';
+            const currentIndex = THEME_ORDER.indexOf(currentTheme);
+            const newTheme = THEME_ORDER[(currentIndex + 1) % THEME_ORDER.length];
 
             root.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: newTheme } }));
         }
 
         // Optimized time update
@@ -167,6 +187,11 @@
         <img src="assets/icons/w98_world_network_directories.png" alt="" role="presentation"/>
         <span>linktree.link</span>
     </button>
+    <button class="desktop-icon" data-external-link="https://linktr.ee/uluckaymak"
+            aria-label="Open pomoduck app" tabindex="0">
+        <img src="assets/icons/w2k_notepad_1.png" alt="" role="presentation"/>
+        <span>pomoduck.app</span>
+    </button>
     <button class="desktop-icon" data-window-id="programs-folder" aria-label="Open programs that i use folder"
             tabindex="0">
         <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation"/>
@@ -190,13 +215,21 @@
         <img src="assets/icons/w2k_folder_closed.png" alt="" role="presentation"/>
         <span>All Projects</span>
     </button>
-    <button class="desktop-icon" data-window-id="leave-note" aria-label="Open leave_a_note.exe application" tabindex="0">
+    <!-- <button class="desktop-icon" data-window-id="leave-note" aria-label="Open leave_a_note.exe application" tabindex="0">
         <img src="assets/icons/w2k_notepad_1.png" alt="" role="presentation"/>
         <span>leave_a_note.exe</span>
-    </button>
+    </button> -->
     <button class="desktop-icon" data-window-id="contact" aria-label="Open contact.exe application" tabindex="0">
         <img src="assets/icons/w98_phone_desk.png" alt="" role="presentation"/>
         <span>contact.exe</span>
+    </button>
+    <button class="desktop-icon" data-window-id="paint" aria-label="Open Paint application" tabindex="0">
+        <img src="assets/icons/w98_paintbrush.png" alt="" role="presentation"/>
+        <span>Paint</span>
+    </button>
+    <button class="desktop-icon" data-window-id="my-pictures" aria-label="Open My Pictures folder" tabindex="0">
+        <img src="assets/icons/w98_directory_pictures.png" alt="" role="presentation"/>
+        <span>My Pictures</span>
     </button>
 </div>
 
@@ -787,12 +820,142 @@
 </div>
 
 
+<div id="paint" class="window" style="width: 660px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="assets/icons/w98_paintbrush.png"
+                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">untitled - Paint
+        </div>
+        <div class="title-bar-controls">
+            <button class="minimize-btn" aria-label="Minimize"></button>
+            <button class="close-btn" aria-label="Close"></button>
+        </div>
+    </div>
+    <ul class="menubar">
+        <li style="position: relative;"><span style="text-decoration: underline;">F</span>ile
+            <ul class="context-menu" id="paint-file-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
+                <li id="paint-menu-new">New</li>
+                <li id="paint-menu-save">Save as PNG...</li>
+                <li id="paint-menu-open-gallery">Open My Pictures...</li>
+                <li class="divider"></li>
+                <li id="paint-menu-exit">Exit</li>
+            </ul>
+        </li>
+        <li style="position: relative;"><span style="text-decoration: underline;">E</span>dit
+            <ul class="context-menu" id="paint-edit-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
+                <li id="paint-menu-undo">Undo</li>
+                <li id="paint-menu-redo">Redo</li>
+                <li class="divider"></li>
+                <li id="paint-menu-select-all">Select All</li>
+                <li id="paint-menu-clear-selection">Clear Selection</li>
+            </ul>
+        </li>
+        <li style="position: relative;"><span style="text-decoration: underline;">V</span>iew
+            <ul class="context-menu" id="paint-view-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
+                <li id="paint-menu-zoom-in">Zoom In</li>
+                <li id="paint-menu-zoom-out">Zoom Out</li>
+                <li id="paint-menu-zoom-reset">Normal Size (100%)</li>
+            </ul>
+        </li>
+        <li style="position: relative;"><span style="text-decoration: underline;">I</span>mage
+            <ul class="context-menu" id="paint-image-menu" style="display: none; top: 18px; left: 0; min-width: 170px;">
+                <li id="paint-menu-flip-h">Flip Horizontal</li>
+                <li id="paint-menu-flip-v">Flip Vertical</li>
+                <li class="divider"></li>
+                <li id="paint-menu-invert">Invert Colors</li>
+                <li class="divider"></li>
+                <li id="paint-menu-clear-image">Clear Image</li>
+            </ul>
+        </li>
+        <li style="position: relative;"><span style="text-decoration: underline;">O</span>ptions
+            <ul class="context-menu" id="paint-options-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
+                <li id="paint-menu-edit-colors">Edit Colors...</li>
+            </ul>
+        </li>
+        <li style="position: relative;"><span style="text-decoration: underline;">H</span>elp
+            <ul class="context-menu" id="paint-help-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
+                <li id="paint-menu-about">About Paint</li>
+            </ul>
+        </li>
+    </ul>
+    <div class="window-body" style="margin: 6px; display: flex; gap: 6px; align-items: flex-start;">
+        <div style="display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
+            <div class="sunken-panel" id="paint-toolbox" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; padding: 3px; width: 60px;">
+                <button type="button" class="paint-tool" data-tool="lasso" title="Free-Form Select" aria-label="Free-Form Select"></button>
+                <button type="button" class="paint-tool selected" data-tool="select" title="Rectangular Select" aria-label="Rectangular Select"></button>
+                <button type="button" class="paint-tool" data-tool="eraser" title="Eraser" aria-label="Eraser"></button>
+                <button type="button" class="paint-tool" data-tool="fill" title="Fill With Color" aria-label="Fill With Color"></button>
+                <button type="button" class="paint-tool" data-tool="eyedropper" title="Pick Color" aria-label="Pick Color"></button>
+                <button type="button" class="paint-tool" data-tool="zoom" title="Magnifier (click to cycle zoom)" aria-label="Magnifier"></button>
+                <button type="button" class="paint-tool" data-tool="pencil" title="Pencil" aria-label="Pencil"></button>
+                <button type="button" class="paint-tool" data-tool="brush" title="Brush" aria-label="Brush"></button>
+                <button type="button" class="paint-tool" data-tool="airbrush" title="Airbrush" aria-label="Airbrush"></button>
+                <button type="button" class="paint-tool" data-tool="text" title="Text" aria-label="Text"></button>
+                <button type="button" class="paint-tool" data-tool="line" title="Line" aria-label="Line"></button>
+                <button type="button" class="paint-tool" data-tool="curve" title="Curve (drag, then drag again to bend)" aria-label="Curve"></button>
+                <button type="button" class="paint-tool" data-tool="rect" title="Rectangle" aria-label="Rectangle"></button>
+                <button type="button" class="paint-tool" data-tool="polygon" title="Polygon (click points, double-click to close)" aria-label="Polygon"></button>
+                <button type="button" class="paint-tool" data-tool="ellipse" title="Ellipse" aria-label="Ellipse"></button>
+                <button type="button" class="paint-tool" data-tool="roundrect" title="Rounded Rectangle" aria-label="Rounded Rectangle"></button>
+            </div>
+            <div class="sunken-panel" style="padding: 6px; display: flex; flex-direction: column; gap: 4px; width: 48px; align-items: center;">
+                <label for="paint-brush-size" style="font-size: 10px;">Size</label>
+                <input type="range" id="paint-brush-size" min="1" max="30" value="4" orient="vertical"/>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;">
+            <div class="sunken-panel" id="paint-canvas-wrap" style="padding: 0; overflow: auto; max-width: 100%; max-height: 420px; position: relative; background: #808080;">
+                <canvas id="paint-canvas" width="480" height="320" style="display: block; background: #fff;"></canvas>
+                <canvas id="paint-overlay" width="480" height="320" style="display: block; position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none;"></canvas>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="sunken-panel" id="paint-color-indicator" style="width: 34px; height: 34px; position: relative; flex-shrink: 0; cursor: pointer;" title="Left square: foreground. Right square: background. Double-click to edit.">
+                    <div id="paint-secondary-swatch" style="position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; border: 1px solid #000; background: #ffffff;"></div>
+                    <div id="paint-primary-swatch" style="position: absolute; left: 2px; top: 2px; width: 20px; height: 20px; border: 1px solid #000; background: #000000;"></div>
+                </div>
+                <div id="paint-palette" style="display: grid; grid-template-columns: repeat(14, 16px); grid-template-rows: repeat(2, 16px); gap: 1px;"></div>
+                <input type="color" id="paint-color-picker" style="display: none;"/>
+            </div>
+        </div>
+    </div>
+    <div class="status-bar">
+        <p class="status-bar-field" id="paint-status">For Help, click a tool.</p>
+        <p class="status-bar-field" id="paint-coords" style="flex: 0 0 90px;">0, 0</p>
+        <p class="status-bar-field" id="paint-zoom-field" style="flex: 0 0 70px;">100%</p>
+    </div>
+</div>
+
+
+<div id="my-pictures" class="window" style="width: 640px; display: none;">
+    <div class="title-bar">
+        <div class="title-bar-text">
+            <img src="assets/icons/w98_directory_pictures.png"
+                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">My Pictures
+        </div>
+        <div class="title-bar-controls">
+            <button class="minimize-btn" aria-label="Minimize"></button>
+            <button class="close-btn" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="window-body markdown-content">
+        <p>Paint'te "Save as PNG" dediğinde resimler buraya da kaydedilir (bu taraycıda, bu cihazda saklanır).</p>
+        <div id="my-pictures-grid" class="grid-container sunken-panel" style="height: 320px; overflow-y: auto;"></div>
+    </div>
+    <div class="status-bar">
+        <p class="status-bar-field">Double click a picture to open it.</p>
+        <p class="status-bar-field">Pictures: <span id="my-pictures-count">0</span></p>
+    </div>
+</div>
+
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script type="module" src="assets/js/windows.js"></script>
 <script type="module" src="assets/js/projects.js"></script>
 <script type="module" src="assets/js/utils.js"></script>
 <script type="module" src="assets/js/portfolio.js"></script>
+<script type="module" src="assets/js/y2k-effects.js"></script>
+<script type="module" src="assets/js/paint.js"></script>
 <script src="assets/js/oneko/oneko.js"></script>
 
 </body>
