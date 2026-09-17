@@ -1,0 +1,171 @@
+/* ===================================================== */
+/* Y2K Girly Theme — pastel, glossy, bubbly overrides     */
+/* Scoped entirely under [data-theme="y2k"] so it never   */
+/* affects the light/pink themes.                         */
+/* ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap');
+
+/* Windows */
+[data-theme="y2k"] .window {
+    background: var(--window-bg);
+    box-shadow: inset -1px -1px var(--y2k-shadow-dark),
+                inset 1px 1px var(--y2k-shadow-light),
+                inset -2px -2px var(--y2k-shadow-mid-dark),
+                inset 2px 2px var(--y2k-shadow-mid-light);
+}
+
+[data-theme="y2k"] .title-bar {
+    background: linear-gradient(90deg, var(--y2k-title-start), var(--y2k-title-end));
+}
+
+[data-theme="y2k"] .title-bar.inactive {
+    background: linear-gradient(90deg, #e3c2dd, #cfc3ea);
+}
+
+[data-theme="y2k"] .window.active .title-bar {
+    background: linear-gradient(90deg, var(--y2k-title-active-start), var(--y2k-title-active-end));
+}
+
+[data-theme="y2k"] .title-bar-text {
+    font-family: var(--y2k-font);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+/* Bubbly display font on headings + emphasis */
+[data-theme="y2k"] h1,
+[data-theme="y2k"] h2,
+[data-theme="y2k"] h3,
+[data-theme="y2k"] h4 {
+    font-family: var(--y2k-font);
+    color: #d6006f;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #ffb6de;
+}
+
+[data-theme="y2k"] .start-button,
+[data-theme="y2k"] .taskbar-windows .taskbar-button,
+[data-theme="y2k"] button {
+    font-family: var(--y2k-font);
+}
+
+/* Taskbar + start button */
+[data-theme="y2k"] .taskbar {
+    background: var(--taskbar-bg);
+}
+
+[data-theme="y2k"] .start-button,
+[data-theme="y2k"] .taskbar-windows .taskbar-button {
+    background: var(--taskbar-bg);
+    box-shadow: inset -1px -1px var(--y2k-shadow-dark),
+                inset 1px 1px var(--y2k-shadow-light),
+                inset -2px -2px var(--y2k-shadow-mid-dark),
+                inset 2px 2px var(--y2k-shadow-mid-light);
+}
+
+[data-theme="y2k"] .taskbar-windows .taskbar-button.active {
+    background: var(--window-bg);
+}
+
+[data-theme="y2k"] .taskbar-right {
+    background: var(--window-bg);
+}
+
+/* Start menu + context menus */
+[data-theme="y2k"] .start-menu,
+[data-theme="y2k"] .context-menu {
+    background: var(--window-bg);
+    box-shadow: inset -1px -1px var(--y2k-shadow-light),
+                inset 1px 1px var(--y2k-shadow-mid-dark),
+                inset -2px -2px var(--y2k-shadow-mid-light),
+                inset 2px 2px var(--y2k-shadow-dark);
+}
+
+[data-theme="y2k"] .start-menu-sidebar {
+    background: linear-gradient(to top, var(--y2k-title-active-start), var(--y2k-title-active-end));
+}
+
+[data-theme="y2k"] .menubar {
+    background: var(--taskbar-bg);
+}
+
+[data-theme="y2k"] .menubar li:hover,
+[data-theme="y2k"] .menubar li.active,
+[data-theme="y2k"] .context-menu li:hover,
+[data-theme="y2k"] .start-menu-item:hover {
+    background: var(--y2k-accent);
+    color: #fff;
+}
+
+/* Tables / panels */
+[data-theme="y2k"] table > thead > tr > * {
+    background: var(--color-light-gray);
+    box-shadow: inset -1px -1px var(--y2k-shadow-dark),
+                inset 1px 1px var(--y2k-shadow-light),
+                inset -2px -2px var(--y2k-shadow-mid-dark),
+                inset 2px 2px var(--y2k-shadow-mid-light);
+}
+
+[data-theme="y2k"] table > tbody > tr.highlighted {
+    background-color: var(--y2k-accent);
+}
+
+[data-theme="y2k"] .sunken-panel,
+[data-theme="y2k"] table {
+    background-color: #fff8fd;
+}
+
+[data-theme="y2k"] .status-bar-field {
+    background: #fff0fa;
+    box-shadow: inset -1px -1px var(--y2k-shadow-mid-light), inset 1px 1px var(--y2k-shadow-mid-dark);
+}
+
+/* Scrollbars */
+[data-theme="y2k"] ::-webkit-scrollbar-track {
+    background-color: #fff0fa;
+}
+
+[data-theme="y2k"] ::-webkit-scrollbar-thumb {
+    background-color: #ffb6de;
+    box-shadow: inset -1px -1px var(--y2k-shadow-dark),
+                inset 1px 1px var(--y2k-shadow-light),
+                inset -2px -2px var(--y2k-shadow-mid-dark),
+                inset 2px 2px var(--y2k-shadow-mid-light);
+}
+
+[data-theme="y2k"] ::-webkit-scrollbar-corner {
+    background: var(--color-light-gray);
+}
+
+/* Desktop icon labels */
+[data-theme="y2k"] .desktop-icon span {
+    text-shadow: 1px 1px 3px rgba(214, 0, 111, 0.7), 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* Highlight selection tone stays baby-blue via --highlight-color already */
+
+/* ---------------- Sparkle cursor trail ---------------- */
+/* Elements are created dynamically by y2k-effects.js; this just styles them */
+.y2k-sparkle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999998;
+    font-size: 14px;
+    user-select: none;
+    will-change: transform, opacity;
+    animation: y2kSparkleFade 0.9s ease-out forwards;
+}
+
+@keyframes y2kSparkleFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4) rotate(90deg) translateY(-22px);
+    }
+}

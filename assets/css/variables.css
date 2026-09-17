@@ -61,3 +61,35 @@
     --highlight-color: #5bcefa;
 }
 
+/* Y2K Girly theme */
+:root[data-theme="y2k"] {
+    --color-white: #fff0fa;
+    --color-black: #6b3f7a;
+    --color-light-gray: #ffd6ec;
+    --color-gray: #c9a3d4;
+    --color-silver: #ffe1f3;
+    --color-navy: #ff8fcf;
+    --color-blue: #b28dff;
+    --color-teal: #baf2ff;
+    --desktop-bg-start: #ffd1f0;
+    --desktop-bg-end: #b8a1ff;
+    --window-bg: #fff0fa;
+    --taskbar-bg: #ffc9e8;
+    --highlight-color: #baf2ff;
+
+    /* Chrome bevel colors for windows/buttons */
+    --y2k-shadow-dark: #a85fae;
+    --y2k-shadow-light: #ffffff;
+    --y2k-shadow-mid-dark: #d68fc9;
+    --y2k-shadow-mid-light: #ffe6f7;
+
+    /* Title bar */
+    --y2k-title-start: #ffb0e0;
+    --y2k-title-end: #c9b3ff;
+    --y2k-title-active-start: #ff5fb0;
+    --y2k-title-active-end: #8f6fff;
+
+    --y2k-accent: #ff5fb0;
+    --y2k-font: 'Baloo 2', 'Space Mono', cursive;
+}
+

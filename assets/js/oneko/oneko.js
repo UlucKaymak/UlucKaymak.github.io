@@ -232,7 +232,9 @@
 			  font-size: 2em;
 			  animation: heartBurst 1s ease-out;
 			  animation-fill-mode: forwards;
-			  color: #ab9df2;
+			  color: #e59df2;
+			  z-index: 700000;
+			  pointer-events: none;
 		  }
 	  `;
 
