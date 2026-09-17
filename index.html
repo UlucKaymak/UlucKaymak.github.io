@@ -906,8 +906,13 @@
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;">
             <div class="sunken-panel" id="paint-canvas-wrap" style="padding: 0; overflow: auto; max-width: 100%; max-height: 420px; position: relative; background: #808080;">
-                <canvas id="paint-canvas" width="480" height="320" style="display: block; background: #fff;"></canvas>
-                <canvas id="paint-overlay" width="480" height="320" style="display: block; position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none;"></canvas>
+                <div id="paint-canvas-container" style="position: relative; width: 480px; height: 320px; margin: 3px;">
+                    <canvas id="paint-canvas" width="480" height="320" style="display: block; background: #fff;"></canvas>
+                    <canvas id="paint-overlay" width="480" height="320" style="display: block; position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none;"></canvas>
+                    <div id="paint-resize-x" style="position: absolute; right: -4px; top: 50%; width: 5px; height: 5px; background: #000; cursor: e-resize;"></div>
+                    <div id="paint-resize-y" style="position: absolute; left: 50%; bottom: -4px; width: 5px; height: 5px; background: #000; cursor: s-resize;"></div>
+                    <div id="paint-resize-xy" style="position: absolute; right: -4px; bottom: -4px; width: 5px; height: 5px; background: #000; cursor: se-resize;"></div>
+                </div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
                 <div class="sunken-panel" id="paint-color-indicator" style="width: 34px; height: 34px; position: relative; flex-shrink: 0; cursor: pointer;" title="Left square: foreground. Right square: background. Double-click to edit.">

@@ -311,6 +311,11 @@ const applyZoom = () => {
         c.style.height = `${h}px`;
         c.style.imageRendering = state.zoomLevel > 1 ? 'pixelated' : 'auto';
     });
+    const container = document.getElementById('paint-canvas-container');
+    if (container) {
+        container.style.width = `${w}px`;
+        container.style.height = `${h}px`;
+    }
     if (zoomFieldEl) zoomFieldEl.textContent = `${state.zoomLevel * 100}%`;
 };
 
@@ -944,6 +949,72 @@ const setupKeyboardShortcuts = () => {
 
 // ---------------- init ----------------
 
+const setupCanvasResize = () => {
+    const container = document.getElementById('paint-canvas-container');
+    const handles = [
+        { el: document.getElementById('paint-resize-x'), dir: 'x' },
+        { el: document.getElementById('paint-resize-y'), dir: 'y' },
+        { el: document.getElementById('paint-resize-xy'), dir: 'xy' }
+    ];
+
+    handles.forEach(({ el, dir }) => {
+        if (!el) return;
+        el.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            el.setPointerCapture(e.pointerId);
+
+            const startW = base.width;
+            const startH = base.height;
+            const startX = e.clientX;
+            const startY = e.clientY;
+            
+            const onMove = (me) => {
+                let newW = startW;
+                let newH = startH;
+                if (dir.includes('x')) newW = Math.max(10, Math.round((startW + (me.clientX - startX)) / state.zoomLevel));
+                if (dir.includes('y')) newH = Math.max(10, Math.round((startH + (me.clientY - startY)) / state.zoomLevel));
+                
+                container.style.width = `${newW * state.zoomLevel}px`;
+                container.style.height = `${newH * state.zoomLevel}px`;
+            };
+            
+            const onUp = (ue) => {
+                el.releasePointerCapture(e.pointerId);
+                el.removeEventListener('pointermove', onMove);
+                el.removeEventListener('pointerup', onUp);
+                el.removeEventListener('pointercancel', onUp);
+                
+                let newW = startW;
+                let newH = startH;
+                if (dir.includes('x')) newW = Math.max(10, Math.round((startW + (ue.clientX - startX)) / state.zoomLevel));
+                if (dir.includes('y')) newH = Math.max(10, Math.round((startH + (ue.clientY - startY)) / state.zoomLevel));
+                
+                if (newW !== startW || newH !== startH) {
+                    pushHistory();
+                    const imgData = baseCtx.getImageData(0, 0, startW, startH);
+                    
+                    base.width = newW;
+                    base.height = newH;
+                    overlay.width = newW;
+                    overlay.height = newH;
+                    
+                    baseCtx.fillStyle = '#ffffff';
+                    baseCtx.fillRect(0, 0, newW, newH);
+                    baseCtx.putImageData(imgData, 0, 0);
+                    
+                    applyZoom();
+                    setStatus(`Resized to ${newW} x ${newH}`);
+                }
+            };
+            
+            el.addEventListener('pointermove', onMove);
+            el.addEventListener('pointerup', onUp);
+            el.addEventListener('pointercancel', onUp);
+        });
+    });
+};
+
 const init = () => {
     base = document.getElementById('paint-canvas');
     overlay = document.getElementById('paint-overlay');
@@ -970,6 +1041,7 @@ const init = () => {
     bindMenuActions();
     setupKeyboardShortcuts();
     watchGalleryWindowVisibility();
+    setupCanvasResize();
 
     overlay.addEventListener('pointerdown', onPointerDown);
     overlay.addEventListener('pointermove', onPointerMove);
