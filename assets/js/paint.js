@@ -993,6 +993,8 @@ const renderToolOptions = () => {
 
 const setupToolbox = () => {
     document.querySelectorAll('.paint-tool').forEach((btn) => {
+        btn.addEventListener('mouseenter', () => setStatus(TOOL_LABELS[btn.dataset.tool] || btn.dataset.tool));
+        btn.addEventListener('mouseleave', () => setStatus('For Help, click a tool.'));
         btn.addEventListener('click', () => {
             if (btn.dataset.tool === 'zoom') { cycleZoom(); return; }
 
@@ -1027,6 +1029,25 @@ const setupKeyboardShortcuts = () => {
         else if (e.key === 'Enter' && state.tool === 'polygon' && polygonState) { e.preventDefault(); finalizePolygon(); }
         else if (e.key === 'Escape') {
             state.selection = null; lassoPoints = null; curveState = null; polygonState = null; clearOverlay();
+        }
+    });
+
+    document.addEventListener('paste', (e) => {
+        const paintWin = document.getElementById('paint');
+        if (!paintWin || !paintWin.classList.contains('active') || paintWin.style.display === 'none') return;
+
+        if (e.clipboardData && e.clipboardData.items) {
+            for (let item of e.clipboardData.items) {
+                if (item.type.indexOf('image/') !== -1) {
+                    const blob = item.getAsFile();
+                    if (!blob) continue;
+                    const reader = new FileReader();
+                    reader.onload = (event) => loadImageIntoCanvas(event.target.result);
+                    reader.readAsDataURL(blob);
+                    e.preventDefault();
+                    break;
+                }
+            }
         }
     });
 };
