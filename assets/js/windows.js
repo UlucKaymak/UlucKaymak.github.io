@@ -101,7 +101,7 @@ export let openWindow = (id) => {
     const win = document.getElementById(id);
     if (!win) return;
 
-    win.style.display = 'block';
+    win.style.display = win.dataset.display || 'block';
 
     if (window.innerWidth > 768) {
         const vw = window.innerWidth;
@@ -184,7 +184,7 @@ export const makeAllWindowsDraggable = () => {
     });
 };
 
-const setupDragging = (win) => {
+export const setupDragging = (win) => {
     if (win.dataset.draggingSetup) return;
     win.dataset.draggingSetup = "true";
 

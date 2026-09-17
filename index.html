@@ -820,18 +820,21 @@
 </div>
 
 
-<div id="paint" class="window" style="width: 660px; display: none;">
-    <div class="title-bar">
+<div id="paint" class="window" data-display="flex" style="width: 660px; height: 500px; display: none; flex-direction: column;">
+    <div class="title-bar" style="flex-shrink: 0;">
         <div class="title-bar-text">
             <img src="assets/icons/w98_paintbrush.png"
-                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">untitled - Paint
+                 alt="" role="presentation"
+                 style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;">
+            untitled - Paint
         </div>
         <div class="title-bar-controls">
             <button class="minimize-btn" aria-label="Minimize"></button>
+            <button class="maximize-btn" aria-label="Maximize"></button>
             <button class="close-btn" aria-label="Close"></button>
         </div>
     </div>
-    <ul class="menubar">
+    <ul class="menubar" style="flex-shrink: 0;">
         <li style="position: relative;"><span style="text-decoration: underline;">F</span>ile
             <ul class="context-menu" id="paint-file-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
                 <li id="paint-menu-new">New</li>
@@ -879,7 +882,7 @@
             </ul>
         </li>
     </ul>
-    <div class="window-body" style="margin: 6px; display: flex; gap: 6px; align-items: flex-start;">
+    <div class="window-body" style="margin: 6px; display: flex; gap: 6px; align-items: stretch; flex: 1; min-height: 0;">
         <div style="display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;">
             <div class="sunken-panel" id="paint-toolbox" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; padding: 3px; width: 60px;">
                 <button type="button" class="paint-tool" data-tool="lasso" title="Free-Form Select" aria-label="Free-Form Select"></button>
@@ -905,7 +908,7 @@
             </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;">
-            <div class="sunken-panel" id="paint-canvas-wrap" style="padding: 0; overflow: auto; max-width: 100%; max-height: 420px; position: relative; background: #808080;">
+            <div class="sunken-panel" id="paint-canvas-wrap" style="padding: 0; overflow: auto; max-width: 100%; flex: 1; min-height: 0; position: relative; background: #808080;">
                 <div id="paint-canvas-container" style="position: relative; width: 480px; height: 320px; margin: 3px;">
                     <canvas id="paint-canvas" width="480" height="320" style="display: block; background: #fff;"></canvas>
                     <canvas id="paint-overlay" width="480" height="320" style="display: block; position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none;"></canvas>
