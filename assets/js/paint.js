@@ -901,7 +901,6 @@ const bindMenuActions = () => {
     document.getElementById('paint-menu-flip-v').onclick = () => flip(false);
     document.getElementById('paint-menu-invert').onclick = invertColors;
     document.getElementById('paint-menu-clear-image').onclick = clearImage;
-    document.getElementById('paint-menu-edit-colors').onclick = () => openColorPicker('primary');
     document.getElementById('paint-menu-about').onclick = () => alert('Paint\nA tiny MS Paint clone built for Uluç\'s portfolio.\n(Not affiliated with Microsoft.)');
 };
 
