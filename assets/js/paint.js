@@ -177,7 +177,7 @@ const PALETTE = [
 ];
 
 let base, baseCtx, overlay, overlayCtx, canvasWrap;
-let sizeInput, statusEl, coordsEl, zoomFieldEl;
+let optionsEl, statusEl, coordsEl, zoomFieldEl;
 let primarySwatchEl, secondarySwatchEl, colorPickerEl;
 
 const state = {
@@ -185,6 +185,7 @@ const state = {
     primary: '#000000',
     secondary: '#ffffff',
     size: 4,
+    shape: 'round',
     isPointerDown: false,
     button: 0,
     startPos: null,
@@ -336,22 +337,26 @@ const paintStroke = (pos, isStart) => {
     const color = state.button === 2 ? state.secondary : state.primary;
     let drawColor = color;
     let size = state.size;
-    let cap = 'round';
+    let cap = state.shape || 'round';
 
     if (state.tool === 'pencil') size = 1;
-    if (state.tool === 'eraser') { drawColor = '#ffffff'; size = Math.max(size, 8); cap = 'square'; }
+    if (state.tool === 'eraser') { drawColor = state.secondary; size = Math.max(size, 8); cap = 'square'; }
     if (state.tool === 'airbrush') { sprayDots(pos, drawColor, size); return; }
 
     baseCtx.strokeStyle = drawColor;
     baseCtx.fillStyle = drawColor;
     baseCtx.lineWidth = size;
     baseCtx.lineCap = cap;
-    baseCtx.lineJoin = 'round';
+    baseCtx.lineJoin = cap === 'square' ? 'miter' : 'round';
 
     if (isStart) {
-        baseCtx.beginPath();
-        baseCtx.arc(pos.x, pos.y, size / 2, 0, Math.PI * 2);
-        baseCtx.fill();
+        if (cap === 'square') {
+            baseCtx.fillRect(pos.x - size/2, pos.y - size/2, size, size);
+        } else {
+            baseCtx.beginPath();
+            baseCtx.arc(pos.x, pos.y, size / 2, 0, Math.PI * 2);
+            baseCtx.fill();
+        }
     } else {
         baseCtx.beginPath();
         baseCtx.moveTo(state.lastPos.x, state.lastPos.y);
@@ -910,6 +915,82 @@ const openColorPicker = (which) => {
 
 // ---------------- toolbox ----------------
 
+const renderToolOptions = () => {
+    if (!optionsEl) return;
+    optionsEl.innerHTML = '';
+    optionsEl.style.display = 'flex';
+    
+    if (['brush', 'eraser', 'airbrush', 'line', 'curve'].includes(state.tool)) {
+        const sizes = [2, 4, 8];
+        const isBrush = state.tool === 'brush';
+        sizes.forEach(sz => {
+            const btn = document.createElement('div');
+            btn.style.width = '100%';
+            btn.style.height = '18px';
+            btn.style.display = 'flex';
+            btn.style.alignItems = 'center';
+            btn.style.justifyContent = 'center';
+            btn.style.cursor = 'pointer';
+            btn.style.background = state.size === sz && (!isBrush || state.shape === 'round') ? '#000080' : 'transparent';
+            btn.style.color = state.size === sz && (!isBrush || state.shape === 'round') ? '#fff' : '#000';
+            
+            const indicator = document.createElement('div');
+            indicator.style.background = btn.style.color;
+            if (state.tool === 'line' || state.tool === 'curve') {
+                indicator.style.width = '30px';
+                indicator.style.height = `${sz}px`;
+            } else {
+                indicator.style.width = `${sz*2}px`;
+                indicator.style.height = `${sz*2}px`;
+                indicator.style.borderRadius = '50%';
+            }
+            btn.appendChild(indicator);
+            
+            btn.onclick = () => {
+                state.size = sz;
+                state.shape = 'round';
+                renderToolOptions();
+            };
+            optionsEl.appendChild(btn);
+        });
+        
+        if (isBrush) {
+            // Add square shapes
+            sizes.forEach(sz => {
+                const btn = document.createElement('div');
+                btn.style.width = '100%';
+                btn.style.height = '18px';
+                btn.style.display = 'flex';
+                btn.style.alignItems = 'center';
+                btn.style.justifyContent = 'center';
+                btn.style.cursor = 'pointer';
+                btn.style.background = state.size === sz && state.shape === 'square' ? '#000080' : 'transparent';
+                
+                const indicator = document.createElement('div');
+                indicator.style.background = state.size === sz && state.shape === 'square' ? '#fff' : '#000';
+                indicator.style.width = `${sz*2}px`;
+                indicator.style.height = `${sz*2}px`;
+                btn.appendChild(indicator);
+                
+                btn.onclick = () => {
+                    state.size = sz;
+                    state.shape = 'square';
+                    renderToolOptions();
+                };
+                optionsEl.appendChild(btn);
+            });
+            // Make optionsEl scrollable if too many
+            optionsEl.style.overflowY = 'auto';
+            optionsEl.style.justifyContent = 'flex-start';
+        } else {
+            optionsEl.style.overflowY = 'hidden';
+            optionsEl.style.justifyContent = 'center';
+        }
+    } else {
+        optionsEl.style.display = 'none';
+    }
+};
+
 const setupToolbox = () => {
     document.querySelectorAll('.paint-tool').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -925,8 +1006,11 @@ const setupToolbox = () => {
 
             overlay.style.cursor = state.tool === 'text' ? 'text' : 'crosshair';
             setStatus(`${TOOL_LABELS[state.tool]} selected.`);
+            
+            renderToolOptions();
         });
     });
+    renderToolOptions();
 };
 
 // ---------------- keyboard shortcuts (only while Paint is the active window) ----------------
@@ -1023,7 +1107,7 @@ const init = () => {
     baseCtx = base.getContext('2d', { willReadFrequently: true });
     overlayCtx = overlay.getContext('2d');
     canvasWrap = document.getElementById('paint-canvas-wrap');
-    sizeInput = document.getElementById('paint-brush-size');
+    optionsEl = document.getElementById('paint-tool-options');
     statusEl = document.getElementById('paint-status');
     coordsEl = document.getElementById('paint-coords');
     zoomFieldEl = document.getElementById('paint-zoom-field');
@@ -1050,8 +1134,7 @@ const init = () => {
     overlay.addEventListener('contextmenu', (e) => e.preventDefault());
     overlay.addEventListener('dblclick', () => { if (state.tool === 'polygon') finalizePolygon(); });
 
-    sizeInput.addEventListener('input', () => { state.size = parseInt(sizeInput.value, 10); });
-
+    
     document.getElementById('paint-color-indicator').addEventListener('dblclick', () => openColorPicker('primary'));
 };
 

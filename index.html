@@ -871,11 +871,7 @@
                 <li id="paint-menu-clear-image">Clear Image</li>
             </ul>
         </li>
-        <li style="position: relative;"><span style="text-decoration: underline;">O</span>ptions
-            <ul class="context-menu" id="paint-options-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
-                <li id="paint-menu-edit-colors">Edit Colors...</li>
-            </ul>
-        </li>
+
         <li style="position: relative;"><span style="text-decoration: underline;">H</span>elp
             <ul class="context-menu" id="paint-help-menu" style="display: none; top: 18px; left: 0; min-width: 150px;">
                 <li id="paint-menu-about">About Paint</li>
@@ -902,9 +898,8 @@
                 <button type="button" class="paint-tool" data-tool="ellipse" title="Ellipse" aria-label="Ellipse"></button>
                 <button type="button" class="paint-tool" data-tool="roundrect" title="Rounded Rectangle" aria-label="Rounded Rectangle"></button>
             </div>
-            <div class="sunken-panel" style="padding: 6px; display: flex; flex-direction: column; gap: 4px; width: 48px; align-items: center;">
-                <label for="paint-brush-size" style="font-size: 10px;">Size</label>
-                <input type="range" id="paint-brush-size" min="1" max="30" value="4" orient="vertical"/>
+            <div class="sunken-panel" id="paint-tool-options" style="width: 60px; height: 65px; margin-top: 4px; box-sizing: border-box; background: #c3c3c3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                <!-- dynamic tool options -->
             </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0;">

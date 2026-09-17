@@ -351,3 +351,82 @@ select:focus option {
 select:active {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='16' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h16v17H0V0zm1 16h14V1H1v15z' fill='gray'/%3E%3Cpath fill='silver' d='M1 1h14v15H1z'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 7H5v1h1v1h1v1h1v1h1v-1h1V9h1V8h1V7z' fill='%23000'/%3E%3C/svg%3E")
 }
+
+/* ---- Paint app controls ---- */
+/* Tool + palette buttons must escape the default win98 "hidden text" trick
+   (color:transparent + text-shadow:0 0) since they render glyphs/swatches, not text */
+.paint-tool {
+    min-width: 0;
+    min-height: 0;
+    width: 27px;
+    height: 24px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+    color: initial;
+    text-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paint-tool.selected {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.paint-palette-swatch {
+    min-width: 0;
+    min-height: 0;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 1px solid #808080;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+button.paint-palette-swatch:active {
+    box-shadow: none;
+    outline: 1px solid #000;
+    outline-offset: -2px;
+}
+
+#paint-brush-size {
+    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    width: 20px;
+    height: 90px;
+}
+
+/* Toolbox icons: plain emoji render inconsistently across OS/fonts, so each
+   tool gets a small monochrome inline SVG background instead. */
+#paint-toolbox {
+    overflow: visible;
+    grid-auto-rows: 26px;
+}
+
+.paint-tool {
+    font-size: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+}
+
+.paint-tool[data-tool='lasso'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M3%206c0-2%202-3%205-3s6%201%206%204-3%205-6%205-5-2-5-6z%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-dasharray%3D%222%2C1.4%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='select'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%222.5%22%20y%3D%223.5%22%20width%3D%2211%22%20height%3D%229%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-dasharray%3D%222%2C1.4%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='eraser'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cg%20transform%3D%22rotate%28-25%208%208%29%22%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%229%22%20height%3D%226%22%20fill%3D%22%23fff%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22/%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%229%22%20height%3D%223%22%20fill%3D%22%23ec6ea8%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22/%3E%3C/g%3E%3C/svg%3E"); }
+.paint-tool[data-tool='fill'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M3%208l5-5%205%205-5%205-5-5z%22%20fill%3D%22%23c9a3d4%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22/%3E%3Cpath%20d%3D%22M4.5%209.5c-1%201.5-1.5%202.7-1.5%203.3%200%20.9.9%201.2%201.5%201.2s1.5-.3%201.5-1.2c0-.6-.5-1.8-1.5-3.3z%22%20fill%3D%22%233f48cc%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='eyedropper'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M11%202l3%203-2%202-3-3z%22%20fill%3D%22%23c9a3d4%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3Cpath%20d%3D%22M10.5%204.5l-7%207-2%203%203-2%207-7z%22%20fill%3D%22%23fff%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='zoom'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Ccircle%20cx%3D%227%22%20cy%3D%227%22%20r%3D%224.2%22%20fill%3D%22%23fff%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22/%3E%3Cline%20x1%3D%2210.2%22%20y1%3D%2210.2%22%20x2%3D%2214%22%20y2%3D%2214%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='pencil'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M3%2013l0.6-3.2%207-7%202.6%202.6-7%207z%22%20fill%3D%22%23ffd23f%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.1%22/%3E%3Cpath%20d%3D%22M10.6%202.8l2.6%202.6%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.1%22/%3E%3Cpath%20d%3D%22M3%2013l2.6-0.6-2-2z%22%20fill%3D%22%23c98a4b%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='brush'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M9.5%202.5c1.2-1%202.7-0.6%203%200.6.3%201.2-0.6%202-1.6%202.6l-3%202-1.6-1.6z%22%20fill%3D%22%237092be%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3Cpath%20d%3D%22M6.3%206.1l1.6%201.6-3.4%204.6c-.5.7-1.6.7-2.1%200-.5-.6-.4-1.4.2-1.9z%22%20fill%3D%22%23b97a57%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='airbrush'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%225%22%20height%3D%223%22%20rx%3D%220.6%22%20fill%3D%22%23c3c3c3%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3Cpath%20d%3D%22M7%206l6-2M7%209l6%202%22%20stroke%3D%22%23000%22%20stroke-width%3D%221%22/%3E%3Ccircle%20cx%3D%2211%22%20cy%3D%224%22%20r%3D%220.6%22%20fill%3D%22%23000%22/%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%226%22%20r%3D%220.5%22%20fill%3D%22%23000%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2210%22%20r%3D%220.5%22%20fill%3D%22%23000%22/%3E%3Ccircle%20cx%3D%2213.5%22%20cy%3D%228.5%22%20r%3D%220.4%22%20fill%3D%22%23000%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='text'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Ctext%20x%3D%228%22%20y%3D%2212.5%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2C%20serif%22%20font-size%3D%2212%22%20font-weight%3D%22bold%22%20fill%3D%22%23000%22%3EA%3C/text%3E%3C/svg%3E"); }
+.paint-tool[data-tool='line'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cline%20x1%3D%222.5%22%20y1%3D%2213.5%22%20x2%3D%2213.5%22%20y2%3D%222.5%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='curve'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M2.5%2012c2-6%208-8%2011-2%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='rect'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%222.5%22%20y%3D%224%22%20width%3D%2211%22%20height%3D%228%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='polygon'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20d%3D%22M8%202l5.5%204-2%206.5h-7l-2-6.5z%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='ellipse'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cellipse%20cx%3D%228%22%20cy%3D%228%22%20rx%3D%225.8%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22/%3E%3C/svg%3E"); }
+.paint-tool[data-tool='roundrect'] { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%222.5%22%20y%3D%224%22%20width%3D%2211%22%20height%3D%228%22%20rx%3D%222.5%22%20ry%3D%222.5%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.3%22/%3E%3C/svg%3E"); }
