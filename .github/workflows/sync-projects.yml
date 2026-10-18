@@ -25,14 +25,16 @@ jobs:
             exit 1
           fi
           git submodule sync
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global url."https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
           # Explicitly set the URL to ensure it uses the new repository name
           git config submodule.projects.url "https://github.com/UlucKaymak/Portfolio-projectDatabase.git"
-          git submodule update --init --recursive projects
+          git submodule update --init --recursive projects || true
           
       - name: Update Submodule
         run: |
-          git submodule update --remote --merge projects
+          git submodule update --remote --force projects
           
       - name: Sync projects.json
         run: |
@@ -47,8 +49,6 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add projects projects.json
           if git diff --staged --quiet; then
             echo "No changes to commit"
