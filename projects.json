@@ -1,9 +1,35 @@
 [
   {
+    "id": "videogame-leafborn",
+    "title": "Leafborn | Demo Teaser",
+    "type": "Teaser Video Soundtrack",
+    "date": "2026_10_12",
+    "role": "Soundtrack Composer",
+    "thumbnail": "2026_10_15-VideoGame-Leafborn/Leafborn-Thumbnail.png",
+    "media": [
+      "https://www.youtube.com/watch?v=DZhWPp3fjLk",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/eb66358c8437422500745f9468fe4e978cf030e2/ss_eb66358c8437422500745f9468fe4e978cf030e2.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/4433d4473d8dfcb2b8a2991837cd159a04f6f3af/ss_4433d4473d8dfcb2b8a2991837cd159a04f6f3af.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/9257155f0f8a12cd56c49af5c215f0e4c10e0997/ss_9257155f0f8a12cd56c49af5c215f0e4c10e0997.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/ef27b7f8901e7b986a13c788386528ae4ef950e3/ss_ef27b7f8901e7b986a13c788386528ae4ef950e3.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/c7691a8c40545d60a4679d91667e36d0991e37ac/ss_c7691a8c40545d60a4679d91667e36d0991e37ac.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/28be679ceb6099f02a4f5c3d5637fe7d162e6afa/ss_28be679ceb6099f02a4f5c3d5637fe7d162e6afa.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/c53f287628a82773f9ea280bfa4eb208919926a9/ss_c53f287628a82773f9ea280bfa4eb208919926a9.1920x1080.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4247440/ea6d09421c69d85de2357a4d2b4442bcf187d9b5/ss_ea6d09421c69d85de2357a4d2b4442bcf187d9b5.1920x1080.jpg"
+    ],
+    "tags": [
+      "#VideoGame",
+      "#Soundtrack",
+      "#Audio"
+    ],
+    "enabled": true,
+    "contentPath": "2026_10_15-VideoGame-Leafborn/description.md"
+  },
+  {
     "id": "tuesdaymarket-potato",
     "title": "Potato.Exe | Reveal Teaser",
-    "type": "Teaser Video",
-    "date": "2026_03_06",
+    "type": "Teaser Video Soundtrack",
+    "date": "2026_08_16",
     "role": "Soundtrack Composer",
     "thumbnail": "2026_08_15-TuesdayMarket-PotatoExe/PotatoTitleShot.jpeg",
     "media": [
@@ -50,7 +76,7 @@
   {
     "id": "inevgames-kardiyateaser",
     "title": "Kardiya: the Winds of Fate | Reveal Teaser",
-    "type": "Teaser Video",
+    "type": "Teaser Video Soundtrack",
     "date": "2026_03_06",
     "role": "Motion Grapher, Soundtrack Composer",
     "thumbnail": "2026_04-InEvGames-Kardiya_Teaser/Kardiya-Teaser-ThumbnailKare.png",
