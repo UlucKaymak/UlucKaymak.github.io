@@ -31,17 +31,19 @@
     "type": "Teaser Video Soundtrack",
     "date": "2026_08_16",
     "role": "Soundtrack Composer",
-    "thumbnail": "2026_08_15-TuesdayMarket-PotatoExe/PotatoTitleShot.jpeg",
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/4fa13023ebd7eeea6c78dcca66b7d0bb22aa9af2/header.jpg",
     "media": [
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/9691a7e5baf27109c64a6f34a5372438410dc31b/ss_9691a7e5baf27109c64a6f34a5372438410dc31b.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/2182b67af8da6b1a2c29b7bd8a70dff167edee65/ss_2182b67af8da6b1a2c29b7bd8a70dff167edee65.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/f913bc18c65974008a3e22fa1180ab2b58bcf241/ss_f913bc18c65974008a3e22fa1180ab2b58bcf241.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/fa71631fea9ac6396e6cc6edf35024544cc17802/ss_fa71631fea9ac6396e6cc6edf35024544cc17802.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/064dd300bbdf0ee655c90c440c0edcf1e9a5416e/ss_064dd300bbdf0ee655c90c440c0edcf1e9a5416e.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/3ff5987529bf6b6351275267df9757b053f585a3/ss_3ff5987529bf6b6351275267df9757b053f585a3.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/264f9100ac821cc2e168bce14c396923cae62898/ss_264f9100ac821cc2e168bce14c396923cae62898.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/4f9234c4db041d8094c9894013abd40961f8ec98/ss_4f9234c4db041d8094c9894013abd40961f8ec98.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5179880/33996c1afc4425fd947bc120d695c293404efbb7/ss_33996c1afc4425fd947bc120d695c293404efbb7.1920x1080.jpg"
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/4fa13023ebd7eeea6c78dcca66b7d0bb22aa9af2/header.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/ab836059224276009d78bc8f98d2405a530db92d/capsule_184x69.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/9691a7e5baf27109c64a6f34a5372438410dc31b/ss_9691a7e5baf27109c64a6f34a5372438410dc31b.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/2182b67af8da6b1a2c29b7bd8a70dff167edee65/ss_2182b67af8da6b1a2c29b7bd8a70dff167edee65.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/f913bc18c65974008a3e22fa1180ab2b58bcf241/ss_f913bc18c65974008a3e22fa1180ab2b58bcf241.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/fa71631fea9ac6396e6cc6edf35024544cc17802/ss_fa71631fea9ac6396e6cc6edf35024544cc17802.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/064dd300bbdf0ee655c90c440c0edcf1e9a5416e/ss_064dd300bbdf0ee655c90c440c0edcf1e9a5416e.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/3ff5987529bf6b6351275267df9757b053f585a3/ss_3ff5987529bf6b6351275267df9757b053f585a3.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/264f9100ac821cc2e168bce14c396923cae62898/ss_264f9100ac821cc2e168bce14c396923cae62898.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/4f9234c4db041d8094c9894013abd40961f8ec98/ss_4f9234c4db041d8094c9894013abd40961f8ec98.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/33996c1afc4425fd947bc120d695c293404efbb7/ss_33996c1afc4425fd947bc120d695c293404efbb7.1920x1080.jpg"
     ],
     "tags": [
       "#VideoGame",
@@ -59,12 +61,12 @@
     "type": "App",
     "date": "2026_08",
     "role": "Creative Coder",
-    "thumbnail": "2026_08-uluc_app-Stickurr/Stickurr.jpeg",
+    "thumbnail": "2026_08-uluc_app-Stickurr/Stickurr_cropped.jpeg",
     "media": [
-      "2026_08-uluc_app-Stickurr/Stickurr.jpeg",
       "2026_08-uluc_app-Stickurr/screenshot1.jpeg",
       "2026_08-uluc_app-Stickurr/screenshot2.jpeg",
-      "2026_08-uluc_app-Stickurr/screenshot3.jpeg"
+      "2026_08-uluc_app-Stickurr/screenshot3.jpeg",
+      "2026_08-uluc_app-Stickurr/Stickurr_cropped.jpeg"
     ],
     "tags": [
       "#CreativeCoding",
@@ -79,17 +81,22 @@
     "type": "Teaser Video Soundtrack",
     "date": "2026_03_06",
     "role": "Motion Grapher, Soundtrack Composer",
-    "thumbnail": "2026_04-InEvGames-Kardiya_Teaser/Kardiya-Teaser-ThumbnailKare.png",
+    "thumbnail": "2026_04-InEvGames-Kardiya_Teaser/Kardiya-Teaser-Thumbnail.jpeg",
     "media": [
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/4c895c3260bb7861b0b0ae61935605b73bc978f7/ss_4c895c3260bb7861b0b0ae61935605b73bc978f7.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/f3377bace336efdd7faac681b9df35e5f47b8ed5/ss_f3377bace336efdd7faac681b9df35e5f47b8ed5.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/c2a174570ca5852c08f3b04bb9b71aaee982f167/ss_c2a174570ca5852c08f3b04bb9b71aaee982f167.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/328dcf226535094396c1f7e8c36bfe4560def957/ss_328dcf226535094396c1f7e8c36bfe4560def957.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/296a80256e8c76e834b36bae138b478652d329a5/ss_296a80256e8c76e834b36bae138b478652d329a5.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/ea09cd98258285c4d1e891d0f49c077c9e7c24ac/ss_ea09cd98258285c4d1e891d0f49c077c9e7c24ac.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/1c61778d30f44f7641210dad6af73b36d7940f78/ss_1c61778d30f44f7641210dad6af73b36d7940f78.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/5b8ad9f86e999fc5e69dd4b05fe06f2189e6f312/ss_5b8ad9f86e999fc5e69dd4b05fe06f2189e6f312.1920x1080.jpg",
-      "https://youtu.be/fWqNdUKE4DE"
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb/ss_fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e/ss_9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/1c61778d30f44f7641210dad6af73b36d7940f78/ss_1c61778d30f44f7641210dad6af73b36d7940f78.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/328dcf226535094396c1f7e8c36bfe4560def957/ss_328dcf226535094396c1f7e8c36bfe4560def957.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/dd957117919fe225ed441b084cd5be61b5351cb3/ss_dd957117919fe225ed441b084cd5be61b5351cb3.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/f767bc5b0c3f390be0fd13d7127c5fb37aa73f60/ss_f767bc5b0c3f390be0fd13d7127c5fb37aa73f60.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/587e3aa5a501a8b4ac4bbe9c725b2461b2f678bc/ss_587e3aa5a501a8b4ac4bbe9c725b2461b2f678bc.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/08e9e5a5cc31440ea112e7fd5a760577fbecd2ca/ss_08e9e5a5cc31440ea112e7fd5a760577fbecd2ca.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/9952a88fed6d53773c9170faf5e24b1ffa7618d7/ss_9952a88fed6d53773c9170faf5e24b1ffa7618d7.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/db626b3ea971649e3a800bbc8dd3b0d9ef21bca8/ss_db626b3ea971649e3a800bbc8dd3b0d9ef21bca8.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/32b28d677eeca85bbf916f2b4a2c90a45e5dcc00/ss_32b28d677eeca85bbf916f2b4a2c90a45e5dcc00.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/2f428c47cd945e28e35725fe023cd2f2e2c51ce3/ss_2f428c47cd945e28e35725fe023cd2f2e2c51ce3.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/f2dbc87ef2957c3f808ea2422b2abeef28ef054c/ss_f2dbc87ef2957c3f808ea2422b2abeef28ef054c.1920x1080.jpg",
+      "2026_04-InEvGames-Kardiya_Teaser/Kardiya-Teaser-Thumbnail.jpeg"
     ],
     "tags": [
       "#VideoGame",
@@ -107,18 +114,22 @@
     "type": "Video Game",
     "date": "2026_03_06",
     "role": "Soundtrack Composer, Audio Engineer, and some other things",
-    "thumbnail": "2026_03_06-InEvGames-Kardiya/KardiyaCapsule_Square.png",
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/54ca8566335f7b0f030632f9903fb0810c597e7a/header.jpg",
     "media": [
-      "2026_03_06-InEvGames-Kardiya/KardiyaCapsule_Square.png",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb/ss_fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e/ss_9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/1c61778d30f44f7641210dad6af73b36d7940f78/ss_1c61778d30f44f7641210dad6af73b36d7940f78.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/dd957117919fe225ed441b084cd5be61b5351cb3/ss_dd957117919fe225ed441b084cd5be61b5351cb3.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/f767bc5b0c3f390be0fd13d7127c5fb37aa73f60/ss_f767bc5b0c3f390be0fd13d7127c5fb37aa73f60.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/08e9e5a5cc31440ea112e7fd5a760577fbecd2ca/ss_08e9e5a5cc31440ea112e7fd5a760577fbecd2ca.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/db626b3ea971649e3a800bbc8dd3b0d9ef21bca8/ss_db626b3ea971649e3a800bbc8dd3b0d9ef21bca8.1920x1080.jpg?t=1789804703",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3189020/32b28d677eeca85bbf916f2b4a2c90a45e5dcc00/ss_32b28d677eeca85bbf916f2b4a2c90a45e5dcc00.1920x1080.jpg?t=1789804703",
-      "https://youtu.be/fWqNdUKE4DE"
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/54ca8566335f7b0f030632f9903fb0810c597e7a/header.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb/ss_fd70f2fa10d9d145bc4ab3f2c0bb384a7f07fddb.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e/ss_9782734cf5afb99b6d094a0dc1dc3e54fb03cf4e.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/1c61778d30f44f7641210dad6af73b36d7940f78/ss_1c61778d30f44f7641210dad6af73b36d7940f78.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/328dcf226535094396c1f7e8c36bfe4560def957/ss_328dcf226535094396c1f7e8c36bfe4560def957.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/dd957117919fe225ed441b084cd5be61b5351cb3/ss_dd957117919fe225ed441b084cd5be61b5351cb3.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/f767bc5b0c3f390be0fd13d7127c5fb37aa73f60/ss_f767bc5b0c3f390be0fd13d7127c5fb37aa73f60.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/587e3aa5a501a8b4ac4bbe9c725b2461b2f678bc/ss_587e3aa5a501a8b4ac4bbe9c725b2461b2f678bc.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/08e9e5a5cc31440ea112e7fd5a760577fbecd2ca/ss_08e9e5a5cc31440ea112e7fd5a760577fbecd2ca.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/9952a88fed6d53773c9170faf5e24b1ffa7618d7/ss_9952a88fed6d53773c9170faf5e24b1ffa7618d7.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/db626b3ea971649e3a800bbc8dd3b0d9ef21bca8/ss_db626b3ea971649e3a800bbc8dd3b0d9ef21bca8.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/32b28d677eeca85bbf916f2b4a2c90a45e5dcc00/ss_32b28d677eeca85bbf916f2b4a2c90a45e5dcc00.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/2f428c47cd945e28e35725fe023cd2f2e2c51ce3/ss_2f428c47cd945e28e35725fe023cd2f2e2c51ce3.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3189020/f2dbc87ef2957c3f808ea2422b2abeef28ef054c/ss_f2dbc87ef2957c3f808ea2422b2abeef28ef054c.1920x1080.jpg"
     ],
     "tags": [
       "#VideoGame",
@@ -135,14 +146,15 @@
     "type": "Video Game",
     "date": "2025_12_06",
     "role": "Soundtrack Composer, UX Consultant",
-    "thumbnail": "2025_07-iBright-MiLord/Milord-Thumbnail.jpeg",
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/header.jpg",
     "media": [
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/3afbb9c3e2abdeaa9d717c2c6ce5d2fcf8e905c9/ss_3afbb9c3e2abdeaa9d717c2c6ce5d2fcf8e905c9.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/88b717d942f7246c60ba2079ebb39391ebe36988/ss_88b717d942f7246c60ba2079ebb39391ebe36988.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/291510d9c5434349f69018ec0a0ed1c6f436f695/ss_291510d9c5434349f69018ec0a0ed1c6f436f695.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/25cfd659aa256bfb4afbf3418fcfbf046b401c39/ss_25cfd659aa256bfb4afbf3418fcfbf046b401c39.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/7ce46af9e76d1e45c67f14150dcb53bfd83ddfcc/ss_7ce46af9e76d1e45c67f14150dcb53bfd83ddfcc.1920x1080.jpg",
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2455460/51092c375b57686d3b13e13d8f854e83ba455eb9/ss_51092c375b57686d3b13e13d8f854e83ba455eb9.1920x1080.jpg"
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/header.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/3afbb9c3e2abdeaa9d717c2c6ce5d2fcf8e905c9/ss_3afbb9c3e2abdeaa9d717c2c6ce5d2fcf8e905c9.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/88b717d942f7246c60ba2079ebb39391ebe36988/ss_88b717d942f7246c60ba2079ebb39391ebe36988.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/291510d9c5434349f69018ec0a0ed1c6f436f695/ss_291510d9c5434349f69018ec0a0ed1c6f436f695.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/25cfd659aa256bfb4afbf3418fcfbf046b401c39/ss_25cfd659aa256bfb4afbf3418fcfbf046b401c39.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/7ce46af9e76d1e45c67f14150dcb53bfd83ddfcc/ss_7ce46af9e76d1e45c67f14150dcb53bfd83ddfcc.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2455460/51092c375b57686d3b13e13d8f854e83ba455eb9/ss_51092c375b57686d3b13e13d8f854e83ba455eb9.1920x1080.jpg"
     ],
     "tags": [
       "#VideoGame",
@@ -311,20 +323,15 @@
     "type": "Video Game",
     "date": "2025_05_02",
     "role": "Soundtrack Composer, Audio Engineer, Audio FXs, and some other things",
-    "thumbnail": "2025_06-InEvGames-Livber/Livber-Square.jpeg",
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/bd2799296bd2ccdcf70023b2b18958aed1815f66/header.jpg",
     "media": [
-      "2025_06-InEvGames-Livber/Livber-Square.jpeg",
-      "https://open.spotify.com/track/2PTYyUZuy9lFylkzU2qIr8?si=b264a379aa1d4561",
-      "https://open.spotify.com/track/0LLHSIlwPEFMZ4o6sApmvh?si=9888804cf1c74198",
-      "https://open.spotify.com/track/1qkzakpfD2U8QLyvzrlmNj?si=c493d122b2d74d48",
-      "https://www.youtube.com/watch?v=JXUwuZWjZIg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/bd2799296bd2ccdcf70023b2b18958aed1815f66/header.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/8c5fe209edf3b9407b0ad2f0428d9ed4f845fd44/ss_8c5fe209edf3b9407b0ad2f0428d9ed4f845fd44.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/a4ee7b463898df1cbb06e0d63da4d15dc40ea243/ss_a4ee7b463898df1cbb06e0d63da4d15dc40ea243.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/f8fab10bc717bd4bd006fed28c5456f03ec9e41d/ss_f8fab10bc717bd4bd006fed28c5456f03ec9e41d.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/78c20b0fae32b6d718065863be343bd6d2e05589/ss_78c20b0fae32b6d718065863be343bd6d2e05589.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/46664679072c3c1ab09cc9378e9d1affe5dda09c/ss_46664679072c3c1ab09cc9378e9d1affe5dda09c.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/0cc59b13d121b62f69855394e227a8ff74b32402/ss_0cc59b13d121b62f69855394e227a8ff74b32402.1920x1080.jpg",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/d2b4c40a2e07456c1acb224982a16aca7377e781/ss_d2b4c40a2e07456c1acb224982a16aca7377e781.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/3c4cd259f2279a148d2295fb7b83e0410882df2a/ss_3c4cd259f2279a148d2295fb7b83e0410882df2a.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/3f8f206a778e2d0403f8897cc69912bc4fce20e9/ss_3f8f206a778e2d0403f8897cc69912bc4fce20e9.1920x1080.jpg"
     ],
@@ -440,9 +447,8 @@
     "type": "Algorithmic Art Piece",
     "date": "2024_09-Present",
     "role": "Creative Coder, Artist",
-    "thumbnail": "2024_09-uluc-UnseenImages/Artwork-UnseenImages.jpeg",
+    "thumbnail": "2024_09-uluc-UnseenImages/Unseen0.jpeg",
     "media": [
-      "2024_09-uluc-UnseenImages/Artwork-UnseenImages.jpeg",
       "2024_09-uluc-UnseenImages/Unseen0.jpeg",
       "2024_09-uluc-UnseenImages/Unseen1-1.jpeg",
       "2024_09-uluc-UnseenImages/Unseen1-2.jpeg",
@@ -504,7 +510,7 @@
     "type": "Album Cover Art",
     "date": "2024",
     "role": "Album Cover Artist",
-    "thumbnail": "2024-AnlaKiAlbumCovers/ANLAKI_04-Cover.jpeg",
+    "thumbnail": "2024-AnlaKiAlbumCovers/anlakiyasadikca.jpeg",
     "media": [
       "2024-AnlaKiAlbumCovers/ANLAKI_04-Cover.jpeg",
       "2024-AnlaKiAlbumCovers/AnlaKi-BlenderExport.jpeg",
@@ -535,8 +541,7 @@
     "thumbnail": "2023_12-uluc-motivasyonkonusmasi/MotivasyonKonuşması2.jpeg",
     "media": [
       "2023_12-uluc-motivasyonkonusmasi/MotivasyonKonuşması2.jpeg",
-      "https://open.spotify.com/album/4AVGtbc3M8loPLVHmRR4HS?si=HIJiyscqRey4dne-pv7HZg",
-      "https://open.spotify.com/track/7kFoP6ly3ITH9pntfCJHSO?si=f78de78abcfe4e61"
+      "https://open.spotify.com/album/4AVGtbc3M8loPLVHmRR4HS?si=HIJiyscqRey4dne-pv7HZg"
     ],
     "tags": [
       "#AlbumCoverArt",
