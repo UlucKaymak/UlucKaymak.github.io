@@ -33,7 +33,7 @@ const updateTaskbar = () => {
             const win = document.getElementById(windowId);
             if (win) {
                 if (win.style.display === 'none' || !windowData.isActive) {
-                    win.style.display = 'block';
+                    win.style.display = win.dataset.display || 'block';
                     bringToFront(win);
                 } else {
                     // If window is already active, minimize it

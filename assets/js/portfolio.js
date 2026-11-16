@@ -1,15 +1,27 @@
 /**
- * Optimized Portfolio System - Combined modules for better performance
+ * Optimized Portfolio System - Search and indexing for SidePortfolio
  */
 
+import {
+    escapeHtml,
+    formatDate,
+    extractMiniDescription,
+    showProjectDetail
+} from './projects.js';
+import {
+    bringToFront,
+    closeWindow,
+    minimizeWindow,
+    setupDragging
+} from './windows.js';
 
 // Portfolio Loader
 class PortfolioLoader {
     async loadProjectsWithProgress() {
         try {
-            const response = await fetch('/projects.json');
+            const response = await fetch('projects.json');
             const projects = await response.json();
-            return Array.isArray(projects) ? projects : [];
+            return Array.isArray(projects) ? projects.filter(p => p.enabled) : [];
         } catch (error) {
             console.error('Failed to load projects:', error);
             return [];
@@ -17,25 +29,56 @@ class PortfolioLoader {
     }
 }
 
-// Search System  
+// Search System
 class SmartSearch {
     constructor(projects) {
         this.projects = projects;
+        this.miniDescMap = new Map();
         this.searchIndex = this.buildSearchIndex(projects);
+        this.hydrateDescriptions(projects);
     }
 
     buildSearchIndex(projects) {
-        return projects.map(project => ({
-            ...project,
-            searchText: `${project.title} ${project.description} ${project.type} ${(project.tags || []).join(' ')}`.toLowerCase()
+        return projects.map(project => {
+            const desc = this.miniDescMap.get(project.id) || project.description || '';
+            return {
+                ...project,
+                miniDescription: desc,
+                searchText: `${project.title || ''} ${desc} ${project.type || ''} ${project.role || ''} ${(project.tags || []).join(' ')}`.toLowerCase()
+            };
+        });
+    }
+
+    async hydrateDescriptions(projects) {
+        await Promise.all(projects.map(async (project) => {
+            if (project.description) {
+                this.miniDescMap.set(project.id, project.description);
+                return;
+            }
+            if (!project.contentPath) return;
+            try {
+                const path = (!project.contentPath.startsWith('http') && !project.contentPath.startsWith('/'))
+                    ? 'projects/' + project.contentPath
+                    : project.contentPath;
+                const res = await fetch(encodeURI(path));
+                if (!res.ok) return;
+                const text = await res.text();
+                const mini = extractMiniDescription(text);
+                if (mini) {
+                    this.miniDescMap.set(project.id, mini);
+                }
+            } catch (e) {
+                // Ignore individual fetch errors
+            }
         }));
+        this.searchIndex = this.buildSearchIndex(this.projects);
     }
 
     search(query) {
-        if (!query.trim()) return this.projects;
-        
+        if (!query.trim()) return this.searchIndex;
+
         const terms = query.toLowerCase().split(' ').filter(term => term.length > 0);
-        return this.searchIndex.filter(project => 
+        return this.searchIndex.filter(project =>
             terms.every(term => project.searchText.includes(term))
         );
     }
@@ -45,10 +88,10 @@ class SmartSearch {
         searchWindow.className = 'window';
         searchWindow.id = 'search-window';
         searchWindow.style.cssText = 'width: 500px; display: none; z-index: 1000;';
-        
+
         searchWindow.innerHTML = `
             <div class="title-bar">
-                <div class="title-bar-text">🔍 Search Projects</div>
+                <div class="title-bar-text">Search Projects</div>
                 <div class="title-bar-controls">
                     <button class="minimize-btn" aria-label="Minimize"></button>
                     <button class="close-btn" aria-label="Close"></button>
@@ -64,7 +107,7 @@ class SmartSearch {
                 </div>
             </div>
         `;
-        
+
         this.setupSearchEvents(searchWindow);
         return searchWindow;
     }
@@ -72,14 +115,30 @@ class SmartSearch {
     setupSearchEvents(searchWindow) {
         const searchInput = searchWindow.querySelector('#search-input');
         const resultsDiv = searchWindow.querySelector('#search-results');
-        
+        const closeBtn = searchWindow.querySelector('.close-btn');
+        const minimizeBtn = searchWindow.querySelector('.minimize-btn');
+
+        if (closeBtn) closeBtn.addEventListener('click', () => closeWindow(searchWindow));
+        if (minimizeBtn) minimizeBtn.addEventListener('click', () => minimizeWindow(searchWindow));
+        searchWindow.addEventListener('mousedown', () => bringToFront(searchWindow));
+
         let debounceTimer;
         searchInput.addEventListener('input', (e) => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 const results = this.search(e.target.value);
                 this.displayResults(results, resultsDiv);
-            }, 300);
+            }, 200);
+        });
+
+        resultsDiv.addEventListener('click', (e) => {
+            const item = e.target.closest('.search-result-item');
+            if (!item) return;
+            const projId = item.getAttribute('data-project-id');
+            const project = this.projects.find(p => p.id === projId);
+            if (project) {
+                showProjectDetail(project);
+            }
         });
     }
 
@@ -89,14 +148,17 @@ class SmartSearch {
             return;
         }
 
-        container.innerHTML = results.map(project => `
-            <div class="search-result-item" style="border-bottom: 1px solid #ddd; padding: 8px; cursor: pointer;" 
-                 onclick="window.showProjectDetail && showProjectDetail(${JSON.stringify(project).replace(/"/g, '&quot;')})">
-                <div style="font-weight: bold; font-size: 12px;">${project.title}</div>
-                <div style="font-size: 10px; color: #666; margin: 2px 0;">${project.type} • ${project.date}</div>
-                <div style="font-size: 10px;">${project.description.substring(0, 100)}${project.description.length > 100 ? '...' : ''}</div>
-            </div>
-        `).join('');
+        container.innerHTML = results.map(project => {
+            const desc = project.miniDescription || project.description || project.role || '';
+            const snippet = desc.length > 120 ? desc.substring(0, 120) + '...' : desc;
+            return `
+                <div class="search-result-item" data-project-id="${escapeHtml(project.id)}" style="border-bottom: 1px solid #ddd; padding: 8px; cursor: pointer;">
+                    <div style="font-weight: bold; font-size: 12px;">${escapeHtml(project.title)}</div>
+                    <div style="font-size: 10px; color: #666; margin: 2px 0;">${escapeHtml(project.type)} | ${escapeHtml(formatDate(project.date))}</div>
+                    ${snippet ? `<div style="font-size: 10px;">${escapeHtml(snippet)}</div>` : ''}
+                </div>
+            `;
+        }).join('');
     }
 }
 
@@ -111,20 +173,19 @@ class PortfolioSystem {
 
     async initialize() {
         if (this.isInitialized) return;
-        
+
         try {
             this.projects = await this.loader.loadProjectsWithProgress();
             this.search = new SmartSearch(this.projects);
-            
+
             const searchWindow = this.search.createSearchInterface();
             document.body.appendChild(searchWindow);
-            
+            setupDragging(searchWindow);
+
             this.setupGlobalHotkeys(searchWindow);
-            this.setupProjectRecommendations();
-            
+
             this.isInitialized = true;
-            console.log('🚀 Portfolio system loaded');
-            
+            console.log('Portfolio system loaded');
         } catch (error) {
             console.error('Failed to initialize portfolio:', error);
         }
@@ -136,21 +197,18 @@ class PortfolioSystem {
                 e.preventDefault();
                 this.openSearch(searchWindow);
             }
-            
+
             if (e.key === 'Escape' && searchWindow.style.display !== 'none') {
-                searchWindow.style.display = 'none';
+                closeWindow(searchWindow);
             }
         });
     }
 
     openSearch(searchWindow) {
         searchWindow.style.display = 'block';
+        bringToFront(searchWindow);
         const searchInput = searchWindow.querySelector('#search-input');
         if (searchInput) searchInput.focus();
-    }
-
-    setupProjectRecommendations() {
-        // Project recommendations functionality can be added here if needed
     }
 
     getProjects() {

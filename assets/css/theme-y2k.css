@@ -143,6 +143,47 @@
     text-shadow: 1px 1px 3px rgba(214, 0, 111, 0.7), 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
+/* Project Detail window Y2K overrides */
+[data-theme="y2k"] .sp-detail-title,
+[data-theme="y2k"] .sp-heading-block-title,
+[data-theme="y2k"] .sp-metric-value,
+[data-theme="y2k"] .sp-section-eyebrow,
+[data-theme="y2k"] .sp-pipeline-index {
+    color: #d6006f;
+    text-shadow: none;
+}
+
+[data-theme="y2k"] .sp-gallery-header {
+    background: linear-gradient(90deg, var(--y2k-title-active-start), var(--y2k-title-active-end));
+}
+
+[data-theme="y2k"] .sp-heading-block-header,
+[data-theme="y2k"] .sp-subtitle-banner {
+    background: #fff0fa;
+    border-left-color: var(--y2k-accent);
+}
+
+[data-theme="y2k"] .sp-heading-block-index,
+[data-theme="y2k"] .sp-cta-btn.sp-cta-primary {
+    background: var(--y2k-accent);
+    color: #fff !important;
+}
+
+[data-theme="y2k"] .sp-cta-btn,
+[data-theme="y2k"] .sp-metric-cell {
+    background: var(--taskbar-bg);
+    box-shadow: inset -1px -1px var(--y2k-shadow-dark),
+                inset 1px 1px var(--y2k-shadow-light),
+                inset -2px -2px var(--y2k-shadow-mid-dark),
+                inset 2px 2px var(--y2k-shadow-mid-light);
+}
+
+[data-theme="y2k"] .sp-reader-statusbar,
+[data-theme="y2k"] .sp-toc-bar,
+[data-theme="y2k"] .sp-gallery-panel {
+    background: #ffe6f7;
+}
+
 /* Highlight selection tone stays baby-blue via --highlight-color already */
 
 /* ---------------- Sparkle cursor trail ---------------- */
