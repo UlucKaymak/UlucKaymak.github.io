@@ -34,7 +34,6 @@
     "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/4fa13023ebd7eeea6c78dcca66b7d0bb22aa9af2/header.jpg",
     "media": [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/4fa13023ebd7eeea6c78dcca66b7d0bb22aa9af2/header.jpg",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/ab836059224276009d78bc8f98d2405a530db92d/capsule_184x69.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/9691a7e5baf27109c64a6f34a5372438410dc31b/ss_9691a7e5baf27109c64a6f34a5372438410dc31b.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/2182b67af8da6b1a2c29b7bd8a70dff167edee65/ss_2182b67af8da6b1a2c29b7bd8a70dff167edee65.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5179880/f913bc18c65974008a3e22fa1180ab2b58bcf241/ss_f913bc18c65974008a3e22fa1180ab2b58bcf241.1920x1080.jpg",
@@ -268,7 +267,7 @@
     "title": "PersonA",
     "type": "Art Installation",
     "date": "2025_06_11",
-    "role": "Creative Coder",
+    "role": "Interaction Designer, Creative Coder",
     "thumbnail": "2025_06_11-Art-Persona/Cover.jpeg",
     "media": [
       "2025_06_11-Art-Persona/60x33cm_sergi_2025_siyah.jpeg",
@@ -278,7 +277,6 @@
       "2025_06_11-Art-Persona/img-00002.jpeg",
       "2025_06_11-Art-Persona/img-00003.jpeg",
       "2025_06_11-Art-Persona/img-00004.jpeg",
-      "2025_06_11-Art-Persona/img-00005.jpeg",
       "2025_06_11-Art-Persona/img-captured.0.jpg"
     ],
     "tags": [
@@ -307,8 +305,7 @@
       "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_1.jpg",
       "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_2.jpg",
       "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_3.jpg",
-      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_4.jpg",
-      "https://www.instagram.com/justalways.col/reel/DPonZ4RDFNu/?hl=om-et"
+      "2025_05_13-Focsel_ss25/2025-05-18_18-45-43_DJzjJ_-oLWZ_4.jpg"
     ],
     "tags": [
       "#Audio",
@@ -326,6 +323,7 @@
     "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/bd2799296bd2ccdcf70023b2b18958aed1815f66/header.jpg",
     "media": [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/bd2799296bd2ccdcf70023b2b18958aed1815f66/header.jpg",
+      "2025_06-InEvGames-Livber/LivberSpectogram.png",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/8c5fe209edf3b9407b0ad2f0428d9ed4f845fd44/ss_8c5fe209edf3b9407b0ad2f0428d9ed4f845fd44.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/a4ee7b463898df1cbb06e0d63da4d15dc40ea243/ss_a4ee7b463898df1cbb06e0d63da4d15dc40ea243.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/f8fab10bc717bd4bd006fed28c5456f03ec9e41d/ss_f8fab10bc717bd4bd006fed28c5456f03ec9e41d.1920x1080.jpg",
@@ -333,7 +331,11 @@
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/46664679072c3c1ab09cc9378e9d1affe5dda09c/ss_46664679072c3c1ab09cc9378e9d1affe5dda09c.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/0cc59b13d121b62f69855394e227a8ff74b32402/ss_0cc59b13d121b62f69855394e227a8ff74b32402.1920x1080.jpg",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/3c4cd259f2279a148d2295fb7b83e0410882df2a/ss_3c4cd259f2279a148d2295fb7b83e0410882df2a.1920x1080.jpg",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/3f8f206a778e2d0403f8897cc69912bc4fce20e9/ss_3f8f206a778e2d0403f8897cc69912bc4fce20e9.1920x1080.jpg"
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3700580/3f8f206a778e2d0403f8897cc69912bc4fce20e9/ss_3f8f206a778e2d0403f8897cc69912bc4fce20e9.1920x1080.jpg",
+      "2025_06-InEvGames-Livber/Livber_Screenshot_(1).jpg",
+      "2025_06-InEvGames-Livber/Livber_Screenshot_(3).jpg",
+      "2025_06-InEvGames-Livber/Livber_Screenshot_(5).jpg",
+      "2025_06-InEvGames-Livber/Livber_Screenshot_(8).jpg"
     ],
     "tags": [
       "#VideoGame",
@@ -407,7 +409,10 @@
       "2024_09-uluc-mukarnasv3_musenna/MVI_4175-0014.jpeg",
       "2024_09-uluc-mukarnasv3_musenna/MVI_4194-0015.jpeg",
       "2024_09-uluc-mukarnasv3_musenna/MVI_4195-0016.jpeg",
-      "2024_09-uluc-mukarnasv3_musenna/MVI_4206-0017.jpeg"
+      "2024_09-uluc-mukarnasv3_musenna/MVI_4206-0017.jpeg",
+      "2024_09-uluc-mukarnasv3_musenna/Screenshot 2026-11-15 at 23.11.30.png",
+      "2024_09-uluc-mukarnasv3_musenna/Screenshot 2026-11-15 at 23.11.42.png",
+      "2024_09-uluc-mukarnasv3_musenna/Screenshot 2026-11-15 at 23.11.47.png"
     ],
     "tags": [
       "#Interactive",
@@ -445,7 +450,7 @@
     "id": "ulucart-unseenimages",
     "title": "Unseen Images",
     "type": "Algorithmic Art Piece",
-    "date": "2024_09-Present",
+    "date": "2024_09",
     "role": "Creative Coder, Artist",
     "thumbnail": "2024_09-uluc-UnseenImages/Unseen0.jpeg",
     "media": [
@@ -626,10 +631,10 @@
     "thumbnail": "2023-uluc-memories/coverart-memory_01.jpeg",
     "media": [
       "2023-uluc-memories/coverart-memory_01.jpeg",
-      "2023-uluc-memories/coverart-memory_03.jpeg",
-      "2023-uluc-memories/coverart-memory_04.jpeg",
       "https://open.spotify.com/track/37gL9YgWTr92xVjkBDirnx?si=df130568f6b8479a",
-      "https://open.spotify.com/track/6jxPpSpsQTpQecc17WnPdK?si=d601e727a60141bf"
+      "2023-uluc-memories/coverart-memory_03.jpeg",
+      "https://open.spotify.com/track/6jxPpSpsQTpQecc17WnPdK?si=d601e727a60141bf",
+      "2023-uluc-memories/coverart-memory_04.jpeg"
     ],
     "tags": [
       "#MusicRelease",
@@ -643,7 +648,7 @@
   },
   {
     "id": "kisafilm-bubirstratejioyunudur",
-    "title": " Bu Bir Strateji Oyunudur",
+    "title": "Bu Bir Strateji Oyunudur",
     "type": "Short Film",
     "date": "2022_11",
     "role": "Audio Engineer",
